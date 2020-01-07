@@ -8,15 +8,33 @@
 #pragma once
 
 #include <frc/commands/Command.h>
+#include "../../util/include/Trajectory.h"
+#include <frc/Timer.h>
 
 class DriveForward : public frc::Command {
 public:
-    DriveForward();
+    DriveForward(double distance);
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
     void End() override;
     void Interrupted() override;
+
+    frc::Timer *timer;
 private:
     bool isFinished;
+
+    double currTime;
+
+    double leftVal;
+    double rightVal;
+
+    double leftVelocity;
+    double rightVelocity;
+    double leftAccel;
+    double rightAccel;
+
+    double dist;
+
+    Trajectory::Trapezoid straightTrapezoid;
 };

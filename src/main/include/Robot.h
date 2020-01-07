@@ -7,7 +7,6 @@
 
 #include <frc/WPILib.h>
 #include <frc/TimedRobot.h>
-#include <frc/commands/Command.h>
 #include "OI.h"
 #include "subsystems/Drivetrain.h"
 
@@ -15,6 +14,8 @@ class Robot: public frc::TimedRobot {
 public:
     static OI *mOI;
     static Drivetrain *mDrivetrain;
+    static Trajectory *mTrajectory;
+    static frc::CommandGroup *mAutoCommand;
 
 private:
     void RobotInit() override;

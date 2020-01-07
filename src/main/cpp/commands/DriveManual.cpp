@@ -13,7 +13,9 @@ DriveManual::DriveManual() {
 }
 
 // Called just before this Command runs the first time
-void DriveManual::Initialize() {}
+void DriveManual::Initialize() {
+    Robot::mTrajectory->test();
+}
 
 // Called repeatedly when this Command is scheduled to run
 void DriveManual::Execute()

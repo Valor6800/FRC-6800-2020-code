@@ -10,16 +10,20 @@
 
 Drivetrain *Robot::mDrivetrain = NULL;
 OI *Robot::mOI = NULL;
+Trajectory *Robot::mTrajectory = NULL;
+frc::CommandGroup *Robot::mAutoCommand = NULL;
 
 void Robot::RobotInit()
 {
+    mTrajectory = new Trajectory();
     mDrivetrain = new Drivetrain();
     mOI = new OI();
+    mAutoCommand = new MotionProfileTest();
 }
 
 void Robot::AutonomousInit()
 {
-
+    mAutoCommand->Start();
 }
 
 void Robot::AutonomousPeriodic()

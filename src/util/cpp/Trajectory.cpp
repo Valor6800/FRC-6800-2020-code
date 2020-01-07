@@ -13,14 +13,17 @@
 // Robot specific parameters
 #define DEFAULT_MAX_VELOCITY 14.0
 #define DEFAULT_MAX_ACCEL 14.0
-#define DEFAULT_WHEEL_BASE 3.0
+#define DEFAULT_WHEEL_BASE 2.4
+
+// feet necessary to max velcoity
+#define D_1 7.14
 
 Trajectory::Trajectory() : logfile(LOG_FILE_NAME)
 {
     // Set some default gains. Shouldn't change
     kv = 1 / DEFAULT_MAX_VELOCITY;
     ka = 0;
-    kp = 1.0 / 50;
+    kp = 0;
     kd = 0;
 
     // Create default states
@@ -37,16 +40,31 @@ Trajectory::Trajectory() : logfile(LOG_FILE_NAME)
 #endif
 }
 
+Trajectory::Trapezoid Trajectory::create_trapezoid(double distance) {
+    Trajectory::trapezoid.max_velocity = DEFAULT_MAX_VELOCITY;
+    Trajectory::trapezoid.max_accel = DEFAULT_MAX_ACCEL;
+    Trajectory::trapezoid.distance = distance;
+
+    Trajectory::trapezoid.t_1 = sqrt((2.0 * D_1) / Trajectory::trapezoid.max_accel);
+    Trajectory::trapezoid.t_2 = Trajectory::trapezoid.t_1 + ((distance - (2.0 * D_1)) / Trajectory::trapezoid.max_velocity);
+    Trajectory::trapezoid.d_1 = D_1;
+    Trajectory::trapezoid.d_2 = Trajectory::trapezoid.d_1 + ((Trajectory::trapezoid.t_2 - Trajectory::trapezoid.t_1) * Trajectory::trapezoid.max_velocity);
+    
+    Trajectory::trapezoid.time = Trajectory::trapezoid.t_1 + Trajectory::trapezoid.t_2;
+
+    return Trajectory::trapezoid;
+}
+
 void Trajectory::plan(Trajectory::Trapezoid *plan)
 {
     // Calculate the rising edge of the trapezoid
-    plan->t_1 = plan->max_velocity/plan->max_acceleration;
-    plan->d_1 = 0.5 * plan->max_acceleration * plan->t_1 * plan->t_1;
+    plan->t_1 = plan->max_velocity/plan->max_accel;
+    plan->d_1 = 0.5 * plan->max_accel * plan->t_1 * plan->t_1;
 
     // Check if you never get up to full speed
     if (plan->d_1 > plan->distance / 2) {
         plan->d_1 = plan->distance / 2;
-        plan->t_1 = sqrt(plan->d_1 / (0.5 * plan->max_acceleration));
+        plan->t_1 = sqrt(plan->d_1 / (0.5 * plan->max_accel));
     }
 
     // Calculate the straight, or constant top, of the trapezoid
@@ -62,7 +80,7 @@ void Trajectory::plan_straight(double target_distance, Trajectory::Trapezoid *st
 {
     // Both wheels can travel at max velocity or max acceleration
     straight_plan->distance = target_distance;
-    straight_plan->max_acceleration = DEFAULT_MAX_ACCEL;
+    straight_plan->max_accel = DEFAULT_MAX_ACCEL;
     straight_plan->max_velocity = DEFAULT_MAX_VELOCITY;
 
     // Create the trapezoid for both wheels being the same
@@ -77,23 +95,23 @@ void Trajectory::plan_turn(double radius, int degree, Trajectory::Trapezoid *lef
     if (degree > 0) {
         // Use the left wheel as the max velocity wheel. Add half the drive base to the curve
         left_plan->distance = (radius + half_wheel_base) * M_PI * (degree / 180.0);
-        left_plan->max_acceleration = DEFAULT_MAX_ACCEL;
+        left_plan->max_accel = DEFAULT_MAX_ACCEL;
         left_plan->max_velocity = DEFAULT_MAX_VELOCITY;
 
         // The right wheel cannot travel max velocity as then the robot will go straight.
         // Reduce the right wheel's speed the turning ratio so the robot arcs
         right_plan->distance = (radius - half_wheel_base) * M_PI * (degree / 180.0);
-        right_plan->max_acceleration = DEFAULT_MAX_ACCEL * (right_plan->distance / left_plan->distance);
+        right_plan->max_accel = DEFAULT_MAX_ACCEL * (right_plan->distance / left_plan->distance);
         right_plan->max_velocity = DEFAULT_MAX_VELOCITY * (right_plan->distance / left_plan->distance);
     } else {
         // Use the right wheel as the maximum velocity wheel
         right_plan->distance = (radius + half_wheel_base) * M_PI * (degree * -1 / 180.0);
-        right_plan->max_acceleration = DEFAULT_MAX_ACCEL;
+        right_plan->max_accel = DEFAULT_MAX_ACCEL;
         right_plan->max_velocity = DEFAULT_MAX_VELOCITY;
 
         // The left wheel cannot travel max velocity. Same logic as the right wheel in the other turn case
         left_plan->distance = (radius - half_wheel_base) * M_PI * (degree * -1 / 180.0);
-        left_plan->max_acceleration = DEFAULT_MAX_ACCEL * (left_plan->distance / right_plan->distance);
+        left_plan->max_accel = DEFAULT_MAX_ACCEL * (left_plan->distance / right_plan->distance);
         left_plan->max_velocity = DEFAULT_MAX_VELOCITY * (left_plan->distance / right_plan->distance);
     }
 
@@ -108,9 +126,9 @@ void Trajectory::calculate(Trajectory::Trapezoid *plan, Trajectory::State *prev_
 
     // Ramp up
     if (time < plan->t_1) {
-        new_state->s = 0.5 * plan->max_acceleration * time * time;
-        new_state->v = plan->max_acceleration * time;
-        new_state->a = plan->max_acceleration;
+        new_state->s = 0.5 * plan->max_accel * time * time;
+        new_state->v = plan->max_accel * time;
+        new_state->a = plan->max_accel;
 
     // Constant velocity
     } else if (time < plan->t_2) {
@@ -120,9 +138,9 @@ void Trajectory::calculate(Trajectory::Trapezoid *plan, Trajectory::State *prev_
 
     // Ramp down
     } else if (time < plan->time) {
-        new_state->s = -0.5 * plan->max_acceleration * (time - plan->time) * (time - plan->time) + plan->distance;
-        new_state->v = -plan->max_acceleration * (time - plan->time);
-        new_state->a = -plan->max_acceleration;
+        new_state->s = -0.5 * plan->max_accel * (time - plan->time) * (time - plan->time) + plan->distance;
+        new_state->v = -plan->max_accel * (time - plan->time);
+        new_state->a = -plan->max_accel;
 
     // Stop
     } else {
@@ -165,8 +183,10 @@ void Trajectory::track(double time) {
     #elif
         // Set left and right position from encoder
         // @TODO use WPILib to get encoder positions
+        /*
         prev_left_state->s = left_encoder_sensor.get();
         prev_right_state->s = right_encoder_sensor.get();
+        */
     #endif
 
     // Calculate the gains to apply to the wheels
@@ -208,4 +228,8 @@ void Trajectory::simulate(double time_interval, double time_start, double time_e
 #endif
     }
     printf("Simulation complete\n");
+}
+
+void test() {
+    int x  = 0;
 }

@@ -12,6 +12,8 @@
 #include <rev/CANSparkMax.h>
 #include <frc/SpeedControllerGroup.h>
 #include <frc/drive/DifferentialDrive.h>
+#include "commands/DriveManual.h"
+#include "commands/Autos/MotionProfileTest.h"
 
 /**
  * Drivetrain subsytem for moving the chassis

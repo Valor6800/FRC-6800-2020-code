@@ -1,3 +1,5 @@
+#pragma once
+
 #include <fstream>
 
 class Trajectory {
@@ -10,7 +12,7 @@ public:
         double d_1;
         double d_2;
         double max_velocity;
-        double max_acceleration;
+        double max_accel;
         double distance;
         double time;
     };
@@ -27,24 +29,29 @@ public:
         double error_d;
     };
 
-    void plan_straight(double, Trapezoid *);
-    void plan_turn(double, int, Trapezoid *, Trapezoid *);
+    Trapezoid create_trapezoid(double distance);
 
-    void calculate(Trapezoid *, State *, State *);
+    void test();
 
-    void simulate(double, double, double);
-    void track(double);
+    void plan_straight(double target_distance, Trapezoid *straight_plan);
+    void plan_turn(double radius, int degree, Trapezoid *left_plan, Trapezoid *right_plan);
 
-private:
-    void plan(Trapezoid *);
+    void calculate(Trapezoid *plan, State *prev_state, State *new_state);
+
+    void simulate(double time_interval, double time_start, double time_end);
+    void track(double time);
+
+    Trapezoid left_plan, right_plan, trapezoid;
 
     double kv;
     double ka;
     double kp;
     double kd;
 
-    Trapezoid left_plan, right_plan;
     State *prev_left_state, *prev_right_state, *curr_left_state, *curr_right_state;
+
+private:
+    void plan(Trapezoid *plan);
 
     std::ofstream logfile;
 };

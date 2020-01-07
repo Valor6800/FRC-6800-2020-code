@@ -8,24 +8,51 @@
 #include "commands/DriveForward.h"
 #include "Robot.h"
 
-DriveForward::DriveForward() : isFinished(false) {
+DriveForward::DriveForward(double distance) : isFinished(false) {
     Requires(Robot::mDrivetrain);
+
+    dist = distance;
+    timer = new frc::Timer();
+
+    timer->Reset();
+    timer->Start();
 }
 
-void DriveForward::Initialize() {}
+void DriveForward::Initialize() {
+    straightTrapezoid = Robot::mTrajectory->create_trapezoid(dist);
+    Robot::mTrajectory->plan_straight(dist, &straightTrapezoid);
+
+    Robot::mTrajectory->test();
+}
 
 void DriveForward::Execute()
-{
-    double leftVal = 0;
-    double rightVal = 0;
-    // @TODO perform some action to determine the new left and right values
-    isFinished = false;
-    // @TODO perform some action to determine the finish condition
+{   
+    currTime = timer->Get();
+
+    leftVelocity = Robot::mTrajectory->curr_left_state->v;
+    rightVelocity = Robot::mTrajectory->curr_right_state->v;
+
+    leftAccel = Robot::mTrajectory->curr_left_state->a;
+    rightAccel = Robot::mTrajectory->curr_right_state->a;
+
+    leftVal = Robot::mTrajectory->kv * leftVelocity + (Robot::mTrajectory->ka * leftAccel);
+    rightVal = Robot::mTrajectory->kv * rightVelocity + (Robot::mTrajectory->ka * rightAccel);
+
+    Robot::mTrajectory->track(currTime);
+
     Robot::mDrivetrain->move(leftVal, rightVal);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool DriveForward::IsFinished() { return isFinished; }
+bool DriveForward::IsFinished() {
+    if (timer->Get() > Robot::mTrajectory->trapezoid.time) {
+        return true;
+    }
+    else {
+        return false;
+    }
+    
+}
 
 // Called once after isFinished returns true
 void DriveForward::End()
