@@ -1,6 +1,6 @@
 #include "subsystems/Drivetrain.h"
 
-Drivetrain::Drivetrain() : frc::PIDSubsystem("Drivetrain", P_VALUE, I_VALUE, D_VALUE),
+Drivetrain::Drivetrain() : frc2::TrapezoidProfileSubsystem,
                            leftDriveA(CAN_ID_LEFT_A, rev::CANSparkMax::MotorType::kBrushless),
                            leftDriveB(CAN_ID_LEFT_B, rev::CANSparkMax::MotorType::kBrushless),
                            rightDriveA(CAN_ID_RIGHT_A, rev::CANSparkMax::MotorType::kBrushless),
