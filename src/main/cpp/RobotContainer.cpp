@@ -1,11 +1,7 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 #include "RobotContainer.h"
+
+#define GAMEPAD_BASE_LOCATION 1
+#define GAMEPAD_OPERATOR_LOCATION 0
 
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
@@ -15,7 +11,8 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 }
 
 void RobotContainer::ConfigureButtonBindings() {
-  // Configure your button bindings here
+    frc::XboxController mGamepadDriver{GAMEPAD_DRIVER_LOCATION};
+    frc::XboxController mGamepadOperator{GAMEPAD_OPERATOR_LOCATION};
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
