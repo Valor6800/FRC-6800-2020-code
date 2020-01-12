@@ -1,28 +1,22 @@
-#include "commands/Shoot.h"
-#include "../../include/RobotContainer.h"
+// #include "commands/Shoot.h"
 
-Shoot::Shoot(Shooter* shooter) : m_shooter{shooter} {
-    Requires(RobotContainer::m_shooter);
-}
-void Shoot::Initialize() {
+// Shoot::Shoot(Shooter* shooter, double distance) : m_shooter{shooter} {
+//     m_shooter = shooter;
+//     dist = distance;
+// }
+// void Shoot::Initialize() {
 
-}
-void Shoot::Execute() {
-    // what are shooter controls????????
-    // replace val
-    double val;
-    if (abs(val) > .05) {
-        RobotContainer::m_shooter.SetShooterPower(val);
-    }  else {
-        RobotContainer::m_it.SetShooterPower(0);
-    }
-}
-bool Shoot::IsFinished() {
+// }
+// void Shoot::Execute() {
+//     // what are shooter controls????????
+//     //do some math to figure out power and hood
+// }
+// bool Shoot::IsFinished() {
+//     return false;
+// }
+// void Shoot::End() {
+//     m_shooter.SetPower(0);
+// }
+// void Shoot::Interrupted() {
     
-}
-void Shoot::End() {
-    
-}
-void Shoot::Interrupted() {
-    
-}
+// }
