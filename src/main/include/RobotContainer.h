@@ -1,13 +1,22 @@
 #pragma once
 
 #include <frc2/command/Command.h>
+#include <frc2/command/CommandScheduler.h>
+#include <frc/XboxController.h>
 
-#include "subsystems/Drivetrain.h"
 #include "subsystems/Arm.h"
-#include "subsystems/IT.h"
-#include "subsystems/Lift.h"
 #include "subsystems/Muncher.h"
 #include "subsystems/Shooter.h"
+#include "subsystems/Drivetrain.h"
+#include "subsystems/IT.h"
+#include "subsystems/Lift.h"
+
+#include "commands/DriveManual.h"
+#include "commands/Shoot.h"
+#include "commands/SpinIT.h"
+
+#define GAMEPAD_BASE_LOCATION 1
+#define GAMEPAD_OPERATOR_LOCATION 0
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -20,18 +29,27 @@ class RobotContainer {
  public:
     RobotContainer();
 
-    frc2::Command* GetAutonomousCommand();
+   // frc2::Command* GetAutonomousCommand();
+    frc::XboxController mGamepadDriver{GAMEPAD_BASE_LOCATION};
+    frc::XboxController mGamepadOperator{GAMEPAD_OPERATOR_LOCATION};
 
+    // Arm m_arm;
+    // IT m_it;
+    // Lift m_lift;
+    // Shooter m_shooter;
+    // Muncher m_muncher;
+
+
+    frc2::Command* m_default = nullptr;
+    // Shoot m_shoot;
+    // SpinIT m_spinIT;
  private:
   // The robot's subsystems and commands are defined here...
-    Drivetrain m_drivetrain;
-    Arm m_arm;
-    IT m_it;
-    Lift m_lift;
-    Shooter m_shooter;
-    Muncher m_muncher;
+  DriveManual m_driveManual;
 
-    ExampleCommand m_autonomousCommand;
+  Drivetrain *m_drivetrain;
+ 
+    
 
   void ConfigureButtonBindings();
 };

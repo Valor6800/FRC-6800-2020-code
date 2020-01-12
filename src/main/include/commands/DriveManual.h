@@ -15,14 +15,16 @@
 class DriveManual : public frc2::CommandHelper<frc2::CommandBase, DriveManual> {
  public:
 
-    explicit DriveManual(Drivetrain* drivetrain);
+    explicit DriveManual(Drivetrain* drivetrain, double leftValue, double rightValue);
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
-    void End() override;
-    void Interrupted() override;
+   // void End() override;
+    //void Interrupted() override;
 
  private:
 
     Drivetrain* m_drivetrain;
+    double leftVal;
+    double rightVal;
 };

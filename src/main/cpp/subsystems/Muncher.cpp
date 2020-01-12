@@ -1,14 +1,14 @@
-#include "subsystems/Muncher.h"
+// #include "subsystems/Muncher.h"
 
-Muncher::Muncher() {
+// Muncher::Muncher() {
 
-}
+// }
 
-void Muncher::Periodic() {
+// void Muncher::Periodic() {
   
-}
+// }
 
-void Muncher::SetMunchPower(double power) {
-    munchA.Set(power);
-    munchB.Set(power);
-}
+// void Muncher::SetMunchPower(double power) {
+//     munchA.Set(power);
+//     munchB.Set(power);
+// }
