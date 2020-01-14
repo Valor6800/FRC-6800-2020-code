@@ -61,7 +61,7 @@ void Robot::TeleopInit() {
  */
 void Robot::TeleopPeriodic() {
   
-  }
+}
 
 /**
  * This function is called periodically during test mode.

@@ -1,22 +1,16 @@
 #include "commands/DriveManual.h"
 
-DriveManual::DriveManual(Drivetrain* drivetrain, double leftValue, double rightValue) : m_drivetrain{drivetrain} {
-    leftVal = leftValue;
-    rightVal = rightValue;
-}
-void DriveManual::Initialize() {
+DriveManual::DriveManual(Drivetrain* drivetrain, std::function<double()> leftValue, std::function<double()> rightValue) 
+            : m_drivetrain{drivetrain}, m_leftValue{leftValue}, m_rightValue{rightValue} {
+    AddRequirements({drivetrain});
 
 }
+
 void DriveManual::Execute() {
-    m_drivetrain->Move(leftVal, rightVal);
+    m_drivetrain->Move(m_leftValue(), m_rightValue());
 }
+
 bool DriveManual::IsFinished() {
     return false;
 }
-// void DriveManual::End() {
-//     m_drivetrain->Stop();
-// }
-// void DriveManual::Interrupted() {
-    
-// }
 
