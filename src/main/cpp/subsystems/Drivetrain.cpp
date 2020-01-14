@@ -26,6 +26,8 @@ Drivetrain::Drivetrain() : leftDriveA(CAN_ID_LEFT_A, rev::CANSparkMax::MotorType
     rightDriveC.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
 }
 
+void Drivetrain::Periodic() { }
+
 void Drivetrain::Move(double leftInput, double rightInput) {
     //curvature for now because driver wants to try it, previously used split arcade
     drive.CurvatureDrive(leftInput, rightInput, true);
