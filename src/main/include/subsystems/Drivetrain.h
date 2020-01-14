@@ -1,12 +1,9 @@
 #pragma once
 
-#include <frc2/command/SubsystemBase.h>
 #include <frc2/command/TrapezoidProfileSubsystem.h>
 #include <frc/SpeedControllerGroup.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <rev/CANSparkMax.h>
-#include <frc2/command/Command.h>
-#include <frc2/command/Subsystem.h>
 #include <frc2/command/SubsystemBase.h>
 
 //ask shawn about motor ports because these are 100% wrong
@@ -22,9 +19,7 @@ class Drivetrain : public frc2::SubsystemBase{
 
     Drivetrain();
 
-    //void Periodic() override;
-
-    //void SetDefCommand(frc2::Command* defaultCommand);
+    void Periodic() override;
 
     void Move(double leftInput, double rightInput);
 

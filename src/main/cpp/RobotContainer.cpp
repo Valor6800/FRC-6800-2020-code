@@ -1,13 +1,14 @@
 #include "RobotContainer.h"
 
+#include "commands/DriveManual.h"
 
 
-RobotContainer::RobotContainer() /*: m_autonomousCommand(&m_subsystem)*/ {
+RobotContainer::RobotContainer() /*: m_driveManual(&m_drivetrain)*/ {
   // Initialize all of your commands and subsystems here
-  
-  m_drivetrain->SetDefaultCommand(&m_drivetrain, DriveManual(m_drivetrain,
-         mGamepadDriver.GetY(frc::GenericHID::JoystickHand::kLeftHand),
-         mGamepadDriver.GetX(frc::GenericHID::JoystickHand::kRightHand)));
+
+  m_drivetrain->SetDefaultCommand(DriveManual(m_drivetrain,
+      [this] { return mGamepadDriver.GetY(frc::GenericHID::kLeftHand); },
+      [this] { return mGamepadDriver.GetX(frc::GenericHID::kRightHand); }));
          
   // Configure the button bindings
   ConfigureButtonBindings();
