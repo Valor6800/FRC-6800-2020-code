@@ -5,12 +5,12 @@
 #include <frc/XboxController.h>
 
 #include "subsystems/Drivetrain.h"
+#include "subsystems/Shooter.h"
 
 #include "commands/DriveManual.h"
+#include "commands/Shoot.h"
 
-#define GAMEPAD_BASE_LOCATION 1
-#define GAMEPAD_OPERATOR_LOCATION 0
-
+#include "Constants.h"
 /**
  * This class is where the bulk of the robot should be declared.  Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -18,6 +18,9 @@
  * scheduler calls).  Instead, the structure of the robot (including subsystems,
  * commands, and button mappings) should be declared here.
  */
+
+// using namespace Constants;
+
 class RobotContainer {
  public:
     RobotContainer();
@@ -39,6 +42,7 @@ class RobotContainer {
     // Shooter m_shooter;
     // Muncher m_muncher;
     Drivetrain* m_drivetrain;
+    Shooter* m_shooter;
 
   void ConfigureButtonBindings();
 };

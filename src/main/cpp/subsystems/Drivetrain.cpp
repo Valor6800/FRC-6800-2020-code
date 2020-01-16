@@ -8,12 +8,12 @@
 #define ARCADE_MODE true
 #define DRIVER_SQUARED true
 
-Drivetrain::Drivetrain() : leftDriveA(CAN_ID_LEFT_A, rev::CANSparkMax::MotorType::kBrushless),
-                           leftDriveB(CAN_ID_LEFT_B, rev::CANSparkMax::MotorType::kBrushless),
-                           leftDriveC(CAN_ID_LEFT_C, rev::CANSparkMax::MotorType::kBrushless),
-                           rightDriveA(CAN_ID_RIGHT_A, rev::CANSparkMax::MotorType::kBrushless),
-                           rightDriveB(CAN_ID_RIGHT_B, rev::CANSparkMax::MotorType::kBrushless),
-                           rightDriveC(CAN_ID_RIGHT_C, rev::CANSparkMax::MotorType::kBrushless)
+Drivetrain::Drivetrain() : leftDriveA{CAN_ID_LEFT_A, rev::CANSparkMax::MotorType::kBrushless},
+                           leftDriveB{CAN_ID_LEFT_B, rev::CANSparkMax::MotorType::kBrushless},
+                           leftDriveC{CAN_ID_LEFT_C, rev::CANSparkMax::MotorType::kBrushless},
+                           rightDriveA{CAN_ID_RIGHT_A, rev::CANSparkMax::MotorType::kBrushless},
+                           rightDriveB{CAN_ID_RIGHT_B, rev::CANSparkMax::MotorType::kBrushless},
+                           rightDriveC{CAN_ID_RIGHT_C, rev::CANSparkMax::MotorType::kBrushless}
 {
     drive.SetMaxOutput(MAX_OUTPUT);
     drive.SetDeadband(DEADBAND);
