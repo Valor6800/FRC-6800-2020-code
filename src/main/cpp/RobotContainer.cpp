@@ -9,6 +9,8 @@ RobotContainer::RobotContainer() /*: m_driveManual(&m_drivetrain)*/ {
   m_drivetrain->SetDefaultCommand(DriveManual(m_drivetrain,
       [this] { return mGamepadDriver.GetY(frc::GenericHID::kLeftHand); },
       [this] { return mGamepadDriver.GetX(frc::GenericHID::kRightHand); }));
+
+  m_shooter->SetDefaultCommand(Shoot(m_shooter, mGamepadDriver.GetTriggerAxis(frc::GenericHID::kLeftHand)));
          
   // Configure the button bindings
   ConfigureButtonBindings();

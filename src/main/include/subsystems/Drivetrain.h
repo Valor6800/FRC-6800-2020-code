@@ -6,13 +6,7 @@
 #include <rev/CANSparkMax.h>
 #include <frc2/command/SubsystemBase.h>
 
-//ask shawn about motor ports because these are 100% wrong
-#define CAN_ID_LEFT_A 4
-#define CAN_ID_LEFT_B 3
-#define CAN_ID_LEFT_C 6
-#define CAN_ID_RIGHT_A 1
-#define CAN_ID_RIGHT_B 2
-#define CAN_ID_RIGHT_C 5
+#include "Constants.h"
 
 class Drivetrain : public frc2::SubsystemBase{
  public:
