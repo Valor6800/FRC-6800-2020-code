@@ -1,30 +1,30 @@
-#pragma once
+// #pragma once
 
-#include <frc2/command/SubsystemBase.h>
-#include <frc/VictorSP.h>
-#include <frc/PWMVictorSPX.h>
+// #include <frc2/command/SubsystemBase.h>
+// #include <frc/VictorSP.h>
+// #include <frc/PWMVictorSPX.h>
 
-#include "Constants.h"
+// #include "Constants.h"
 
-class IT : public frc2::SubsystemBase {
- public:
+// class IT : public frc2::SubsystemBase {
+//  public:
 
-    IT();
+//     IT();
 
-    void SetIntakePower(double power);
-    void SetThroatPower(double power);
+//     void SetIntakePower(double power);
+//     void SetThroatPower(double power);
 
-    void Periodic() override;
+//     void Periodic() override;
 
- private:
+//  private:
 
-    frc::VictorSP intake;
-    frc::VictorSP throatA;
-    frc::VictorSP throatB;
+//     frc::VictorSP intake;
+//     frc::VictorSP throatA;
+//     frc::VictorSP throatB;
 
-};
+// };
 
-// // 7 victor sp
-// // 3 talon on board sped control
-// // 6 canspark
+// // // 7 victor sp
+// // // 3 talon on board sped control
+// // // 6 canspark
 
