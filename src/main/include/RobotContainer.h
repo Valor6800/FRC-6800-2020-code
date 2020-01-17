@@ -26,23 +26,21 @@ class RobotContainer {
     RobotContainer();
 
    // frc2::Command* GetAutonomousCommand();
-    frc::XboxController mGamepadDriver{GAMEPAD_BASE_LOCATION};
-    frc::XboxController mGamepadOperator{GAMEPAD_OPERATOR_LOCATION};
 
-
-    // Shoot m_shoot;
     // SpinIT m_spinIT;
 
  private:
    // The robot's subsystems and commands are defined here...
 
+   frc::XboxController mGamepadDriver{GAMEPAD_BASE_LOCATION};
+   frc::XboxController mGamepadOperator{GAMEPAD_OPERATOR_LOCATION};
+
     // Arm m_arm;
     // IT m_it;
     // Lift m_lift;
-    // Shooter m_shooter;
     // Muncher m_muncher;
-    Drivetrain* m_drivetrain;
-    Shooter* m_shooter;
+    Drivetrain m_drivetrain;
+    // Shooter m_shooter;
 
   void ConfigureButtonBindings();
 };

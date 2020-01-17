@@ -3,14 +3,14 @@
 #include "commands/DriveManual.h"
 
 
-RobotContainer::RobotContainer() /*: m_driveManual(&m_drivetrain)*/ {
+RobotContainer::RobotContainer()  /*: m_driveManual(&m_drivetrain)*/ {
   // Initialize all of your commands and subsystems here
 
-  m_drivetrain->SetDefaultCommand(DriveManual(m_drivetrain,
+  m_drivetrain.SetDefaultCommand(DriveManual(&m_drivetrain,
       [this] { return mGamepadDriver.GetY(frc::GenericHID::kLeftHand); },
       [this] { return mGamepadDriver.GetX(frc::GenericHID::kRightHand); }));
 
-  m_shooter->SetDefaultCommand(Shoot(m_shooter, mGamepadDriver.GetTriggerAxis(frc::GenericHID::kLeftHand)));
+ // m_shooter.SetDefaultCommand(Shoot(&m_shooter, mGamepadDriver.GetY(frc::GenericHID::kLeftHand)));
          
   // Configure the button bindings
   ConfigureButtonBindings();
