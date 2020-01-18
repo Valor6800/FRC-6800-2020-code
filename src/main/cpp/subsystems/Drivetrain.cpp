@@ -18,6 +18,9 @@ Drivetrain::Drivetrain() : leftDriveA{CAN_ID_LEFT_A, rev::CANSparkMax::MotorType
     drive.SetMaxOutput(MAX_OUTPUT);
     drive.SetDeadband(DEADBAND);
 
+    leftDrive.SetInverted(!leftDrive.GetInverted());
+    rightDrive.SetInverted(!rightDrive.GetInverted());
+
     leftDriveA.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
     leftDriveB.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
     leftDriveC.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
@@ -30,7 +33,7 @@ void Drivetrain::Periodic() { }
 
 void Drivetrain::Move(double leftInput, double rightInput) {
     //curvature for now because driver wants to try it, previously used split arcade
-    drive.CurvatureDrive(leftInput, rightInput, true);
+    drive.ArcadeDrive(leftInput, -rightInput * .5, true);
 }
 
 void Drivetrain::Stop() {
