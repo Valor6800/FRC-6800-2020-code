@@ -9,9 +9,11 @@ RobotContainer::RobotContainer()  /*: m_driveManual(&m_drivetrain)*/ {
   m_drivetrain.SetDefaultCommand(DriveManual(&m_drivetrain,
       [this] { return mGamepadDriver.GetY(frc::GenericHID::kLeftHand); },
       [this] { return mGamepadDriver.GetX(frc::GenericHID::kRightHand); }));
+  
+  m_shooter.SetDefaultCommand(Shoot(&m_shooter, [this] { return mGamepadDriver.GetTriggerAxis(frc::GenericHID::kLeftHand); }));
 
- // m_shooter.SetDefaultCommand(Shoot(&m_shooter, mGamepadDriver.GetY(frc::GenericHID::kLeftHand)));
-         
+  m_it.SetDefaultCommand(SpinIT(&m_it, [this] { return mGamepadDriver.GetTriggerAxis(frc::GenericHID::kRightHand); }));
+        
   // Configure the button bindings
   ConfigureButtonBindings();
 }

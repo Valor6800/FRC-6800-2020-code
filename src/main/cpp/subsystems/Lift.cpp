@@ -1,14 +1,14 @@
-// #include "subsystems/Lift.h"
+#include "subsystems/Lift.h"
 
-// Lift::Lift() {
+Lift::Lift() {
     
-// }
+}
 
-// void Lift::Periodic() {
+void Lift::Periodic() {
   
-// }
+}
 
-// void Lift::SetLiftPower(double power) {
-//     liftA.Set(power);
-//     liftB.Set(power);
-// }
+void Lift::SetLiftPower(double power) {
+    liftA.Set(power);
+    liftB.Set(power);
+}

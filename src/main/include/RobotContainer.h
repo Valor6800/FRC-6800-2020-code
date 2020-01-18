@@ -6,9 +6,11 @@
 
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Shooter.h"
+#include "subsystems/IT.h"
 
 #include "commands/DriveManual.h"
 #include "commands/Shoot.h"
+#include "commands/SpinIT.h"
 
 #include "Constants.h"
 /**
@@ -27,20 +29,21 @@ class RobotContainer {
 
    // frc2::Command* GetAutonomousCommand();
 
-    // SpinIT m_spinIT;
-
  private:
    // The robot's subsystems and commands are defined here...
 
    frc::XboxController mGamepadDriver{GAMEPAD_BASE_LOCATION};
    frc::XboxController mGamepadOperator{GAMEPAD_OPERATOR_LOCATION};
 
+    Drivetrain m_drivetrain;
+    IT m_it;
     // Arm m_arm;
-    // IT m_it;
+    Shooter m_shooter;
+    
     // Lift m_lift;
     // Muncher m_muncher;
-    Drivetrain m_drivetrain;
-    // Shooter m_shooter;
+    
+    
 
   void ConfigureButtonBindings();
 };

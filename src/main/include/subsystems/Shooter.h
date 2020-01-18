@@ -19,7 +19,7 @@ class Shooter : public frc2::SubsystemBase {
 
    // need to add encoder?
    // check controller type
-    frc::PWMVictorSPX m_flyWheel;
+    frc::PWMVictorSPX m_flyWheel{VICTOR_ID_SHOOTER};
    // frc::Servo hood;
     
 };
