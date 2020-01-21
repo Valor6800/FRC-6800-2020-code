@@ -24,10 +24,11 @@ constexpr static int CAN_ID_RIGHT_B = 5;
 constexpr static int CAN_ID_RIGHT_C = 6;
 
 //SHOOTER SUBSYSTEM (***ask for vals***)
-constexpr static int VICTOR_ID_SHOOTER = 1;
+constexpr static int VICTOR_ID_FLYWHEEL_A = 0;
+constexpr static int VICTOR_ID_FLYWHEEL_B = 1;
 //constexpr static int SERVO_ID_HOOD = 1;
 
 // IT SUBSYSTEM (***ask for vals***)
-constexpr static int VICTOR_ID_INTAKE = 0;
+constexpr static int VICTOR_ID_INTAKE = 4;
 constexpr static int VICTOR_ID_THROATA = 2;
-constexpr static int VICTOR_ID_THROATB = 3;
+constexpr static int VICTOR_ID_THROATB = 8;

@@ -3,6 +3,15 @@
 #include <frc/TimedRobot.h>
 #include <frc2/command/Command.h>
 
+#include <frc/shuffleboard/Shuffleboard.h>
+#include <frc/shuffleboard/ShuffleboardLayout.h>
+#include <frc/shuffleboard/ShuffleboardTab.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include "networktables/NetworkTable.h"
+#include <frc/livewindow/LiveWindow.h>
+
 #include "RobotContainer.h"
 
 class Robot : public frc::TimedRobot {
@@ -23,4 +32,5 @@ class Robot : public frc::TimedRobot {
   //frc2::Command* m_autonomousCommand = nullptr;
 
   RobotContainer m_container;
+ 
 };
