@@ -11,14 +11,13 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
+class ShootStop : public frc2::CommandHelper<frc2::CommandBase, ShootStop> {
  public:
 
-    //Shoot(Shooter* shooter, bool stop);
-    Shoot(Shooter* shooter);
-    void Execute() override;
-   //  bool IsFinished() override;
-   //  void SetStop();
+    ShootStop(Shooter* shooter);
+    void Initialize() override;
+   // void Execute() override;
+    bool IsFinished() override;
     //void End() override;
 
  private:

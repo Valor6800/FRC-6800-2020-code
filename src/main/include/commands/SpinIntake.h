@@ -3,7 +3,7 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-#include "subsystems/IT.h"
+#include "subsystems/Intake.h"
 /**
  * An example command that uses an example subsystem.
  *
@@ -11,10 +11,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class SpinIT : public frc2::CommandHelper<frc2::CommandBase, SpinIT> {
+class SpinIntake : public frc2::CommandHelper<frc2::CommandBase, SpinIntake> {
  public:
 
-    SpinIT(IT* it, std::function<double()> rightTrigger);
+    SpinIntake(Intake* intake, std::function<double()> rightTrigger, std::function<bool()> rightBumper);
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
@@ -22,6 +22,7 @@ class SpinIT : public frc2::CommandHelper<frc2::CommandBase, SpinIT> {
 
  private:
  
-    IT* m_it;
-    std::function<double()> rightTrig;
+    Intake* m_intake;
+    std::function<double()> m_rightTrig;
+    std::function<bool()> m_rightBumper;
 };

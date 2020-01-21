@@ -3,6 +3,7 @@
 #include <frc2/command/SubsystemBase.h>
 // #include <frc/VictorSP.h>
 #include <frc/PWMVictorSPX.h>
+#include <frc/SpeedControllerGroup.h>
 //#include <frc/Servo.h>
 #include "Constants.h"
 
@@ -14,12 +15,16 @@ class Shooter : public frc2::SubsystemBase {
     void SetShooterPower(double power);
     //void TiltHood(double pos);
     void Periodic() override;
-
+    void Stop();
  private:
 
    // need to add encoder?
    // check controller type
-    frc::PWMVictorSPX m_flyWheel{VICTOR_ID_SHOOTER};
+    frc::PWMVictorSPX flywheelA;
+    frc::PWMVictorSPX flywheelB;
+
+    frc::SpeedControllerGroup flywheel{flywheelA, flywheelB};
+
    // frc::Servo hood;
     
 };
