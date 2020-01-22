@@ -1,6 +1,6 @@
 #include "subsystems/Lift.h"
 
-Lift::Lift() {
+Lift::Lift() : liftMtrA{VICTOR_ID_LIFTA}, liftMtrB{VICTOR_ID_LIFTB} {
     
 }
 
@@ -9,6 +9,5 @@ void Lift::Periodic() {
 }
 
 void Lift::SetLiftPower(double power) {
-    liftA.Set(power);
-    liftB.Set(power);
+    liftMtrs.Set(power);
 }

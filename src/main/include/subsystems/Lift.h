@@ -1,7 +1,9 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
-#include <rev/CANSparkMax.h>
+#include <frc/PWMVictorSPX.h>
+#include <frc/SpeedControllerGroup.h>
+#include "Constants.h"
 
 class Lift : public frc2::SubsystemBase {
  public:
@@ -13,7 +15,9 @@ class Lift : public frc2::SubsystemBase {
 
  private:
 
-    rev::CANSparkMax liftA{7, rev::CANSparkMax::MotorType::kBrushless};
-    rev::CANSparkMax liftB{8, rev::CANSparkMax::MotorType::kBrushless};
+    frc::PWMVictorSPX liftMtrA;
+    frc::PWMVictorSPX liftMtrB;
+
+    frc::SpeedControllerGroup liftMtrs{liftMtrA, liftMtrB};
 
 };

@@ -13,4 +13,3 @@ void DriveManual::Execute() {
 bool DriveManual::IsFinished() {
     return false;
 }
-
