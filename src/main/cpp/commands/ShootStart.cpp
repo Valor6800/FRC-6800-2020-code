@@ -1,12 +1,12 @@
-#include "commands/Shoot.h"
+#include "commands/ShootStart.h"
 
 // Shoot::Shoot(Shooter* shooter, bool stop) : m_shooter{shooter}, m_stop{stop} {
 //     AddRequirements({shooter});
 // }
-Shoot::Shoot(Shooter* shooter) : m_shooter{shooter} {
+ShootStart::ShootStart(Shooter* shooter) : m_shooter{shooter} {
     AddRequirements({shooter});
 }
-void Shoot::Execute() {
+void ShootStart::Execute() {
     // what are shooter controls????????
     //do some math to figure out power and hood
     m_shooter->SetShooterPower(0.85);

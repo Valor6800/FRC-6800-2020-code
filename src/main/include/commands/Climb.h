@@ -2,8 +2,12 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include <cmath>
 
-#include "subsystems/Shooter.h"
+#include "subsystems/Lift.h"
+
+#define DEADBAND 0.05
+
 /**
  * An example command that uses an example subsystem.
  *
@@ -11,18 +15,18 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
+class Climb : public frc2::CommandHelper<frc2::CommandBase, Climb> {
  public:
+   
+    Climb(Lift* lift, std::function<double()> value);
 
-    //Shoot(Shooter* shooter, bool stop);
-    Shoot(Shooter* shooter);
     void Execute() override;
-   //  bool IsFinished() override;
-   //  void SetStop();
-    //void End() override;
+
+    bool IsFinished() override;
 
  private:
 
-    Shooter* m_shooter;
+    Lift* m_lift;
+    std::function<double()> m_value;
     
 };

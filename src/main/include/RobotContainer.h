@@ -11,12 +11,17 @@
 #include "subsystems/Shooter.h"
 #include "subsystems/Intake.h"
 #include "subsystems/Throat.h"
+#include "subsystems/Arm.h"
+#include "subsystems/Lift.h"
+#include "subsystems/Muncher.h"
 
 #include "commands/DriveManual.h"
-#include "commands/Shoot.h"
+#include "commands/ShootStart.h"
 #include "commands/SpinIntake.h"
 #include "commands/SpinThroat.h"
 #include "commands/ShootStop.h"
+#include "commands/ArmManual.h"
+#include "commands/Climb.h"
 
 #include "Constants.h"
 /**
@@ -46,10 +51,9 @@ class RobotContainer {
     Drivetrain m_drivetrain;
     Intake m_intake;
     Throat m_throat;
-    // Arm m_arm;
+    Arm m_arm;
     Shooter m_shooter;
-    
-    // Lift m_lift;
+    Lift m_lift;
     // Muncher m_muncher;
     
   void ConfigureButtonBindings();

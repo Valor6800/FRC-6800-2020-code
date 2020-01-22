@@ -14,6 +14,10 @@ RobotContainer::RobotContainer() /*: m_driveManual(&m_drivetrain)*/ {
         
   m_throat.SetDefaultCommand(SpinThroat(&m_throat, [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kLeftHand); }, [this] { return m_GamepadDriver.GetBumper(frc::GenericHID::kLeftHand); }));
 
+  m_arm.SetDefaultCommand(ArmManual(&m_arm, [this] { return m_GamepadDriver.GetY(frc::GenericHID::kLeftHand); }));
+
+  m_lift.SetDefaultCommand(Climb(&m_lift, [this] { return m_GamepadDriver.GetY(frc::GenericHID::kRightHand); }));
+
   // Configure the button bindings
   ConfigureButtonBindings();
 }
@@ -27,9 +31,8 @@ void RobotContainer::ConfigureButtonBindings() {
     // frc::JoystickButton m_x{&m_GamepadDriver, 3};
     // frc::JoystickButton m_y{&m_GamepadDriver, 4};
 
-    m_start.WhenPressed(Shoot(&m_shooter));
+    m_start.WhenPressed(ShootStart(&m_shooter));
     m_back.WhenPressed(ShootStop(&m_shooter));
-
     
 }
 // frc2::Command* RobotContainer::GetAutonomousCommand() {

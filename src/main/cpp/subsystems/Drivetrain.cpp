@@ -32,7 +32,6 @@ Drivetrain::Drivetrain() : leftDriveA{CAN_ID_LEFT_A, rev::CANSparkMax::MotorType
 void Drivetrain::Periodic() { }
 
 void Drivetrain::Move(double leftInput, double rightInput) {
-    //curvature for now because driver wants to try it, previously used split arcade
     drive.ArcadeDrive(leftInput, -rightInput * .5, true);
 }
 
