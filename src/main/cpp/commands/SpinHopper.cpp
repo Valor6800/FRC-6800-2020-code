@@ -1,24 +1,24 @@
-#include "commands/SpinThroat.h"
+#include "commands/SpinHopper.h"
 #include "../../include/RobotContainer.h"
 
-SpinThroat::SpinThroat(Throat* throat, std::function<double()> leftTrigger, std::function<bool()> leftBumper) : m_throat{throat},
+SpinHopper::SpinHopper(Hopper* hopper, std::function<double()> leftTrigger, std::function<bool()> leftBumper) : m_hopper{hopper},
                                                                                                      m_leftTrig{leftTrigger}, 
                                                                                                      m_leftBumper{leftBumper} {
-    AddRequirements({throat});
+    AddRequirements({hopper});
 }
-void SpinThroat::Initialize() {
+void SpinHopper::Initialize() {
     
 }
-void SpinThroat::Execute() {
+void SpinHopper::Execute() {
     if (abs(m_leftTrig()) > .05 && !m_leftBumper()) {
-        m_throat->SetThroatPower(m_leftTrig());
+        m_hopper->SetHopperPower(m_leftTrig());
     } else if (m_leftBumper()) {
-        m_throat->SetThroatPower(-0.5);
+        m_hopper->SetHopperPower(-0.5);
     }
     else {
-        m_throat->SetThroatPower(0);
+        m_hopper->SetHopperPower(0);
     }
 }
-bool SpinThroat::IsFinished() {
+bool SpinHopper::IsFinished() {
     return false;
 }
