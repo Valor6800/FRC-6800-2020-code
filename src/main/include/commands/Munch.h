@@ -2,8 +2,12 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include <cmath>
 
-#include "subsystems/Throat.h"
+#include "subsystems/Muncher.h"
+
+#define DEADBAND 0.05
+
 /**
  * An example command that uses an example subsystem.
  *
@@ -11,18 +15,18 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class SpinThroat : public frc2::CommandHelper<frc2::CommandBase, SpinThroat> {
+class Munch : public frc2::CommandHelper<frc2::CommandBase, Munch> {
  public:
+   
+    Munch(Muncher* muncher, std::function<bool()> pressed);
 
-    SpinThroat(Throat* throat, std::function<double()> leftTrigger, std::function<bool()> leftBumper);
-    void Initialize() override;
     void Execute() override;
+
     bool IsFinished() override;
 
-
  private:
- 
-    Throat* m_throat;
-    std::function<double()> m_leftTrig;
-    std::function<bool()> m_leftBumper;
+
+    Muncher* m_muncher;
+    std::function<bool()> m_pressed;
+    
 };

@@ -1,7 +1,5 @@
 #include "RobotContainer.h"
 
-#include "commands/DriveManual.h"
-
 
 RobotContainer::RobotContainer() /*: m_driveManual(&m_drivetrain)*/ {
   // Initialize all of your commands and subsystems here
@@ -12,11 +10,13 @@ RobotContainer::RobotContainer() /*: m_driveManual(&m_drivetrain)*/ {
 
   m_intake.SetDefaultCommand(SpinIntake(&m_intake, [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kRightHand); }, [this] { return m_GamepadDriver.GetBumper(frc::GenericHID::kRightHand); }));
         
-  m_throat.SetDefaultCommand(SpinThroat(&m_throat, [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kLeftHand); }, [this] { return m_GamepadDriver.GetBumper(frc::GenericHID::kLeftHand); }));
+  m_hopper.SetDefaultCommand(SpinHopper(&m_hopper, [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kLeftHand); }, [this] { return m_GamepadDriver.GetBumper(frc::GenericHID::kLeftHand); }));
 
   m_arm.SetDefaultCommand(ArmManual(&m_arm, [this] { return m_GamepadDriver.GetY(frc::GenericHID::kLeftHand); }));
 
   m_lift.SetDefaultCommand(Climb(&m_lift, [this] { return m_GamepadDriver.GetY(frc::GenericHID::kRightHand); }));
+
+  m_muncher.SetDefaultCommand(Munch(&m_muncher, [this] { return m_GamepadDriver.GetYButton(); }));
 
   // Configure the button bindings
   ConfigureButtonBindings();

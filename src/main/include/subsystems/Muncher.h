@@ -1,19 +1,24 @@
-// #pragma once
+#pragma once
 
-// #include <frc2/command/SubsystemBase.h>
-// #include <frc/VictorSP.h>
+#include <frc2/command/SubsystemBase.h>
+#include <frc/PWMVictorSPX.h>
+#include <frc/SpeedControllerGroup.h>
+#include "Constants.h"
 
-// class Muncher : public frc2::SubsystemBase {
-//  public:
+class Muncher : public frc2::SubsystemBase {
+ public:
  
-//     Muncher();
+    Muncher();
 
-//     void SetMunchPower(double power);
-//     void Periodic() override;
+    void SetMunchPower(double power);
+    void Periodic() override;
 
-//  private:
+ private:
 
-//    //  frc::VictorSP munchA;
-//    //  frc::VictorSP munchB;
+    // motor type not decided
+    frc::PWMVictorSPX leftMuncherMtr;
+    frc::PWMVictorSPX rightMuncherMtr;
 
-// };
+    frc::SpeedControllerGroup muncherMtrs{leftMuncherMtr, rightMuncherMtr};
+
+};

@@ -3,14 +3,13 @@
 #include <frc2/command/Command.h>
 #include <frc2/command/CommandScheduler.h>
 #include <frc/XboxController.h>
-//#include <frc2/command/button/Button.h>
 #include <frc2/command/button/JoystickButton.h>
 
 
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Shooter.h"
 #include "subsystems/Intake.h"
-#include "subsystems/Throat.h"
+#include "subsystems/Hopper.h"
 #include "subsystems/Arm.h"
 #include "subsystems/Lift.h"
 #include "subsystems/Muncher.h"
@@ -18,10 +17,11 @@
 #include "commands/DriveManual.h"
 #include "commands/ShootStart.h"
 #include "commands/SpinIntake.h"
-#include "commands/SpinThroat.h"
+#include "commands/SpinHopper.h"
 #include "commands/ShootStop.h"
 #include "commands/ArmManual.h"
 #include "commands/Climb.h"
+#include "commands/Munch.h"
 
 #include "Constants.h"
 /**
@@ -50,11 +50,11 @@ class RobotContainer {
 
     Drivetrain m_drivetrain;
     Intake m_intake;
-    Throat m_throat;
+    Hopper m_hopper;
     Arm m_arm;
     Shooter m_shooter;
     Lift m_lift;
-    // Muncher m_muncher;
+    Muncher m_muncher;
     
   void ConfigureButtonBindings();
 };
