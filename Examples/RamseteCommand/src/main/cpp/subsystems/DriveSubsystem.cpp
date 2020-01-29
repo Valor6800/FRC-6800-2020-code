@@ -28,6 +28,8 @@ DriveSubsystem::DriveSubsystem()
   mRightEncoder.SetVelocityConversionFactor(kVelocityConversionFactor);
   ResetEncoders();
   imu.Calibrate();
+  logging_file.open("/home/lvuser/ramsete_test.csv");
+  logging_file << "Time,Heading,LeftPosition,RightPosition,LeftSpeed,RightSpeed,LeftOutput,RightOutput\n";
 }
 
 void DriveSubsystem::SetIdleMode(rev::CANSparkMax::IdleMode mode) {
@@ -41,35 +43,42 @@ void DriveSubsystem::SetIdleMode(rev::CANSparkMax::IdleMode mode) {
 }
 
 void DriveSubsystem::SetupDrive() {
-    mLeftLead.RestoreFactoryDefaults();
-    mLeftFollow1.RestoreFactoryDefaults();
-    mLeftFollow2.RestoreFactoryDefaults();
-    mRightLead.RestoreFactoryDefaults();
-    mRightFollow1.RestoreFactoryDefaults();
-    mRightFollow2.RestoreFactoryDefaults();
+  mLeftLead.RestoreFactoryDefaults();
+  mLeftFollow1.RestoreFactoryDefaults();
+  mLeftFollow2.RestoreFactoryDefaults();
+  mRightLead.RestoreFactoryDefaults();
+  mRightFollow1.RestoreFactoryDefaults();
+  mRightFollow2.RestoreFactoryDefaults();
 
-    mLeftLead.SetInverted(false);
-    mLeftFollow1.SetInverted(false);
-    mLeftFollow2.SetInverted(false);
-    mRightLead.SetInverted(true);
-    mRightFollow1.SetInverted(true);
-    mRightFollow2.SetInverted(true);
+  mLeftLead.SetInverted(false);
+  mLeftFollow1.SetInverted(false);
+  mLeftFollow2.SetInverted(false);
+  mRightLead.SetInverted(true);
+  mRightFollow1.SetInverted(true);
+  mRightFollow2.SetInverted(true);
 
-    mLeftFollow1.Follow(mLeftLead);
-    mRightFollow1.Follow(mRightLead);
-    mLeftFollow2.Follow(mLeftLead);
-    mRightFollow2.Follow(mRightLead);
+  mLeftFollow1.Follow(mLeftLead);
+  mRightFollow1.Follow(mRightLead);
+  mLeftFollow2.Follow(mLeftLead);
+  mRightFollow2.Follow(mRightLead);
 
-    // set motors to brake mode
-    SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+  // set motors to brake mode
+  SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
 }
 
-void DriveSubsystem::LogOutput() {
-
+void DriveSubsystem::LogOutput(units::volt_t leftOut, units::volt_t rightOut) {
+  logging_file << frc::Timer::GetFPGATimestamp() << ",";
+  logging_file << GetHeading() << ",";
+  logging_file << mLeftEncoder.GetPosition() << ",";
+  logging_file << mRightEncoder.GetPosition() << ",";
+  logging_file << mLeftEncoder.GetVelocity() << ",";
+  logging_file << mRightEncoder.GetVelocity() << ",";
+  logging_file << leftOut << ",";
+  logging_file << rightOut;
+  logging_file << "\n";
 }
 
 void DriveSubsystem::Periodic() {
-  LogOutput();
 
   // Implementation of subsystem periodic method goes here.
   m_odometry.Update(frc::Rotation2d(units::degree_t(GetHeading())),
@@ -82,8 +91,9 @@ void DriveSubsystem::ArcadeDrive(double fwd, double rot) {
 }
 
 void DriveSubsystem::TankDriveVolts(units::volt_t left, units::volt_t right) {
-  mLeftLead.SetVoltage(left);
-  mRightLead.SetVoltage(-right);
+  LogOutput(left, right);
+  // mLeftLead.SetVoltage(left);
+  // mRightLead.SetVoltage(right);
 }
 
 void DriveSubsystem::ResetEncoders() {

@@ -31,7 +31,7 @@ constexpr int kRightMotorLeadPort = 4;
 constexpr int kRightMotorFollow1Port = 5;
 constexpr int kRightMotorFollow2Port = 6;
 
-constexpr auto kTrackwidth = 0.69_m;
+constexpr auto kTrackwidth = 0.68_m;
 extern const frc::DifferentialDriveKinematics kDriveKinematics;
 
 constexpr double kWheelDiameterInches = 6;
@@ -49,12 +49,12 @@ constexpr bool kGyroReversed = false;
 // theoretically for *your* robot's drive. The Robot Characterization
 // Toolsuite provides a convenient tool for obtaining these values for your
 // robot.
-constexpr auto ks = 0.22_V;
-constexpr auto kv = 1.98 * 1_V * 1_s / 1_m;
-constexpr auto ka = 0.2 * 1_V * 1_s * 1_s / 1_m;
+constexpr auto ks = 0.146_V;
+constexpr auto kv = 2.25 * 1_V * 1_s / 1_m;
+constexpr auto ka = 0.315 * 1_V * 1_s * 1_s / 1_m;
 
 // Example value only - as above, this must be tuned for your drive!
-constexpr double kPDriveVel = 8.5;
+constexpr double kPDriveVel = 5.53;
 }  // namespace DriveConstants
 
 namespace AutoConstants {

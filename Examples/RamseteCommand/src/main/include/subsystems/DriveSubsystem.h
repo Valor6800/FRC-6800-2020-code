@@ -16,6 +16,8 @@
 #include <frc/kinematics/DifferentialDriveOdometry.h>
 #include <frc2/command/SubsystemBase.h>
 #include <units/units.h>
+#include <iostream>
+#include <fstream>
 
 #include "Constants.h"
 
@@ -34,7 +36,7 @@ class DriveSubsystem : public frc2::SubsystemBase {
   /**
    * Log output to file
    */
-  void LogOutput();
+  void LogOutput(units::volt_t, units::volt_t);
 
   /**
    * Helper method to set all motor controllers to use brake or coast mode
@@ -158,4 +160,6 @@ class DriveSubsystem : public frc2::SubsystemBase {
 
   // Odometry class for tracking robot pose
   frc::DifferentialDriveOdometry m_odometry;
+
+  std::ofstream logging_file;
 };
