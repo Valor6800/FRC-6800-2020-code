@@ -13,8 +13,26 @@ jobs:
    steps:
     - task: Gradle@2
       inputs:
-        workingDirectory: ''
-        gradleWrapperFile: 'gradlew'
+        workingDirectory: './Competition'
+        gradleWrapperFile: './Competition/gradlew'
+        gradleOptions: '-Xmx3072m'
+        publishJUnitResults: false
+        testResultsFiles: '**/TEST-*.xml'
+        tasks: 'build'
+
+    - task: Gradle@2
+      inputs:
+        workingDirectory: './Examples/RamseteCommand'
+        gradleWrapperFile: './Examples/RamseteCommand/gradlew'
+        gradleOptions: '-Xmx3072m'
+        publishJUnitResults: false
+        testResultsFiles: '**/TEST-*.xml'
+        tasks: 'build'
+
+    - task: Gradle@2
+      inputs:
+        workingDirectory: './Examples/DriveStraightTeleop'
+        gradleWrapperFile: './Examples/DriveStraightTeleop/gradlew'
         gradleOptions: '-Xmx3072m'
         publishJUnitResults: false
         testResultsFiles: '**/TEST-*.xml'
