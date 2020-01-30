@@ -22,10 +22,6 @@ DriveSubsystem::DriveSubsystem()
       m_odometry{frc::Rotation2d(units::degree_t(GetHeading()))} {
 
   SetupDrive();
-  mLeftEncoder.SetPositionConversionFactor(kPositionConversionFactor);
-  mRightEncoder.SetPositionConversionFactor(kPositionConversionFactor);
-  mLeftEncoder.SetVelocityConversionFactor(kVelocityConversionFactor);
-  mRightEncoder.SetVelocityConversionFactor(kVelocityConversionFactor);
   ResetEncoders();
   imu.Calibrate();
   logging_file.open("/home/lvuser/ramsete_test.csv");
@@ -63,27 +59,28 @@ void DriveSubsystem::SetupDrive() {
   mRightFollow2.Follow(mRightLead);
 
   // set motors to brake mode
-  SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+  SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
 }
 
-void DriveSubsystem::LogOutput(units::volt_t leftOut, units::volt_t rightOut) {
+void DriveSubsystem::LogOutput() {
   logging_file << frc::Timer::GetFPGATimestamp() << ",";
   logging_file << GetHeading() << ",";
-  logging_file << mLeftEncoder.GetPosition() << ",";
-  logging_file << mRightEncoder.GetPosition() << ",";
-  logging_file << mLeftEncoder.GetVelocity() << ",";
-  logging_file << mRightEncoder.GetVelocity() << ",";
-  logging_file << leftOut << ",";
-  logging_file << rightOut;
+  logging_file << mLeftEncoder.GetPosition() * kPositionConversionFactor << ",";
+  logging_file << mRightEncoder.GetPosition() * kPositionConversionFactor << ",";
+  logging_file << mLeftEncoder.GetVelocity() * kVelocityConversionFactor<< ",";
+  logging_file << mRightEncoder.GetVelocity() * kVelocityConversionFactor << ",";
+  logging_file << "0"<< ",";
+  logging_file << "0";
   logging_file << "\n";
 }
 
 void DriveSubsystem::Periodic() {
+  LogOutput();
 
   // Implementation of subsystem periodic method goes here.
   m_odometry.Update(frc::Rotation2d(units::degree_t(GetHeading())),
-                    units::meter_t(mLeftEncoder.GetPosition()),
-                    units::meter_t(mRightEncoder.GetPosition()));
+                    units::meter_t(mLeftEncoder.GetPosition() * kPositionConversionFactor),
+                    units::meter_t(mRightEncoder.GetPosition()) * kPositionConversionFactor);
 }
 
 void DriveSubsystem::ArcadeDrive(double fwd, double rot) {
@@ -91,9 +88,8 @@ void DriveSubsystem::ArcadeDrive(double fwd, double rot) {
 }
 
 void DriveSubsystem::TankDriveVolts(units::volt_t left, units::volt_t right) {
-  LogOutput(left, right);
-  // mLeftLead.SetVoltage(left);
-  // mRightLead.SetVoltage(right);
+  mLeftLead.SetVoltage(left);
+  mRightLead.SetVoltage(right);
 }
 
 void DriveSubsystem::ResetEncoders() {
@@ -102,7 +98,7 @@ void DriveSubsystem::ResetEncoders() {
 }
 
 double DriveSubsystem::GetAverageEncoderDistance() {
-  return (mLeftEncoder.GetPosition() + mRightEncoder.GetPosition()) / 2.0;
+  return (mLeftEncoder.GetPosition() * kPositionConversionFactor + mRightEncoder.GetPosition() * kPositionConversionFactor) / 2.0;
 }
 
 rev::CANEncoder& DriveSubsystem::GetLeftEncoder() { return mLeftEncoder; }
@@ -124,8 +120,8 @@ double DriveSubsystem::GetTurnRate() {
 frc::Pose2d DriveSubsystem::GetPose() { return m_odometry.GetPose(); }
 
 frc::DifferentialDriveWheelSpeeds DriveSubsystem::GetWheelSpeeds() {
-  return {units::meters_per_second_t(mLeftEncoder.GetVelocity()),
-          units::meters_per_second_t(mRightEncoder.GetVelocity())};
+  return {units::meters_per_second_t(mLeftEncoder.GetVelocity() * kVelocityConversionFactor),
+          units::meters_per_second_t(mRightEncoder.GetVelocity() * kVelocityConversionFactor)};
 }
 
 void DriveSubsystem::ResetOdometry(frc::Pose2d pose) {
