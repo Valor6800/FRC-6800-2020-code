@@ -38,11 +38,11 @@ constexpr double kWheelDiameterInches = 6;
 constexpr double kGearRatio = 8.8;
 
 // Convert rotations to meters using gear ratio and wheel diameter (converted to meters)
-constexpr double kPositionConversionFactor = kWheelDiameterInches * 0.0254 * kGearRatio * M_PI;
+constexpr double kPositionConversionFactor = kWheelDiameterInches * 0.0254 / kGearRatio * M_PI;
 // Convert rotations per minute to meters per second 
 constexpr double kVelocityConversionFactor = kPositionConversionFactor / 60;
 
-constexpr bool kGyroReversed = false;
+constexpr bool kGyroReversed = true;
 
 // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!
 // These characterization values MUST be determined either experimentally or
@@ -58,8 +58,8 @@ constexpr double kPDriveVel = 5.53;
 }  // namespace DriveConstants
 
 namespace AutoConstants {
-constexpr auto kMaxSpeed = 4.2672_mps;
-constexpr auto kMaxAcceleration = 4.2672_mps_sq;
+constexpr auto kMaxSpeed = 4_mps;
+constexpr auto kMaxAcceleration = 4_mps_sq;
 
 // Reasonable baseline values for a RAMSETE follower in units of meters and
 // seconds

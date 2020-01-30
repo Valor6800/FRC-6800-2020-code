@@ -36,7 +36,7 @@ class DriveSubsystem : public frc2::SubsystemBase {
   /**
    * Log output to file
    */
-  void LogOutput(units::volt_t, units::volt_t);
+  void LogOutput();
 
   /**
    * Helper method to set all motor controllers to use brake or coast mode
