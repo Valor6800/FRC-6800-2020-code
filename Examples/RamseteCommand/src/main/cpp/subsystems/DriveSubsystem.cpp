@@ -25,7 +25,7 @@ DriveSubsystem::DriveSubsystem()
   ResetEncoders();
   imu.Calibrate();
   logging_file.open("/home/lvuser/ramsete_test.csv");
-  logging_file << "Time,Heading,LeftPosition,RightPosition,LeftSpeed,RightSpeed,LeftOutput,RightOutput\n";
+  logging_file << "Time,Heading,LeftPosition,RightPosition,LeftSpeed,RightSpeed,LeftOutput,RightOutput,LeftCurrent,RightCurrent\n";
 }
 
 void DriveSubsystem::SetIdleMode(rev::CANSparkMax::IdleMode mode) {
@@ -69,8 +69,10 @@ void DriveSubsystem::LogOutput() {
   logging_file << mRightEncoder.GetPosition() * kPositionConversionFactor << ",";
   logging_file << mLeftEncoder.GetVelocity() * kVelocityConversionFactor<< ",";
   logging_file << mRightEncoder.GetVelocity() * kVelocityConversionFactor << ",";
-  logging_file << "0"<< ",";
-  logging_file << "0";
+  logging_file << mLeftLead.GetAppliedOutput() << ",";
+  logging_file << mRightLead.GetAppliedOutput() << ",";
+  logging_file << mLeftLead.GetOutputCurrent() << ",";
+  logging_file << mRightLead.GetOutputCurrent();
   logging_file << "\n";
 }
 
