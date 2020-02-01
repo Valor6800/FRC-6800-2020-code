@@ -28,7 +28,7 @@
 
 #define DRIVE_OFFSET_K 1
 
-#define KP -0.0208f
+#define KP -0.01f
 #define MIN_COMMAND 0.0f
 
 class Robot : public frc::TimedRobot {
@@ -218,7 +218,7 @@ class Robot : public frc::TimedRobot {
    
     double joystick_x_value = m_GamepadDriver.GetX(frc::GenericHID::kLeftHand);
     double direction_x = (joystick_x_value >= 0) ? 1 : -1;
-    joystick_x_value = -std::pow(joystick_x_value, 2) * direction_x * DRIVE_MULTIPLIER_X;
+    joystick_x_value = -std::pow(joystick_x_value * DRIVE_MULTIPLIER_X, 2) * direction_x;
     double turn_target = MaxRPM * joystick_x_value;
     if (direction_y == 1) {   //for inverting x and y in revese direction
       turn_target = -turn_target;
