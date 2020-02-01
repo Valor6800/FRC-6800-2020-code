@@ -4,12 +4,19 @@
 #include <frc/SpeedControllerGroup.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <rev/CANSparkMax.h>
+#include <rev/CANEncoder.h>
+#include <adi/ADIS16448_IMU.h>
 #include <frc2/command/SubsystemBase.h>
 #include <networktables/NetworkTableEntry.h>
 #include <networktables/NetworkTableInstance.h>
 #include <networktables/NetworkTable.h>
 #include <frc/livewindow/LiveWindow.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/kinematics/DifferentialDriveOdometry.h>
+#include <frc/geometry/Pose2d.h>
+#include <units/units.h>
+#include <frc/geometry/Rotation2d.h>
+#include <frc/kinematics/DifferentialDriveWheelSpeeds.h>
 
 #include "Constants.h"
 
@@ -38,18 +45,26 @@ class Drivetrain : public frc2::SubsystemBase{
     Drivetrain();
 
     void Periodic() override;
+    
+    void InitDrives(rev::CANSparkMax::IdleMode idleMode);
+    void ResetEncoders();
+    void ResetOdometry(frc::Pose2d pose);
+    rev::CANEncoder& GetLeftEncoder();
+    rev::CANEncoder& GetRightEncoder();
+    double GetEncAvgDistance();
+    double GetHeading();
+    double GetTurnRate();
+    frc::Pose2d GetPose();
+    frc::DifferentialDriveWheelSpeeds GetWheelSpeeds();
 
+    void TankDriveVolts(units::volt_t leftVolts, units::volt_t rightVolts);
     void ArcadeDrive(double leftInput, double rightInput);
-
     void RocketLeagueDrive(double straightInput, double reverseInput, double turnInput, bool limelightInput);
 
-    void InitDrives(rev::CANSparkMax::IdleMode idleMode);
-
+    void SetMultiplier(double multiplier);
     void Stop();
 
     double boostMultiplier;
-
-    void SetMultiplier(double multiplier);
 
  private:
 
@@ -59,6 +74,8 @@ class Drivetrain : public frc2::SubsystemBase{
     rev::CANSparkMax m_rightDriveLead;
     rev::CANSparkMax m_rightDriveFollowA;
     rev::CANSparkMax m_rightDriveFollowB;
+
+    frc::ADIS16448_IMU imu{};
 
     rev::CANPIDController m_leftPIDController = m_leftDriveLead.GetPIDController();
     rev::CANPIDController m_rightPIDController = m_rightDriveLead.GetPIDController();
@@ -70,6 +87,8 @@ class Drivetrain : public frc2::SubsystemBase{
     frc::SpeedControllerGroup rightDrive{m_rightDriveLead, m_rightDriveFollowA, m_rightDriveFollowB};
 
     frc::DifferentialDrive drive{leftDrive, rightDrive};
+
+    frc::DifferentialDriveOdometry m_odometry;
 
     double directionY;
     double straightValue;
