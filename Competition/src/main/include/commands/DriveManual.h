@@ -15,7 +15,7 @@
 class DriveManual : public frc2::CommandHelper<frc2::CommandBase, DriveManual> {
  public:
    
-    DriveManual(Drivetrain* drivetrain, std::function<double()> straightValue, std::function<double()> reverseValue, std::function<double()> turnValue);
+    DriveManual(Drivetrain* drivetrain, std::function<double()> straightValue, std::function<double()> reverseValue, std::function<double()> turnValue, std::function<bool()> limelightInput);
 
     void Execute() override;
 
@@ -29,4 +29,5 @@ class DriveManual : public frc2::CommandHelper<frc2::CommandBase, DriveManual> {
    std::function<double()> m_straightValue;
    std::function<double()> m_reverseValue;
    std::function<double()> m_turnValue;
+   std::function<bool()> m_limelightInput;
 };

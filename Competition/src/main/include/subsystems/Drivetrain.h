@@ -5,10 +5,15 @@
 #include <frc/drive/DifferentialDrive.h>
 #include <rev/CANSparkMax.h>
 #include <frc2/command/SubsystemBase.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
+#include <frc/livewindow/LiveWindow.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 #include "Constants.h"
 
-#define kP 0
+#define kP -0.01f
 #define kI 0
 #define kD 0
 #define kIz 0
@@ -36,7 +41,7 @@ class Drivetrain : public frc2::SubsystemBase{
 
     void ArcadeDrive(double leftInput, double rightInput);
 
-    void RocketLeagueDrive(double straightInput, double reverseInput, double turnInput);
+    void RocketLeagueDrive(double straightInput, double reverseInput, double turnInput, bool limelightInput);
 
     void InitDrives(rev::CANSparkMax::IdleMode idleMode);
 
