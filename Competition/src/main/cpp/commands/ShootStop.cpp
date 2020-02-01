@@ -5,8 +5,6 @@ ShootStop::ShootStop(Shooter* shooter) : m_shooter{shooter} {
 }
 
 void ShootStop::Initialize() {
-    // what are shooter controls????????
-    //do some math to figure out power and hood
     m_shooter->SetShooterPower(0);
 }
 bool ShootStop::IsFinished() {
