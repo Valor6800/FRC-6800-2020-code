@@ -5,8 +5,9 @@ RobotContainer::RobotContainer() /*: m_driveManual(&m_drivetrain)*/ {
   // Initialize all of your commands and subsystems here
  
   m_drivetrain.SetDefaultCommand(DriveManual(&m_drivetrain,
-      [this] { return m_GamepadDriver.GetY(frc::GenericHID::kLeftHand); },
-      [this] { return m_GamepadDriver.GetX(frc::GenericHID::kRightHand); }));
+      [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kRightHand); },
+      [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kLeftHand); },
+      [this] { return m_GamepadDriver.GetX(frc::GenericHID::kLeftHand); }));
 
   m_intake.SetDefaultCommand(SpinIntake(&m_intake, [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kRightHand); }, [this] { return m_GamepadDriver.GetBumper(frc::GenericHID::kRightHand); }));
         
@@ -27,11 +28,11 @@ void RobotContainer::ConfigureButtonBindings() {
     frc2::JoystickButton m_back{&m_GamepadDriver, 7};
 
     // frc::JoystickButton m_a{&m_GamepadDriver, 1};
-    // frc::JoystickButton m_b{&m_GamepadDriver, 2};
+    frc2::JoystickButton m_b{&m_GamepadDriver, 2};
     // frc::JoystickButton m_x{&m_GamepadDriver, 3};
-    frc2::JoystickButton m_y{&m_GamepadDriver, 4};
+    //frc2::JoystickButton m_y{&m_GamepadDriver, 4};
     
-    m_y.WhenPressed(frc2::InstantCommand([this] { m_drivetrain.SetMultiplier(1); }, {&m_drivetrain}));
+    m_b.WhenPressed(frc2::InstantCommand([this] { m_drivetrain.SetMultiplier(1); }, {&m_drivetrain}));
 
     m_start.WhenPressed(ShootStart(&m_shooter));
     m_back.WhenPressed(ShootStop(&m_shooter));

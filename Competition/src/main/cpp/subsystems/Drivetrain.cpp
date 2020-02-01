@@ -11,6 +11,8 @@ Drivetrain::Drivetrain() : m_leftDriveLead{DriveConstants::CAN_ID_LEFT_LEAD, rev
     drive.SetMaxOutput(kMaxOutput);
     drive.SetDeadband(kDeadband);
 
+    InitDrives(rev::CANSparkMax::IdleMode::kCoast);
+
     leftDrive.SetInverted(!leftDrive.GetInverted());
     rightDrive.SetInverted(!rightDrive.GetInverted());
 }
@@ -23,26 +25,30 @@ void Drivetrain::ArcadeDrive(double leftInput, double rightInput) {
     drive.ArcadeDrive(leftInput, -rightInput * .5, true);
 }
 
-void Drivetrain::RocketLeagueDrive(double straightInput, double turnInput) {
-    if (std::abs(straightInput) < kDeadbandY) {
-      straightInput = 0;
+void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, double turnInput) {
+    straightValue = reverseInput - straightInput;
+    if (std::abs(straightValue) < kDeadbandY) {
+      straightValue = 0;
     }
-    directionY = (straightInput > 0) ? 1 : -1;
-    straightTarget = MaxRPM * -std::pow(straightInput, 2) * directionY * kDriveMultiplierY * boostMultiplier;
+    directionY = (straightValue > 0) ? 1 : -1;
+    straightTarget = MaxRPM * -std::pow(straightValue, 2) * directionY * kDriveMultiplierY * boostMultiplier;
    
-    directionX = (turnInput >= 0) ? 1 : -1;
-    turnInput = -std::pow(turnInput, 2) * directionX * kDriveMultiplierX;
-    turnTarget = MaxRPM * turnInput;
+    turnValue = turnInput;
+    directionX = (turnValue >= 0) ? 1 : -1;
+    turnValue = -std::pow(turnValue, 2) * directionX * kDriveMultiplierX;
+    turnTarget = MaxRPM * turnValue;
     if (directionY == 1) {   //for inverting x and y in revese direction
       turnTarget = -turnTarget;
     }
     
-    if (std::abs(turnInput) < kDeadbandX) {
-      if (std::abs(straightInput) < kDeadbandY)
+    if (std::abs(turnValue) < kDeadbandX) {
+      if (std::abs(straightValue) < kDeadbandY) {
         turnTarget = 0; //if turning, don't use drive straightening
-      else
-        turnTarget = (m_leftEncoder.GetVelocity() - m_rightEncoder.GetVelocity()) * kDriveOffsetK;
+      }
+      else {
+        turnTarget = (m_leftEncoder.GetVelocity() - m_rightEncoder.GetVelocity()) * kDriveOffset;
         // Robot tends to curve to the left at 50RPM slower
+      }
     }
   
     m_leftPIDController.SetReference(straightTarget - turnTarget, rev::ControlType::kVelocity);
@@ -50,12 +56,12 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double turnInput) {
 }
 
 void Drivetrain::InitDrives(rev::CANSparkMax::IdleMode idleMode) {
-    m_leftDriveLead.RestoreFactoryDefaults();
-    m_leftDriveFollowA.RestoreFactoryDefaults();
-    m_leftDriveFollowB.RestoreFactoryDefaults();
-    m_rightDriveLead.RestoreFactoryDefaults();
-    m_rightDriveFollowA.RestoreFactoryDefaults();
-    m_rightDriveFollowB.RestoreFactoryDefaults();
+    // m_leftDriveLead.RestoreFactoryDefaults();
+    // m_leftDriveFollowA.RestoreFactoryDefaults();
+    // m_leftDriveFollowB.RestoreFactoryDefaults();
+    // m_rightDriveLead.RestoreFactoryDefaults();
+    // m_rightDriveFollowA.RestoreFactoryDefaults();
+    // m_rightDriveFollowB.RestoreFactoryDefaults();
 
     m_leftDriveLead.SetIdleMode(idleMode);
     m_leftDriveFollowA.SetIdleMode(idleMode);

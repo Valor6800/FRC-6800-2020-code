@@ -25,8 +25,7 @@
 #define kDeadbandX 0.02
 #define kDriveMultiplierX 0.5
 #define kDriveMultiplierY 1
-
-#define kDriveOffsetK 1
+#define kDriveOffset 1
 
 class Drivetrain : public frc2::SubsystemBase{
  public:
@@ -37,7 +36,7 @@ class Drivetrain : public frc2::SubsystemBase{
 
     void ArcadeDrive(double leftInput, double rightInput);
 
-    void RocketLeagueDrive(double straightInput, double turnInput);
+    void RocketLeagueDrive(double straightInput, double reverseInput, double turnInput);
 
     void InitDrives(rev::CANSparkMax::IdleMode idleMode);
 
@@ -68,8 +67,10 @@ class Drivetrain : public frc2::SubsystemBase{
     frc::DifferentialDrive drive{leftDrive, rightDrive};
 
     double directionY;
+    double straightValue;
     double straightTarget;
     double directionX;
+    double turnValue;
     double turnTarget;
 
 };
