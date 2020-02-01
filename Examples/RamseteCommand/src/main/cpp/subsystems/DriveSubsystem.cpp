@@ -9,6 +9,8 @@
 
 #include <frc/geometry/Rotation2d.h>
 #include <frc/kinematics/DifferentialDriveWheelSpeeds.h>
+#include <frc/shuffleboard/Shuffleboard.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 using namespace DriveConstants;
 
@@ -74,6 +76,9 @@ void DriveSubsystem::LogOutput() {
   logging_file << mLeftLead.GetOutputCurrent() << ",";
   logging_file << mRightLead.GetOutputCurrent();
   logging_file << "\n";
+  
+  frc::SmartDashboard::PutNumber("Heading", std::remainder(imu.GetAngle(), 360) * (kGyroReversed ? -1.0 : 1.0));
+  
 }
 
 void DriveSubsystem::Periodic() {
