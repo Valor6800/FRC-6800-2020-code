@@ -4,6 +4,7 @@
 #include <rev/CANSparkMax.h>
 #include "Constants.h"
 #include <frc/SpeedControllerGroup.h>
+#include <frc/PWMVictorSPX.h>
 
 class Arm : public frc2::SubsystemBase {
   public:
@@ -14,9 +15,11 @@ class Arm : public frc2::SubsystemBase {
 
  private:
 
-     // motor type not decided
-     rev::CANSparkMax leftArmMtr;
-     rev::CANSparkMax rightArmMtr;
+     // talons
+     frc::PWMVictorSPX leftArmMtr;
+     frc::PWMVictorSPX rightArmMtr;
+
+     // 2 servos
 
      frc::SpeedControllerGroup armMtrs{leftArmMtr, rightArmMtr};
 

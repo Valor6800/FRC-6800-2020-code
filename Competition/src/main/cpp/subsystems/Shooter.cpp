@@ -1,6 +1,7 @@
 #include "subsystems/Shooter.h"
 
-Shooter::Shooter() : shootMtr{ShooterConstants::VICTOR_ID_SHOOTER} {
+Shooter::Shooter() : shootMtrA{ShooterConstants::CAN_ID_SHOOTER_A, rev::CANSparkMax::MotorType::kBrushless}, 
+                    shootMtrB{ShooterConstants::CAN_ID_SHOOTER_B, rev::CANSparkMax::MotorType::kBrushless}, hood{ShooterConstants::PWM_ID_HOOD} {
 
 }
 
@@ -9,9 +10,9 @@ void Shooter::Periodic() {
 }
 
 void Shooter::SetShooterPower(double power) {
-    shootMtr.Set(power);
+    shootMtrs.Set(power);
 }
 
 void Shooter::Stop() {
-    shootMtr.Set(0);
+    shootMtrs.Set(0);
 }
