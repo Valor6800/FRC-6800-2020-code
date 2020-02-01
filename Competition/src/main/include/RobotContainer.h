@@ -23,6 +23,7 @@
 #include "commands/ArmManual.h"
 #include "commands/Climb.h"
 #include "commands/Munch.h"
+#include "commands/Auto/HomeTrenchAuto.h"
 
 #include "Constants.h"
 /**
@@ -40,8 +41,8 @@ class RobotContainer {
     RobotContainer();
 
 
-   // frc2::Command* GetAutonomousCommand();
-   frc2::Command* GetShootCommmand();
+   frc2::Command* GetAutonomousCommand();
+   //frc2::Command* GetShootCommmand();
    
 
  private:
@@ -57,6 +58,8 @@ class RobotContainer {
     Shooter m_shooter;
     Lift m_lift;
     Muncher m_muncher;
+
+    HomeTrenchAuto m_homeTrenchAuto;
     
-  void ConfigureButtonBindings();
+    void ConfigureButtonBindings();
 };
