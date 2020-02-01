@@ -20,6 +20,13 @@
 #define kMinVel 0
 #define kMaxAccel 1500
 #define kAllError 0
+#define kDeadband 0.05
+#define kDeadbandY 0.02
+#define kDeadbandX 0.02
+#define kDriveMultiplierX 0.5
+#define kDriveMultiplierY 1
+
+#define kDriveOffsetK 1
 
 class Drivetrain : public frc2::SubsystemBase{
  public:
@@ -28,9 +35,11 @@ class Drivetrain : public frc2::SubsystemBase{
 
     void Periodic() override;
 
-    void Move(double leftInput, double rightInput);
+    void ArcadeDrive(double leftInput, double rightInput);
 
-    void InitDrives();
+    void RocketLeagueDrive(double straightInput, double turnInput);
+
+    void InitDrives(rev::CANSparkMax::IdleMode idleMode);
 
     void Stop();
 
@@ -57,5 +66,10 @@ class Drivetrain : public frc2::SubsystemBase{
     frc::SpeedControllerGroup rightDrive{m_rightDriveLead, m_rightDriveFollowA, m_rightDriveFollowB};
 
     frc::DifferentialDrive drive{leftDrive, rightDrive};
+
+    double directionY;
+    double straightTarget;
+    double directionX;
+    double turnTarget;
 
 };
