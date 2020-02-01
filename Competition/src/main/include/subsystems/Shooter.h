@@ -1,9 +1,10 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
-#include <frc/PWMVictorSPX.h>
+#include <rev/CANSparkMax.h>
 #include <frc/SpeedControllerGroup.h>
 #include "Constants.h"
+#include <frc/Servo.h>
 
 class Shooter : public frc2::SubsystemBase {
  public:
@@ -14,12 +15,11 @@ class Shooter : public frc2::SubsystemBase {
     void Periodic() override;
     void Stop();
  private:
+    rev::CANSparkMax shootMtrA;
+    rev::CANSparkMax shootMtrB;
 
-   // motor type not decided
-    frc::PWMVictorSPX shootMtr;
+    frc::SpeedControllerGroup shootMtrs{shootMtrA, shootMtrB};
 
-    // add encoder
-
-    // maybe add servo?
+    frc::Servo hood;
 
 };

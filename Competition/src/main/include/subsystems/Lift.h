@@ -20,6 +20,4 @@ class Lift : public frc2::SubsystemBase {
 
     frc::SpeedControllerGroup liftMtrs{liftMtrA, liftMtrB};
 
-    // add potentiometer for lift?
-
 };

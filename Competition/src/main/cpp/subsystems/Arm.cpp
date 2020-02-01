@@ -1,9 +1,7 @@
 #include "subsystems/Arm.h"
 
-Arm::Arm() : leftArmMtr{ArmConstants::CAN_ID_LEFT_ARM, rev::CANSparkMax::MotorType::kBrushless}, 
-             rightArmMtr{ArmConstants::CAN_ID_RIGHT_ARM, rev::CANSparkMax::MotorType::kBrushless} {
-    leftArmMtr.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
-    rightArmMtr.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+Arm::Arm() : leftArmMtr{ArmConstants::VICTOR_ID_LEFT_ARM}, rightArmMtr{ArmConstants::VICTOR_ID_RIGHT_ARM} {
+    
 }
 
 void Arm::Periodic() {

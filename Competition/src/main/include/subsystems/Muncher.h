@@ -16,9 +16,6 @@ class Muncher : public frc2::SubsystemBase {
  private:
 
     // motor type not decided
-    frc::PWMVictorSPX leftMuncherMtr;
-    frc::PWMVictorSPX rightMuncherMtr;
-
-    frc::SpeedControllerGroup muncherMtrs{leftMuncherMtr, rightMuncherMtr};
+    frc::PWMVictorSPX muncherMtr;
 
 };

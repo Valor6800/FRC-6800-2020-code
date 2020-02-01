@@ -16,11 +16,7 @@ class Hopper : public frc2::SubsystemBase {
     void Periodic() override;
 
  private:
-    //motor type not decided
-    frc::PWMVictorSPX hopperMtrA;
-    frc::PWMVictorSPX hopperMtrB;
-
-    frc::SpeedControllerGroup hopperMtrs{hopperMtrA, hopperMtrB};
+    frc::PWMVictorSPX hopperMtr;
 
     // photo electric sensors
 

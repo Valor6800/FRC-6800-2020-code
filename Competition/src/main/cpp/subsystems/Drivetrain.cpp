@@ -19,7 +19,7 @@ Drivetrain::Drivetrain() : m_leftDriveLead{DriveConstants::CAN_ID_LEFT_LEAD, rev
 
 void Drivetrain::Periodic() {
 
- }
+}
 
 void Drivetrain::ArcadeDrive(double leftInput, double rightInput) {
     drive.ArcadeDrive(leftInput, -rightInput * .5, true);
@@ -62,6 +62,11 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
   
     m_leftPIDController.SetReference(straightTarget - turnTarget, rev::ControlType::kVelocity);
     m_rightPIDController.SetReference(straightTarget + turnTarget, rev::ControlType::kVelocity);
+
+    frc::SmartDashboard::PutNumber("TurnVelocity", turnTarget);
+    frc::SmartDashboard::PutNumber("ForwardVelocity", straightTarget);
+    frc::SmartDashboard::PutNumber("LeftVelocityVariable", m_leftEncoder.GetVelocity());
+    frc::SmartDashboard::PutNumber("RightVelocityVariable", m_rightEncoder.GetVelocity());
 }
 
 void Drivetrain::InitDrives(rev::CANSparkMax::IdleMode idleMode) {

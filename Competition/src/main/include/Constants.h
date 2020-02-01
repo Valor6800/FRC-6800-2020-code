@@ -44,9 +44,9 @@ namespace RamseteConstants {
 
     constexpr bool kGyroReversed = true;
 
-    constexpr auto ks = 0.146_V;
-    constexpr auto kv = 2.25 * 1_V * 1_s / 1_m;
-    constexpr auto ka = 0.315 * 1_V * 1_s * 1_s / 1_m;
+    constexpr auto kS = 0.146_V;
+    constexpr auto kV = 2.25 * 1_V * 1_s / 1_m;
+    constexpr auto kA = 0.315 * 1_V * 1_s * 1_s / 1_m;
 
     constexpr double kPDriveVel = 5.53;
 
@@ -54,14 +54,16 @@ namespace RamseteConstants {
 
 namespace ArmConstants {
 
-    constexpr static int CAN_ID_LEFT_ARM = 7;
-    constexpr static int CAN_ID_RIGHT_ARM = 8;
+    constexpr static int VICTOR_ID_LEFT_ARM = 7;
+    constexpr static int VICTOR_ID_RIGHT_ARM = 8;
 
 }
 
 namespace ShooterConstants {
 
-    constexpr static int VICTOR_ID_SHOOTER = 0;
+    constexpr static int CAN_ID_SHOOTER_A = 7;
+    constexpr static int CAN_ID_SHOOTER_B = 8;
+    constexpr static int PWM_ID_HOOD = 0;
 
 }
 
@@ -73,21 +75,20 @@ namespace IntakeConstants {
 
 namespace HopperConstants {
 
-    constexpr static int VICTOR_ID_HOPPERA = 2;
-    constexpr static int VICTOR_ID_HOPPERB = 8;
+    constexpr static int VICTOR_ID_HOPPER_A = 2;
+    constexpr static int VICTOR_ID_HOPPER_B = 8;
 
 }
 
 namespace LiftConstants {
 
-    constexpr static int VICTOR_ID_LIFTA = 7;
-    constexpr static int VICTOR_ID_LIFTB = 8;
+    constexpr static int VICTOR_ID_LIFT_A = 7;
+    constexpr static int VICTOR_ID_LIFT_B = 8;
 
 }
 
 namespace MuncherConstants {
 
-    constexpr static int VICTOR_ID_LEFT_MUNCHER = 9;
-    constexpr static int VICTOR_ID_RIGHT_MUNCHER = 10;
+    constexpr static int VICTOR_ID_MUNCHER = 9;
 
 }

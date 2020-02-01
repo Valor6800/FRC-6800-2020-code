@@ -1,6 +1,6 @@
 #include "subsystems/Muncher.h"
 
-Muncher::Muncher() : leftMuncherMtr{MuncherConstants::VICTOR_ID_LEFT_MUNCHER}, rightMuncherMtr{MuncherConstants::VICTOR_ID_RIGHT_MUNCHER} {
+Muncher::Muncher() : muncherMtr{MuncherConstants::VICTOR_ID_MUNCHER} {
 
 }
 
@@ -9,5 +9,5 @@ void Muncher::Periodic() {
 }
 
 void Muncher::SetMunchPower(double power) {
-    muncherMtrs.Set(power);
+    muncherMtr.Set(power);
 }
