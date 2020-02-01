@@ -29,9 +29,9 @@ void RobotContainer::ConfigureButtonBindings() {
     // frc::JoystickButton m_a{&m_GamepadDriver, 1};
     // frc::JoystickButton m_b{&m_GamepadDriver, 2};
     // frc::JoystickButton m_x{&m_GamepadDriver, 3};
-    frc::JoystickButton m_y{&m_GamepadDriver, 4};
+    frc2::JoystickButton m_y{&m_GamepadDriver, 4};
     
-    m_y.WhenPressed(frc2::InstantCommand([&m_drivetrain] { m_drivetrain.SetMultiplier(.5); }, {&m_drivetrain}));
+    m_y.WhenPressed(frc2::InstantCommand([this] { m_drivetrain.SetMultiplier(1); }, {&m_drivetrain}));
 
     m_start.WhenPressed(ShootStart(&m_shooter));
     m_back.WhenPressed(ShootStop(&m_shooter));

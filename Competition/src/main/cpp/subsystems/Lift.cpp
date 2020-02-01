@@ -1,6 +1,6 @@
 #include "subsystems/Lift.h"
 
-Lift::Lift() : liftMtrA{VICTOR_ID_LIFTA}, liftMtrB{VICTOR_ID_LIFTB} {
+Lift::Lift() : liftMtrA{LiftConstants::VICTOR_ID_LIFTA}, liftMtrB{LiftConstants::VICTOR_ID_LIFTB} {
     
 }
 

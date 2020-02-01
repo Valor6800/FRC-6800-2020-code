@@ -254,10 +254,6 @@ class Robot : public frc::TimedRobot {
     if (m_GamepadDriver.GetRawButton(6)) {
       boost_multiplier = 1;
     }
-    else
-    {
-      boost_multiplier = 0.75;
-    }
     
     
 

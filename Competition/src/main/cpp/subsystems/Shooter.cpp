@@ -1,6 +1,6 @@
 #include "subsystems/Shooter.h"
 
-Shooter::Shooter() : shootMtr{VICTOR_ID_SHOOTER} {
+Shooter::Shooter() : shootMtr{ShooterConstants::VICTOR_ID_SHOOTER} {
 
 }
 
