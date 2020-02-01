@@ -13,11 +13,10 @@ InitHomeTrench::InitHomeTrench(Drivetrain* drivetrain) : m_autoVoltageConstraint
         // Start at the origin facing the +X direction
         frc::Pose2d(0_m, 0_m, frc::Rotation2d(0_deg)),
         // Pass through these two interior waypoints, making an 's' curve path
-            //{frc::Translation2d(2.3_m, -1.3_m)},
-        {},
+        {frc::Translation2d(2.3_m, -1.3_m)},
         // End 3 meters straight ahead of where we started, facing forward
-            //frc::Pose2d(7.5_m, -1.3_m, frc::Rotation2d(0_deg)),
-        frc::Pose2d(4.0_m, 0_m, frc::Rotation2d(0_deg)),
+        frc::Pose2d(7.5_m, -1.3_m, frc::Rotation2d(0_deg)),
+        //frc::Pose2d(4.0_m, 0_m, frc::Rotation2d(0_deg)),
         // Pass the config
         m_config);
 
