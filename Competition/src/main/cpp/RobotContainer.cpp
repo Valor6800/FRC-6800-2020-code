@@ -7,7 +7,8 @@ RobotContainer::RobotContainer() /*: m_driveManual(&m_drivetrain)*/ {
   m_drivetrain.SetDefaultCommand(DriveManual(&m_drivetrain,
       [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kRightHand); },
       [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kLeftHand); },
-      [this] { return m_GamepadDriver.GetX(frc::GenericHID::kLeftHand); }));
+      [this] { return m_GamepadDriver.GetX(frc::GenericHID::kLeftHand); },
+      [this] { return m_GamepadDriver.GetBumper(frc::GenericHID::kLeftHand); }));
 
   m_intake.SetDefaultCommand(SpinIntake(&m_intake, [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kRightHand); }, [this] { return m_GamepadDriver.GetBumper(frc::GenericHID::kRightHand); }));
         
@@ -36,6 +37,8 @@ void RobotContainer::ConfigureButtonBindings() {
 
     m_start.WhenPressed(ShootStart(&m_shooter));
     m_back.WhenPressed(ShootStop(&m_shooter));
+
+
     
 }
 // frc2::Command* RobotContainer::GetAutonomousCommand() {

@@ -25,7 +25,7 @@ void Drivetrain::ArcadeDrive(double leftInput, double rightInput) {
     drive.ArcadeDrive(leftInput, -rightInput * .5, true);
 }
 
-void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, double turnInput) {
+void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, double turnInput, bool limelightInput) {
     straightValue = reverseInput - straightInput;
     if (std::abs(straightValue) < kDeadbandY) {
       straightValue = 0;
@@ -34,8 +34,17 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
     straightTarget = MaxRPM * -std::pow(straightValue, 2) * directionY * kDriveMultiplierY * boostMultiplier;
    
     turnValue = turnInput;
+
+    std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+    float tx = table->GetNumber("tx", 0.0);
+    float tv = table->GetNumber("tv" , 0.0);
+
+    if (limelightInput && tv == 1) {
+      turnTarget = kP * tx * MaxRPM;
+    }
+
     directionX = (turnValue >= 0) ? 1 : -1;
-    turnValue = -std::pow(turnValue, 2) * directionX * kDriveMultiplierX;
+    turnValue = -std::pow(turnValue * kDriveMultiplierX, 2) * directionX;
     turnTarget = MaxRPM * turnValue;
     if (directionY == 1) {   //for inverting x and y in revese direction
       turnTarget = -turnTarget;
