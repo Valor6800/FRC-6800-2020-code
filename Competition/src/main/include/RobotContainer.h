@@ -4,6 +4,7 @@
 #include <frc2/command/CommandScheduler.h>
 #include <frc/XboxController.h>
 #include <frc2/command/button/JoystickButton.h>
+#include <frc2/command/InstantCommand.h>
 
 
 #include "subsystems/Drivetrain.h"
@@ -46,8 +47,8 @@ class RobotContainer {
  private:
    // The robot's subsystems and commands are defined here...
 
-    frc::XboxController m_GamepadDriver{GAMEPAD_BASE_LOCATION};
-    frc::XboxController m_GamepadOperator{GAMEPAD_OPERATOR_LOCATION};
+    frc::XboxController m_GamepadDriver{OIConstants::GAMEPAD_BASE_LOCATION};
+    frc::XboxController m_GamepadOperator{OIConstants::GAMEPAD_OPERATOR_LOCATION};
 
     Drivetrain m_drivetrain;
     Intake m_intake;

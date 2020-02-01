@@ -1,6 +1,6 @@
 #include "subsystems/Muncher.h"
 
-Muncher::Muncher() : leftMuncherMtr{VICTOR_ID_LEFT_MUNCHER}, rightMuncherMtr{VICTOR_ID_RIGHT_MUNCHER} {
+Muncher::Muncher() : leftMuncherMtr{MuncherConstants::VICTOR_ID_LEFT_MUNCHER}, rightMuncherMtr{MuncherConstants::VICTOR_ID_RIGHT_MUNCHER} {
 
 }
 

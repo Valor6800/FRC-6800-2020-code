@@ -1,6 +1,6 @@
 #include "subsystems/Hopper.h"
 
-Hopper::Hopper() : hopperMtrA{VICTOR_ID_HOPPERA}, hopperMtrB{VICTOR_ID_HOPPERB} {
+Hopper::Hopper() : hopperMtrA{HopperConstants::VICTOR_ID_HOPPERA}, hopperMtrB{HopperConstants::VICTOR_ID_HOPPERB} {
 
 }
 
