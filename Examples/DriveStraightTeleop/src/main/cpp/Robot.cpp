@@ -14,6 +14,10 @@
 #include <fstream>
 #include <frc/Timer.h>
 #include <frc/XboxController.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
+#include "networktables/NetworkTable.h"
+#include <frc/livewindow/LiveWindow.h>
 
 #include <cmath>
 
@@ -23,6 +27,9 @@
 #define DRIVE_MULTIPLIER_Y 1
 
 #define DRIVE_OFFSET_K 1
+
+#define KP -0.0208f
+#define MIN_COMMAND 0.0f
 
 class Robot : public frc::TimedRobot {
   /**
@@ -116,11 +123,7 @@ class Robot : public frc::TimedRobot {
      * Set inversion to false to gaurentee motors go in the same direction
      **/
     m_leftLeadMotor.SetInverted(false);
-    m_leftFollow1Motor.SetInverted(false);
-    m_leftFollow2Motor.SetInverted(false);
     m_rightLeadMotor.SetInverted(true);
-    m_rightFollow1Motor.SetInverted(true);
-    m_rightFollow2Motor.SetInverted(true);
     
     /**
      * In CAN mode, one SPARK MAX can be configured to follow another. This is done by calling
@@ -163,15 +166,6 @@ class Robot : public frc::TimedRobot {
     m_leftPIDController.SetSmartMotionMinOutputVelocity(kMinVel);
     m_leftPIDController.SetSmartMotionMaxAccel(kMaxAccel);
     m_leftPIDController.SetSmartMotionAllowedClosedLoopError(kAllError);
-
-    // display PID coefficients on SmartDashboard
-    frc::SmartDashboard::PutNumber("P Gain", kP);
-    frc::SmartDashboard::PutNumber("I Gain", kI);
-    frc::SmartDashboard::PutNumber("D Gain", kD);
-    frc::SmartDashboard::PutNumber("I Zone", kIz);
-    frc::SmartDashboard::PutNumber("Feed Forward", kFF);
-    frc::SmartDashboard::PutNumber("Max Output", kMaxOutput);
-    frc::SmartDashboard::PutNumber("Min Output", kMinOutput);
   }
 
   void LogOutput(double setpoint, double turnOffset) {
@@ -208,59 +202,12 @@ class Robot : public frc::TimedRobot {
 
   void TeleopPeriodic() {
 
-    // // read PID coefficients from SmartDashboard
-    // double p = frc::SmartDashboard::GetNumber("P Gain", 0);
-    // double i = frc::SmartDashboard::GetNumber("I Gain", 0);
-    // double d = frc::SmartDashboard::GetNumber("D Gain", 0);
-    // double iz = frc::SmartDashboard::GetNumber("I Zone", 0);
-    // double ff = frc::SmartDashboard::GetNumber("Feed Forward", 0);
-    // double max = frc::SmartDashboard::GetNumber("Max Output", 0);
-    // double min = frc::SmartDashboard::GetNumber("Min Output", 0);
-
-    // // if PID coefficients on SmartDashboard have changed, write new values to controller
-    // if (p != kP) {
-    //   m_leftPIDController.SetP(p);
-    //   m_rightPIDController.SetP(p);
-    //   kP = p;
-    // }
-    // if (i != kI) {
-    //   m_leftPIDController.SetI(i);
-    //   m_rightPIDController.SetI(i);
-    //   kI = i;
-    // }
-    // if (d != kD) {
-    //   m_leftPIDController.SetD(d);
-    //   m_rightPIDController.SetD(d);
-    //   kD = d;
-    // }
-    // if (iz != kIz) {
-    //   m_leftPIDController.SetIZone(iz);
-    //   m_rightPIDController.SetIZone(iz);
-    //   kIz = iz;
-    // }
-    // if (ff != kFF) {
-    //   m_leftPIDController.SetFF(ff);
-    //   m_rightPIDController.SetFF(ff);
-    //   kFF = ff;
-    // }
-    // if((max != kMaxOutput) || (min != kMinOutput)) { 
-    //   m_leftPIDController.SetOutputRange(min, max); 
-    //   m_rightPIDController.SetOutputRange(min, max); 
-    //   kMinOutput = min;
-    //   kMaxOutput = max; 
-    // }
     double boost_multiplier = 0.5;
     // read setpoint from joystick and scale by max rpm
     if (m_GamepadDriver.GetRawButton(6)) {
       boost_multiplier = 1;
     }
-    else
-    {
-      boost_multiplier = 0.75;
-    }
     
-    
-
     double joystick_y_value = m_GamepadDriver.GetTriggerAxis(frc::GenericHID::JoystickHand::kLeftHand) - m_GamepadDriver.GetTriggerAxis(frc::GenericHID::JoystickHand::kRightHand);
     if (std::abs(joystick_y_value) < DEADBAND_Y) {
       joystick_y_value = 0;
@@ -284,13 +231,22 @@ class Robot : public frc::TimedRobot {
         turn_target = (m_leftEncoder.GetVelocity() - m_rightEncoder.GetVelocity()) * DRIVE_OFFSET_K;
         // Robot tends to curve to the left at 50RPM slower
     }
-  
+    
+    std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+    float tx = table->GetNumber("tx", 0.0);
+    float tv = table->GetNumber("tv" , 0.0);
+
+    if (m_GamepadDriver.GetRawButton(5) && tv == 1) {
+      turn_target = KP * tx * MaxRPM;
+    }
+
     m_leftPIDController.SetReference(straight_target - turn_target, rev::ControlType::kVelocity);
     m_rightPIDController.SetReference(straight_target + turn_target, rev::ControlType::kVelocity);
 
-    frc::SmartDashboard::PutNumber("SetPoint", straight_target);
-    frc::SmartDashboard::PutNumber("LeftProcessVariable", m_leftEncoder.GetVelocity());
-    frc::SmartDashboard::PutNumber("RightProcessVariable", m_rightEncoder.GetVelocity());
+    frc::SmartDashboard::PutNumber("TurnVelocity", turn_target);
+    frc::SmartDashboard::PutNumber("ForwardVelocity", straight_target);
+    frc::SmartDashboard::PutNumber("LeftVelocityVariable", m_leftEncoder.GetVelocity());
+    frc::SmartDashboard::PutNumber("RightVelocityVariable", m_rightEncoder.GetVelocity());
 
     LogOutput(straight_target, turn_target);
   }
