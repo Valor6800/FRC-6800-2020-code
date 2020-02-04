@@ -3,7 +3,8 @@
 // Shoot::Shoot(Shooter* shooter, bool stop) : m_shooter{shooter}, m_stop{stop} {
 //     AddRequirements({shooter});
 // }
-ShootStart::ShootStart(Shooter* shooter) : m_shooter{shooter} {
+ShootStart::ShootStart(Shooter* shooter)
+            : m_shooter{shooter} {
     AddRequirements({shooter});
 }
 void ShootStart::Execute() {

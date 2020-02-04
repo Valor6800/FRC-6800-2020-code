@@ -1,13 +1,14 @@
 #include "subsystems/Drivetrain.h"
 
-Drivetrain::Drivetrain() : m_leftDriveLead{DriveConstants::CAN_ID_LEFT_LEAD, rev::CANSparkMax::MotorType::kBrushless},
+Drivetrain::Drivetrain() : boostMultiplier{0.5},
+                           m_leftDriveLead{DriveConstants::CAN_ID_LEFT_LEAD, rev::CANSparkMax::MotorType::kBrushless},
                            m_leftDriveFollowA{DriveConstants::CAN_ID_LEFT_FOLLOW_A, rev::CANSparkMax::MotorType::kBrushless},
                            m_leftDriveFollowB{DriveConstants::CAN_ID_LEFT_FOLLOW_B, rev::CANSparkMax::MotorType::kBrushless},
                            m_rightDriveLead{DriveConstants::CAN_ID_RIGHT_LEAD, rev::CANSparkMax::MotorType::kBrushless},
                            m_rightDriveFollowA{DriveConstants::CAN_ID_RIGHT_FOLLOW_A, rev::CANSparkMax::MotorType::kBrushless},
                            m_rightDriveFollowB{DriveConstants::CAN_ID_RIGHT_FOLLOW_B, rev::CANSparkMax::MotorType::kBrushless},
-                           m_odometry{frc::Rotation2d(units::degree_t(GetHeading()))},
-                           boostMultiplier{0.5}
+                           m_odometry{frc::Rotation2d(units::degree_t(GetHeading()))}
+                           
 {
     drive.SetMaxOutput(kMaxOutput);
     drive.SetDeadband(kDeadband);
@@ -21,7 +22,9 @@ Drivetrain::Drivetrain() : m_leftDriveLead{DriveConstants::CAN_ID_LEFT_LEAD, rev
 }
 
 void Drivetrain::Periodic() {
-
+    m_odometry.Update(frc::Rotation2d(units::degree_t(GetHeading())),
+                    units::meter_t(m_leftEncoder.GetPosition()),
+                    units::meter_t(m_rightEncoder.GetPosition()));
 }
 
 void Drivetrain::InitDrives(rev::CANSparkMax::IdleMode idleMode) {
@@ -105,6 +108,7 @@ frc::DifferentialDriveWheelSpeeds Drivetrain::GetWheelSpeeds() {
 void Drivetrain::TankDriveVolts(units::volt_t leftVolts, units::volt_t rightVolts) {
     m_leftDriveLead.SetVoltage(leftVolts);
     m_rightDriveLead.SetVoltage(rightVolts);
+    drive.Feed();
 }
 
 void Drivetrain::ArcadeDrive(double leftInput, double rightInput) {

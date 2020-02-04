@@ -1,6 +1,7 @@
 #include "commands/ShootStop.h"
 
-ShootStop::ShootStop(Shooter* shooter) : m_shooter{shooter} {
+ShootStop::ShootStop(Shooter* shooter) 
+         : m_shooter{shooter} {
     AddRequirements({shooter});
 }
 
