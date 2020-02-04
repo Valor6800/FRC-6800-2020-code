@@ -53,12 +53,14 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
       DriveConstants::kDriveKinematics, 10_V);
 
   // Set up config for trajectory
-  frc::TrajectoryConfig config(AutoConstants::kMaxSpeed,
+  frc::TrajectoryConfig config1(AutoConstants::kMaxSpeed,
                                AutoConstants::kMaxAcceleration);
   // Add kinematics to ensure max speed is actually obeyed
-  config.SetKinematics(DriveConstants::kDriveKinematics);
+  config1.SetKinematics(DriveConstants::kDriveKinematics);
   // Apply the voltage constraint
-  config.AddConstraint(autoVoltageConstraint);
+  config1.AddConstraint(autoVoltageConstraint);
+  //not reversed
+  config1.SetReversed(false);
 
   // An example trajectory to follow.  All units in meters.
   auto exampleTrajectory1 = frc::TrajectoryGenerator::GenerateTrajectory(
@@ -71,16 +73,24 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
       //{frc::Translation2d(5.8_m, 0.9_m),frc::Translation2d(5.8_m, 0.4_m)},
       {},
       // End 3 meters straight ahead of where we started, facing forward
-      frc::Pose2d(4_m, 0_m /*3.05_m, 2.44_m*/, frc::Rotation2d(0_deg)),
+      frc::Pose2d(2_m, 0.5_m /*3.05_m, 2.44_m*/, frc::Rotation2d(0_deg)),
       // Pass the config
-      config);
+      config1);
 
+      frc::TrajectoryConfig config2(AutoConstants::kMaxSpeed,
+                               AutoConstants::kMaxAcceleration);
+    // Add kinematics to ensure max speed is actually obeyed
+    config2.SetKinematics(DriveConstants::kDriveKinematics);
+    // Apply the voltage constraint
+    config2.AddConstraint(autoVoltageConstraint);
+    //Revese
+    config2.SetReversed(true);
 
     auto exampleTrajectory2 = frc::TrajectoryGenerator::GenerateTrajectory(
       // Start at the origin facing the +X direction
     //   frc::Pose2d(3.05_m, 2.44_m, frc::Rotation2d(0_deg)),
 
-        frc::Pose2d(4_m, 0_m, frc::Rotation2d(0_deg)),
+        frc::Pose2d(2_m, 0.5_m, frc::Rotation2d(0_deg)),
  
       // Pass through these two interior waypoints, making an 's' curve path
       //{frc::Translation2d(5.8_m, 0.9_m),frc::Translation2d(5.8_m, 0.4_m)},
@@ -88,7 +98,7 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
       // End 3 meters straight ahead of where we started, facing forward
       frc::Pose2d(0_m, 0_m /*3.05_m, 2.44_m*/, frc::Rotation2d(0_deg)),
       // Pass the config
-      config);
+      config2);
 
   frc2::RamseteCommand ramseteCommand(
       exampleTrajectory1, [this]() { return m_drive.GetPose(); },
@@ -118,7 +128,11 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
 
   // no auto
   return new frc2::SequentialCommandGroup(
-      std::move(ramseteCommand),std::move(ramseteCommandP2),
-      frc2::InstantCommand([this] { m_drive.TankDriveVolts(0_V, 0_V); }, {}));
-}
+      std::move(ramseteCommand),
+      frc2::InstantCommand([this] { m_drive.TankDriveVolts(0_V, 0_V); }, {}),
 
+      std::move(ramseteCommandP2),
+      frc2::InstantCommand([this] { m_drive.TankDriveVolts(0_V, 0_V); }, {})
+      );
+
+}
