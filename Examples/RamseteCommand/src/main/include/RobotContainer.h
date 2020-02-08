@@ -45,6 +45,7 @@ class RobotContainer {
                                         {}};
   frc2::InstantCommand m_driveFullSpeed{[this] { m_drive.SetMaxOutput(1); },
                                         {}};
+  frc::Timer m_timer;
 
   // The chooser for the autonomous routines
   frc::SendableChooser<frc2::Command*> m_chooser;
