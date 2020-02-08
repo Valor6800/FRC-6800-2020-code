@@ -1,8 +1,11 @@
 #include "RobotContainer.h"
 
 
-RobotContainer::RobotContainer() : m_homeTrenchAuto(&m_drivetrain) {
+RobotContainer::RobotContainer() /*: m_homeTrenchAuto(&m_drivetrain)*/ {
     // Initialize all of your commands and subsystems here
+    m_chooser.AddOption("InitHomeTrench", "InitHomeTrench1");
+    m_chooser.AddOption("Test", "Test1");
+    m_shuffleboard.GetTab("Autonomous").Add(m_chooser);
     
     m_drivetrain.SetDefaultCommand(DriveManual(&m_drivetrain,
         [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kRightHand); },
@@ -39,6 +42,7 @@ void RobotContainer::ConfigureButtonBindings() {
     frc2::JoystickButton m_b{&m_GamepadDriver, 2};
     // frc::JoystickButton m_x{&m_GamepadDriver, 3};
     //frc2::JoystickButton m_y{&m_GamepadDriver, 4};
+
     frc2::JoystickButton m_rightBumper{&m_GamepadDriver, 6};
     
     m_rightBumper.WhenPressed(frc2::InstantCommand([this] { m_drivetrain.SetMultiplier(1); }, {&m_drivetrain}));
@@ -49,5 +53,35 @@ void RobotContainer::ConfigureButtonBindings() {
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
     // An example command will be run in autonomous
-    return &m_homeTrenchAuto;
+    if (m_chooser.GetSelected() == "InitHomeTrench") {
+        return RobotContainer::HomeTrenchAuto();
+    }
+    else {
+        return RobotContainer::TestAuto();
+    }
 }
+
+frc2::Command* RobotContainer::HomeTrenchAuto() {
+   auto trajectory = m_trajectories.GetTrajectory(); 
+
+   frc2::RamseteCommand ramseteCommand(
+      trajectory, [this]() { return m_drivetrain.GetPose(); },
+      frc::RamseteController(RamseteConstants::kRamseteB, RamseteConstants::kRamseteZeta),
+      m_drivetrain.kSimpleMotorFeedforward,
+      m_drivetrain.kDriveKinematics,
+      [this] { return m_drivetrain.GetWheelSpeeds(); },
+      frc2::PIDController(RamseteConstants::kPDriveVel, 0, 0),
+      frc2::PIDController(RamseteConstants::kPDriveVel, 0, 0),
+      [this](auto left, auto right) { m_drivetrain.TankDriveVolts(left, right); },
+      {&m_drivetrain});
+
+   return new frc2::SequentialCommandGroup(
+      std::move(ramseteCommand),
+      frc2::InstantCommand([this] { m_drivetrain.TankDriveVolts(0_V, 0_V); }, {}));
+}
+
+frc2::Command* RobotContainer::TestAuto() {
+    return new frc2::SequentialCommandGroup(frc2::InstantCommand([this] { m_drivetrain.TankDriveVolts(0_V, 0_V); }, {}));
+}
+
+

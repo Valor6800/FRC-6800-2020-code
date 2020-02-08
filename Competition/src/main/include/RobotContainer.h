@@ -6,6 +6,9 @@
 #include <frc2/command/button/JoystickButton.h>
 #include <frc2/command/InstantCommand.h>
 #include <frc2/command/RamseteCommand.h>
+#include <frc2/command/SequentialCommandGroup.h>
+#include <frc/smartdashboard/SendableChooser.h>
+#include <frc/shuffleboard/Shuffleboard.h>
 
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Shooter.h"
@@ -44,7 +47,11 @@ class RobotContainer {
 
    // main auto method to return command group
    frc2::Command* GetAutonomousCommand();
+   frc2::Command* HomeTrenchAuto();
+   frc2::Command* TestAuto();
    
+   frc::SendableChooser<std::string> m_chooser;
+   frc::Shuffleboard m_shuffleboard;
    
 
  private:
@@ -61,7 +68,8 @@ class RobotContainer {
     Lift m_lift;
     Muncher m_muncher;
 
-    HomeTrenchAuto m_homeTrenchAuto;
+    Trajectories m_trajectories;
+    //HomeTrenchAuto m_homeTrenchAuto;
     
     void ConfigureButtonBindings();
 };

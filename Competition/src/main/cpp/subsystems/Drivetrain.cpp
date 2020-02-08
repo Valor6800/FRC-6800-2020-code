@@ -1,6 +1,10 @@
 #include "subsystems/Drivetrain.h"
 
 Drivetrain::Drivetrain() : boostMultiplier{0.5},
+                           kDriveKinematics{DriveConstants::kTrackwidth},
+                           kSimpleMotorFeedforward{RamseteConstants::kS, RamseteConstants::kV, RamseteConstants::kA},
+                           kTrajectoryConfig{RamseteConstants::kMaxSpeed, RamseteConstants::kMaxAcceleration},
+                           kDifferentialDriveVoltageConstraint{kSimpleMotorFeedforward, kDriveKinematics, 10_V},
                            m_leftDriveLead{DriveConstants::CAN_ID_LEFT_LEAD, rev::CANSparkMax::MotorType::kBrushless},
                            m_leftDriveFollowA{DriveConstants::CAN_ID_LEFT_FOLLOW_A, rev::CANSparkMax::MotorType::kBrushless},
                            m_leftDriveFollowB{DriveConstants::CAN_ID_LEFT_FOLLOW_B, rev::CANSparkMax::MotorType::kBrushless},
@@ -19,6 +23,9 @@ Drivetrain::Drivetrain() : boostMultiplier{0.5},
 
     leftDrive.SetInverted(!leftDrive.GetInverted());
     rightDrive.SetInverted(!rightDrive.GetInverted());
+
+    kTrajectoryConfig.SetKinematics(kDriveKinematics);
+    kTrajectoryConfig.AddConstraint(kDifferentialDriveVoltageConstraint);
 }
 
 void Drivetrain::Periodic() {
@@ -164,6 +171,13 @@ void Drivetrain::SetMultiplier(double multiplier) {
     boostMultiplier = multiplier;
 }
 
+// Drivetrain &Drivetrain::GetInstance()
+// {
+//     static Drivetrain instance; // Guaranteed to be destroyed. Instantiated on first use.
+//     return instance;
+// }
+
 void Drivetrain::Stop() {
+    // Drivetrain::GetInstance().
     drive.StopMotor();
 }
