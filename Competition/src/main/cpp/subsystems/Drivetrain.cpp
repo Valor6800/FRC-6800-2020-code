@@ -125,14 +125,6 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
    
     turnValue = turnInput;
 
-    std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
-    float tx = table->GetNumber("tx", 0.0);
-    float tv = table->GetNumber("tv" , 0.0);
-
-    if (limelightInput && tv == 1) {
-      turnTarget = kP * tx * MaxRPM;
-    }
-
     directionX = (turnValue >= 0) ? 1 : -1;
     turnValue = -std::pow(turnValue * kDriveMultiplierX, 2) * directionX;
     turnTarget = MaxRPM * turnValue;
@@ -149,6 +141,14 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
         // Robot tends to curve to the left at 50RPM slower
       }
     }
+
+    std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+    float tx = table->GetNumber("tx", 0.0);
+    float tv = table->GetNumber("tv" , 0.0);
+
+    if (limelightInput && tv == 1) {
+      turnTarget = kP * tx * MaxRPM;
+    }
   
     m_leftPIDController.SetReference(straightTarget - turnTarget, rev::ControlType::kVelocity);
     m_rightPIDController.SetReference(straightTarget + turnTarget, rev::ControlType::kVelocity);
@@ -157,6 +157,7 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
     frc::SmartDashboard::PutNumber("ForwardVelocity", straightTarget);
     frc::SmartDashboard::PutNumber("LeftVelocityVariable", m_leftEncoder.GetVelocity());
     frc::SmartDashboard::PutNumber("RightVelocityVariable", m_rightEncoder.GetVelocity());
+
 }
 
 void Drivetrain::SetMultiplier(double multiplier) {

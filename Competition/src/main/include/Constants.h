@@ -2,6 +2,9 @@
 
 #include <frc/kinematics/DifferentialDriveKinematics.h>
 #include <frc/trajectory/constraint/DifferentialDriveVoltageConstraint.h>
+#include <frc/controller/SimpleMotorFeedforward.h>
+#include <frc/trajectory/Trajectory.h>
+#include <frc/trajectory/TrajectoryGenerator.h>
 
 namespace OIConstants {
 
@@ -48,6 +51,10 @@ namespace RamseteConstants {
 
     constexpr double kPDriveVel = 5.53;
 
+    const frc::SimpleMotorFeedforward kSimpleMotorFeedforward ( RamseteConstants::kS, RamseteConstants::kV, RamseteConstants::kA );
+    const frc::DifferentialDriveKinematics kDriveKinematics{DriveConstants::kTrackwidth};
+    const frc::DifferentialDriveVoltageConstraint kDifferentialDriveVoltageConstraint{RamseteConstants::kSimpleMotorFeedforward, RamseteConstants::kDriveKinematics, 10_V};
+
 }
 
 namespace ArmConstants {
@@ -90,3 +97,11 @@ namespace MuncherConstants {
     constexpr static int VICTOR_ID_MUNCHER = 9;
 
 }
+
+class Constants {
+    public:
+        Constants();
+        frc::TrajectoryConfig kTrajectoryConfig{RamseteConstants::kMaxSpeed, RamseteConstants::kMaxAcceleration};
+
+    private:
+};

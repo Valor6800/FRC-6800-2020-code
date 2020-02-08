@@ -5,7 +5,7 @@
 #include <frc/XboxController.h>
 #include <frc2/command/button/JoystickButton.h>
 #include <frc2/command/InstantCommand.h>
-
+#include <frc2/command/RamseteCommand.h>
 
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Shooter.h"
@@ -26,6 +26,8 @@
 #include "commands/Auto/HomeTrenchAuto.h"
 
 #include "Constants.h"
+#include "Trajectories.h"
+
 /**
  * This class is where the bulk of the robot should be declared.  Since
  * Command-based is a "declarative" paradigm, very little robot logic shouldP
@@ -40,9 +42,9 @@ class RobotContainer {
  public:
     RobotContainer();
 
-
+   // main auto method to return command group
    frc2::Command* GetAutonomousCommand();
-   //frc2::Command* GetShootCommmand();
+   
    
 
  private:

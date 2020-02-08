@@ -45,10 +45,8 @@ void RobotContainer::ConfigureButtonBindings() {
 
     m_start.WhenPressed(ShootStart(&m_shooter));
     m_back.WhenPressed(ShootStop(&m_shooter));
-
-
-    
 }
+
 frc2::Command* RobotContainer::GetAutonomousCommand() {
     // An example command will be run in autonomous
     return &m_homeTrenchAuto;
