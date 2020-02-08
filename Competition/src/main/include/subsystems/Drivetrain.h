@@ -44,6 +44,8 @@ class Drivetrain : public frc2::SubsystemBase{
 
     Drivetrain();
 
+   static Drivetrain& GetInstance();
+
     void Periodic() override;
     
     void InitDrives(rev::CANSparkMax::IdleMode idleMode);
@@ -52,6 +54,8 @@ class Drivetrain : public frc2::SubsystemBase{
     rev::CANEncoder& GetLeftEncoder();
     rev::CANEncoder& GetRightEncoder();
     double GetEncAvgDistance();
+    units::meter_t GetLeftDistance();
+    units::meter_t GetRightDistance();
     double GetHeading();
     double GetTurnRate();
     frc::Pose2d GetPose();

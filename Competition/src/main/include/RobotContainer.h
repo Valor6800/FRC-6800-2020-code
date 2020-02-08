@@ -5,7 +5,7 @@
 #include <frc/XboxController.h>
 #include <frc2/command/button/JoystickButton.h>
 #include <frc2/command/InstantCommand.h>
-
+#include <frc/smartdashboard/SendableChooser.h>
 
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Shooter.h"
@@ -15,14 +15,6 @@
 #include "subsystems/Lift.h"
 #include "subsystems/Muncher.h"
 
-#include "commands/DriveManual.h"
-#include "commands/ShootStart.h"
-#include "commands/SpinIntake.h"
-#include "commands/SpinHopper.h"
-#include "commands/ShootStop.h"
-#include "commands/ArmManual.h"
-#include "commands/Climb.h"
-#include "commands/Munch.h"
 #include "commands/Auto/HomeTrenchAuto.h"
 
 #include "Constants.h"
@@ -40,26 +32,14 @@ class RobotContainer {
  public:
     RobotContainer();
 
-
-   frc2::Command* GetAutonomousCommand();
-   //frc2::Command* GetShootCommmand();
-   
-
  private:
-   // The robot's subsystems and commands are defined here...
+ 
+   Drivetrain& drivetrain_ = Drivetrain::GetInstance();
 
-    frc::XboxController m_GamepadDriver{OIConstants::GAMEPAD_BASE_LOCATION};
-    frc::XboxController m_GamepadOperator{OIConstants::GAMEPAD_OPERATOR_LOCATION};
+   frc::SendableChooser<frc2::Command*> chooser_; // Give options for autonomous actions
 
-    Drivetrain m_drivetrain;
-    Intake m_intake;
-    Hopper m_hopper;
-    Arm m_arm;
-    Shooter m_shooter;
-    Lift m_lift;
-    Muncher m_muncher;
-
-    HomeTrenchAuto m_homeTrenchAuto;
-    
-    void ConfigureButtonBindings();
+   frc::XboxController m_GamepadDriver{OIConstants::GAMEPAD_BASE_LOCATION};
+   frc::XboxController m_GamepadOperator{OIConstants::GAMEPAD_OPERATOR_LOCATION};
+   
+   void ConfigureButtonBindings();
 };
