@@ -1,4 +1,5 @@
 #include "subsystems/Drivetrain.h"
+#include <frc/kinematics/DifferentialDriveOdometry.h>
 
 Drivetrain::Drivetrain() : m_leftDriveLead{DriveConstants::CAN_ID_LEFT_LEAD, rev::CANSparkMax::MotorType::kBrushless},
                            m_leftDriveFollowA{DriveConstants::CAN_ID_LEFT_FOLLOW_A, rev::CANSparkMax::MotorType::kBrushless},
@@ -20,8 +21,14 @@ Drivetrain::Drivetrain() : m_leftDriveLead{DriveConstants::CAN_ID_LEFT_LEAD, rev
     rightDrive.SetInverted(!rightDrive.GetInverted());
 }
 
-void Drivetrain::Periodic() {
+Drivetrain &Drivetrain::GetInstance()
+{
+    static Drivetrain instance; // Guaranteed to be destroyed. Instantiated on first use.
+    return instance;
+}
 
+void Drivetrain::Periodic() {
+    m_odometry.Update(frc::Rotation2d(units::degree_t(GetHeading())), GetLeftDistance(), GetRightDistance());
 }
 
 void Drivetrain::InitDrives(rev::CANSparkMax::IdleMode idleMode) {
@@ -83,6 +90,14 @@ void Drivetrain::ResetOdometry(frc::Pose2d pose) {
 
 double Drivetrain::GetEncAvgDistance() {
     return ((m_leftEncoder.GetPosition() * RamseteConstants::kPositionConversionFactor) + (m_rightEncoder.GetPosition() * RamseteConstants::kPositionConversionFactor)) / 2.0;
+}
+
+units::meter_t Drivetrain::GetLeftDistance() {
+    return m_leftEncoder.GetPosition() * RamseteConstants::kPositionConversionFactor * 1_m;
+}
+
+units::meter_t Drivetrain::GetRightDistance() {
+    return m_rightEncoder.GetPosition() * RamseteConstants::kPositionConversionFactor * 1_m;
 }
 
 double Drivetrain::GetHeading() {
