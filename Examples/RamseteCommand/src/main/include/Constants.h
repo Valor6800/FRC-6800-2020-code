@@ -10,6 +10,12 @@
 #include <units/units.h>
 #include <wpi/math>
 
+#include <vector>
+#include <utility>
+#include "Point.h"
+#include <units/units.h>
+
+
 #pragma once
 
 /**
@@ -58,9 +64,15 @@ constexpr double kPDriveVel = 5.53;
 }  // namespace DriveConstants
 
 namespace AutoConstants {
-constexpr auto kMaxSpeed = 2_mps;
-constexpr auto kMaxAcceleration = 2_mps_sq;
+constexpr auto kMaxSpeed = 4_mps;
+constexpr auto kMaxAcceleration = 4_mps_sq;
 
+#define autoOffset
+// std::vector<Point> Auto1 = {Point(1.0,0.0), Point(2.5,0), Point(3.5,-2),
+//                              Point(-1,-0)};
+
+Point point1(1,1);
+// std::vector<Point> Auto1{point1};
 // Reasonable baseline values for a RAMSETE follower in units of meters and
 // seconds
 constexpr double kRamseteB = 2;
@@ -68,5 +80,6 @@ constexpr double kRamseteZeta = 0.7;
 }  // namespace AutoConstants
 
 namespace OIConstants {
-constexpr int kDriverControllerPort = 1;
+constexpr int kDriverControllerPort = 0;
 }  // namespace OIConstants
+
