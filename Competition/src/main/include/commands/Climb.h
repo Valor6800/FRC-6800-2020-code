@@ -18,7 +18,7 @@
 class Climb : public frc2::CommandHelper<frc2::CommandBase, Climb> {
  public:
    
-    Climb(Lift* lift, std::function<double()> value);
+    Climb(Lift& lift, std::function<double()> value);
 
     void Execute() override;
 
@@ -26,7 +26,6 @@ class Climb : public frc2::CommandHelper<frc2::CommandBase, Climb> {
 
  private:
 
-    Lift* m_lift;
     std::function<double()> m_value;
     
 };

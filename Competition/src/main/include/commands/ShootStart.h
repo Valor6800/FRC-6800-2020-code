@@ -13,16 +13,9 @@
  */
 class ShootStart : public frc2::CommandHelper<frc2::CommandBase, ShootStart> {
  public:
-
-    //Shoot(Shooter* shooter, bool stop);
-    ShootStart(Shooter* shooter);
+    ShootStart(Shooter& shooter);
     void Execute() override;
-   //  bool IsFinished() override;
-   //  void SetStop();
-    //void End() override;
 
  private:
-
-    Shooter* m_shooter;
     
 };

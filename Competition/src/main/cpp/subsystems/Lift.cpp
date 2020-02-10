@@ -4,6 +4,12 @@ Lift::Lift() : liftMtrA{LiftConstants::VICTOR_ID_LIFT_A}, liftMtrB{LiftConstants
     
 }
 
+Lift& Lift::GetInstance()
+{
+    static Lift instance; // Guaranteed to be destroyed. Instantiated on first use.
+    return instance;
+}
+
 void Lift::Periodic() {
   
 }

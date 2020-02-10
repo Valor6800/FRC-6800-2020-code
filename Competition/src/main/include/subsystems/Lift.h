@@ -10,6 +10,8 @@ class Lift : public frc2::SubsystemBase {
 
     Lift();
 
+    static Lift& GetInstance();
+
     void SetLiftPower(double power);
     void Periodic() override;
 

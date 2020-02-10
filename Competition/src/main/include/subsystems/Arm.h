@@ -10,6 +10,9 @@ class Arm : public frc2::SubsystemBase {
   public:
 
      Arm();
+
+     static Arm& GetInstance();
+
      void Periodic() override;
      void SetArmPower(double power);
 

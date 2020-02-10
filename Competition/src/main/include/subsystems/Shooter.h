@@ -11,6 +11,8 @@ class Shooter : public frc2::SubsystemBase {
 
     Shooter();
 
+    static Shooter& GetInstance();
+
     void SetShooterPower(double power);
     void Periodic() override;
     void Stop();

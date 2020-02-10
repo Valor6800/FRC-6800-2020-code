@@ -1,14 +1,15 @@
 #include "subsystems/Drivetrain.h"
 #include <frc/kinematics/DifferentialDriveOdometry.h>
 
-Drivetrain::Drivetrain() : m_leftDriveLead{DriveConstants::CAN_ID_LEFT_LEAD, rev::CANSparkMax::MotorType::kBrushless},
+Drivetrain::Drivetrain() : boostMultiplier{0.5},
+                           m_leftDriveLead{DriveConstants::CAN_ID_LEFT_LEAD, rev::CANSparkMax::MotorType::kBrushless},
                            m_leftDriveFollowA{DriveConstants::CAN_ID_LEFT_FOLLOW_A, rev::CANSparkMax::MotorType::kBrushless},
                            m_leftDriveFollowB{DriveConstants::CAN_ID_LEFT_FOLLOW_B, rev::CANSparkMax::MotorType::kBrushless},
                            m_rightDriveLead{DriveConstants::CAN_ID_RIGHT_LEAD, rev::CANSparkMax::MotorType::kBrushless},
                            m_rightDriveFollowA{DriveConstants::CAN_ID_RIGHT_FOLLOW_A, rev::CANSparkMax::MotorType::kBrushless},
                            m_rightDriveFollowB{DriveConstants::CAN_ID_RIGHT_FOLLOW_B, rev::CANSparkMax::MotorType::kBrushless},
-                           m_odometry{frc::Rotation2d(units::degree_t(GetHeading()))},
-                           boostMultiplier{0.5}
+                           m_odometry{frc::Rotation2d(units::degree_t(GetHeading()))}
+                           
 {
     drive.SetMaxOutput(kMaxOutput);
     drive.SetDeadband(kDeadband);
@@ -21,7 +22,7 @@ Drivetrain::Drivetrain() : m_leftDriveLead{DriveConstants::CAN_ID_LEFT_LEAD, rev
     rightDrive.SetInverted(!rightDrive.GetInverted());
 }
 
-Drivetrain &Drivetrain::GetInstance()
+Drivetrain& Drivetrain::GetInstance()
 {
     static Drivetrain instance; // Guaranteed to be destroyed. Instantiated on first use.
     return instance;
@@ -136,16 +137,8 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
    
     turnValue = turnInput;
 
-    std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
-    float tx = table->GetNumber("tx", 0.0);
-    float tv = table->GetNumber("tv" , 0.0);
-
-    if (limelightInput && tv == 1) {
-      turnTarget = kP * tx * MaxRPM;
-    }
-
     directionX = (turnValue >= 0) ? 1 : -1;
-    turnValue = -std::pow(turnValue * kDriveMultiplierX, 2) * directionX;
+    turnValue = -std::pow(turnValue, 2) * kDriveMultiplierX * directionX;
     turnTarget = MaxRPM * turnValue;
     if (directionY == 1) {   //for inverting x and y in revese direction
       turnTarget = -turnTarget;
@@ -159,6 +152,14 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
         turnTarget = (m_leftEncoder.GetVelocity() - m_rightEncoder.GetVelocity()) * kDriveOffset;
         // Robot tends to curve to the left at 50RPM slower
       }
+    }
+
+    std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+    float tx = table->GetNumber("tx", 0.0);
+    float tv = table->GetNumber("tv" , 0.0);
+
+    if (limelightInput && tv == 1) {
+      turnTarget = kP * tx * MaxRPM;
     }
   
     m_leftPIDController.SetReference(straightTarget - turnTarget, rev::ControlType::kVelocity);

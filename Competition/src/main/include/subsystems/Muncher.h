@@ -10,6 +10,8 @@ class Muncher : public frc2::SubsystemBase {
  
     Muncher();
 
+    static Muncher& GetInstance();
+
     void SetMunchPower(double power);
     void Periodic() override;
 

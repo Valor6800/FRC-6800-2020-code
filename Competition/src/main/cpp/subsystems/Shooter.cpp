@@ -5,6 +5,12 @@ Shooter::Shooter() : shootMtrA{ShooterConstants::CAN_ID_SHOOTER_A, rev::CANSpark
 
 }
 
+Shooter& Shooter::GetInstance()
+{
+    static Shooter instance; // Guaranteed to be destroyed. Instantiated on first use.
+    return instance;
+}
+
 void Shooter::Periodic() {
   
 }
