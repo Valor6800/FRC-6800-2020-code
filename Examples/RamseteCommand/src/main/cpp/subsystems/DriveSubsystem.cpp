@@ -104,6 +104,10 @@ void DriveSubsystem::ResetEncoders() {
   mRightEncoder.SetPosition(0);
 }
 
+void DriveSubsystem::ResetImu() {
+ imu.Reset();
+}
+
 double DriveSubsystem::GetAverageEncoderDistance() {
   return (mLeftEncoder.GetPosition() * kPositionConversionFactor + mRightEncoder.GetPosition() * kPositionConversionFactor) / 2.0;
 }

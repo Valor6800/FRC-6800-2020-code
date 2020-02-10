@@ -9,9 +9,17 @@
 
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/CommandScheduler.h>
+#include <frc/shuffleboard/Shuffleboard.h>
 
-void Robot::RobotInit() {}
+void Robot::RobotInit() {
 
+  m_maxSpeed = frc::Shuffleboard::GetTab("Configuration")
+                     .Add("Max Speed", 0.5)
+                     .WithWidget("Number Slider")
+                     .GetEntry();
+}
+bool potFReached = true;
+bool potBReached = true;
 /**
  * This function is called every robot packet, no matter the mode. Use
  * this for items like diagnostics that you want to run during disabled,
@@ -27,7 +35,12 @@ void Robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); }
  * can use it to reset any subsystem information you want to clear when the
  * robot is disabled.
  */
-void Robot::DisabledInit() {}
+void Robot::DisabledInit() {
+if (m_autonomousCommand != nullptr) {
+    m_autonomousCommand->Cancel();
+    m_autonomousCommand = nullptr;
+  }
+}
 
 void Robot::DisabledPeriodic() {}
 
@@ -59,8 +72,63 @@ void Robot::TeleopInit() {
 /**
  * This function is called periodically during operator control.
  */
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic() {
 
+  frc::SmartDashboard::PutNumber("Servo Angle", m_servo.GetAngle());
+  frc::SmartDashboard::PutNumber("Servo Position", m_servo.GetPosition());
+  frc::SmartDashboard::PutNumber("Servo Raw", m_servo.GetRaw());
+  frc::SmartDashboard::PutNumber("Servo Speed", m_servo.GetSpeed());
+  frc::SmartDashboard::PutNumber("PotVal", m_potentiometer.Get());
+  
+  frc::SmartDashboard::PutBoolean("Switch",  m_limitSwitch.Get());
+
+  double maxSpeed = m_maxSpeed.GetDouble(0.5);
+  
+  // if(OperatorController.GetRawButton(1) && m_limitSwitch.Get()) {
+  //   //m_servo.SetPosition(maxSpeed);
+  //     m_servo.SetRaw(1899);
+
+  // } else if(OperatorController.GetRawButton(2)){
+  //   m_servo.SetRaw(99);
+  //   } else {
+  //     m_servo.SetPosition(0.5);
+  // }
+
+  if (OperatorController.GetRawButton(4))
+  {
+    potFReached = false;
+  }else if(OperatorController.GetRawButton(3))
+  {
+    potBReached = false;
+  }
+
+  if(m_potentiometer.Get() <= potUpperSetpoint && potFReached == false)
+  {
+    m_servo.SetRaw(1899);
+  }
+
+  if(m_potentiometer.Get() >= potUpperSetpoint && potFReached == false)
+  {
+    potFReached = true;
+    m_servo.SetRaw(999);
+  }
+
+
+
+  if(m_potentiometer.Get() >= potLowerSetpoint && potBReached == false)
+  {
+    m_servo.SetRaw(99);
+  }
+
+  if(m_potentiometer.Get() <= potLowerSetpoint && potBReached == false)
+  {
+    potBReached = true;
+    m_servo.SetRaw(999);
+  }
+
+
+
+}
 /**
  * This function is called periodically during test mode.
  */

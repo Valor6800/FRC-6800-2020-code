@@ -10,10 +10,13 @@
 #include <units/units.h>
 #include <wpi/math>
 
+#include <frc/trajectory/Trajectory.h>
+#include <frc/trajectory/TrajectoryGenerator.h>
 #include <vector>
 #include <utility>
-#include "Point.h"
+//#include "Point.h"
 #include <units/units.h>
+#include <opencv2/core/types.hpp>
 
 
 #pragma once
@@ -68,11 +71,29 @@ constexpr auto kMaxSpeed = 4_mps;
 constexpr auto kMaxAcceleration = 4_mps_sq;
 
 #define autoOffset
-// std::vector<Point> Auto1 = {Point(1.0,0.0), Point(2.5,0), Point(3.5,-2),
-//                              Point(-1,-0)};
+// std::vector<cv::Point2d> AutoTest1 = {cv::Point2d(0.0,0.0), cv::Point2d(2.5,0), cv::Point2d(3.5,-2),
+//                              cv::Point2d(-1,-0)};
 
-Point point1(1,1);
-// std::vector<Point> Auto1{point1};
+
+//Definsive 2 ball auto
+//start pos allignment:
+    //Center line of robot alligned with tip of target triangle (2.44m off wall). 
+    //Front bar of robot parallel with initiation line.
+const std::vector<frc::Translation2d> Auto1Taj1Translations = {frc::Translation2d(2.5_m,0.0_m)};
+const std::vector<frc::Pose2d> Auto1Traj1Poses = {frc::Pose2d(0_m,0_m,frc::Rotation2d(0_deg)),frc::Pose2d(3.5_m,-2.0_m,frc::Rotation2d(-60_deg))};
+const std::vector<frc::Pose2d> Auto1Traj2Poses = {Auto1Traj1Poses[1],frc::Pose2d(-1_m,0_m,frc::Rotation2d(0_deg))};
+
+
+//Offensive 5 ball auto
+//start pos allignment:
+    //Center line of robot alligned with tip of target triangle (2.44m off wall). 
+    //Front bar of robot parallel with initiation line.
+const std::vector<frc::Translation2d> Auto2Taj1Translations = {frc::Translation2d(0.75_m,1.3_m),
+                                                               frc::Translation2d(2.2_m,1.25_m)};
+
+const std::vector<frc::Pose2d> Auto2Traj1Poses = {frc::Pose2d(0_m,0_m,frc::Rotation2d(63_deg)),frc::Pose2d(7_m,1.25_m,frc::Rotation2d(0_deg))};
+const std::vector<frc::Pose2d> Auto2Traj2Poses = {Auto2Traj1Poses[1],frc::Pose2d(2.2_m,0.75_m,frc::Rotation2d(20_deg))};
+
 // Reasonable baseline values for a RAMSETE follower in units of meters and
 // seconds
 constexpr double kRamseteB = 2;
@@ -82,4 +103,7 @@ constexpr double kRamseteZeta = 0.7;
 namespace OIConstants {
 constexpr int kDriverControllerPort = 0;
 }  // namespace OIConstants
+
+constexpr double potUpperSetpoint = 0.8;
+constexpr double potLowerSetpoint = 0.2;
 

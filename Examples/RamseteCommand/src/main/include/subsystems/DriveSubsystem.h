@@ -71,6 +71,11 @@ class DriveSubsystem : public frc2::SubsystemBase {
   void ResetEncoders();
 
   /**
+   * Claibrate Imu
+   */
+  void ResetImu();
+
+  /**
    * Gets the average distance of the TWO encoders.
    *
    * @return the average of the TWO encoder readings

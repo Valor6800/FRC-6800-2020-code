@@ -9,6 +9,10 @@
 
 #include <frc/TimedRobot.h>
 #include <frc2/command/Command.h>
+#include <frc/Servo.h>
+#include <frc/XboxController.h>
+#include <frc/DigitalInput.h>
+#include <frc/AnalogPotentiometer.h>
 
 #include "RobotContainer.h"
 
@@ -30,4 +34,13 @@ class Robot : public frc::TimedRobot {
   frc2::Command* m_autonomousCommand = nullptr;
 
   RobotContainer m_container;
+
+  frc::Servo m_servo {6};
+
+  frc::XboxController OperatorController {1};
+
+  nt::NetworkTableEntry m_maxSpeed;
+
+  frc::DigitalInput m_limitSwitch {9};
+  frc::AnalogPotentiometer m_potentiometer {0};
 };
