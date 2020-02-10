@@ -10,31 +10,46 @@
 #include "commands/Munch.h"
 
 RobotContainer::RobotContainer() {
+    m_drivetrain.SetDefaultCommand(DriveManual(m_drivetrain,
+        [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kRightHand); },
+        [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kLeftHand); },
+        [this] { return m_GamepadDriver.GetX(frc::GenericHID::kLeftHand); },
+        [this] { return m_GamepadDriver.GetBumper(frc::GenericHID::kLeftHand); }));
+
+    m_intake.SetDefaultCommand(SpinIntake(m_intake, 
+        [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kRightHand); }, 
+        [this] { return m_GamepadDriver.GetBumper(frc::GenericHID::kRightHand); }));
+            
+    m_hopper.SetDefaultCommand(SpinHopper(m_hopper, 
+        [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kLeftHand); }, 
+        [this] { return m_GamepadDriver.GetBumper(frc::GenericHID::kLeftHand); }));
+
+    m_arm.SetDefaultCommand(ArmManual(m_arm, 
+        [this] { return m_GamepadDriver.GetY(frc::GenericHID::kLeftHand); }));
+
+    m_lift.SetDefaultCommand(Climb(m_lift, 
+        [this] { return m_GamepadDriver.GetY(frc::GenericHID::kRightHand); }));
+
+    m_muncher.SetDefaultCommand(Munch(m_muncher, 
+        [this] { return m_GamepadDriver.GetYButton(); }));
+
     // Configure the button bindings
     ConfigureButtonBindings();
 }
 
 void RobotContainer::ConfigureButtonBindings() {
-    // Start shooter button (Operator: Start)
     frc2::JoystickButton operator_start{&m_GamepadOperator, 8};
-    // Stop shooter button (Operator: Back)
     frc2::JoystickButton operator_back{&m_GamepadOperator, 7};
 
-    // Driver button (unused) (Driver: A)
-    frc2::JoystickButton driver_a{&m_GamepadDriver, 1};
-    // Driver boost button (Driver: B)
-    frc2::JoystickButton driver_b{&m_GamepadDriver, 2};
-    // Driver button (unused) (Driver: X)
-    frc2::JoystickButton driver_x{&m_GamepadDriver, 3};
-    // Driver button (unused) (Driver: Y)
-    frc2::JoystickButton driver_y{&m_GamepadDriver, 4};
-
-    // Operator button (unused) (Operator: A)
-    frc2::JoystickButton operator_a{&m_GamepadOperator, 1};
-    // Operator boost button (Operator: B)
+    // frc::JoystickButton m_a{&m_GamepadDriver, 1};
     frc2::JoystickButton operator_b{&m_GamepadOperator, 2};
-    // Operator button (unused) (Operator: X)
-    frc2::JoystickButton operator_x{&m_GamepadOperator, 3};
-    // Operator button (unused) (Operator: Y)
-    frc2::JoystickButton operator_y{&m_GamepadOperator, 4};
+    // frc::JoystickButton m_x{&m_GamepadDriver, 3};
+    //frc2::JoystickButton m_y{&m_GamepadDriver, 4};
+    frc2::JoystickButton driver_rightBumper{&m_GamepadDriver, 6};
+    
+    driver_rightBumper.WhenPressed(frc2::InstantCommand([this] { m_drivetrain.SetMultiplier(1); }, {&m_drivetrain}));
+    driver_rightBumper.WhenReleased(frc2::InstantCommand([this] { m_drivetrain.SetMultiplier(0.5); }, {&m_drivetrain}));
+
+    operator_start.WhenPressed(ShootStart(m_shooter));
+    operator_back.WhenPressed(ShootStop(m_shooter));
 }

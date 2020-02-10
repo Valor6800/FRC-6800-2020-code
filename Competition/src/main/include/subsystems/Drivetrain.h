@@ -44,7 +44,7 @@ class Drivetrain : public frc2::SubsystemBase{
 
     Drivetrain();
 
-   static Drivetrain& GetInstance();
+    static Drivetrain& GetInstance();
 
     void Periodic() override;
     

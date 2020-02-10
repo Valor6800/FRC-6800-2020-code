@@ -2,6 +2,8 @@
 
 #include <frc/kinematics/DifferentialDriveKinematics.h>
 #include <frc/trajectory/constraint/DifferentialDriveVoltageConstraint.h>
+#include <frc/trajectory/Trajectory.h>
+#include <frc/trajectory/TrajectoryGenerator.h>
 
 namespace OIConstants {
 
@@ -47,6 +49,9 @@ namespace RamseteConstants {
     constexpr auto kA = 0.315 * 1_V * 1_s * 1_s / 1_m;
 
     constexpr double kPDriveVel = 5.53;
+
+    extern const frc::DifferentialDriveKinematics kDriveKinematics;
+    extern const frc::TrajectoryConfig kAutoConfig;
 
 }
 

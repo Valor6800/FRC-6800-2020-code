@@ -18,15 +18,13 @@
 class Munch : public frc2::CommandHelper<frc2::CommandBase, Munch> {
  public:
    
-    Munch(Muncher* muncher, std::function<bool()> pressed);
+    Munch(Muncher& muncher, std::function<bool()> pressed);
 
     void Execute() override;
 
     bool IsFinished() override;
 
  private:
-
-    Muncher* m_muncher;
     std::function<bool()> m_pressed;
     
 };

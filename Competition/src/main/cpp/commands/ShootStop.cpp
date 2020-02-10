@@ -1,15 +1,13 @@
 #include "commands/ShootStop.h"
 
-ShootStop::ShootStop(Shooter* shooter) : m_shooter{shooter} {
-    AddRequirements({shooter});
+ShootStop::ShootStop(Shooter& shooter) {
+    AddRequirements({&shooter});
 }
 
 void ShootStop::Initialize() {
-    m_shooter->SetShooterPower(0);
+    Shooter::GetInstance().SetShooterPower(0);
 }
+
 bool ShootStop::IsFinished() {
    return true;
 }
-// void Shoot::SetStop() {
-//     m_stop = true;
-// }
