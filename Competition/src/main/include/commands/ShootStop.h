@@ -14,14 +14,12 @@
 class ShootStop : public frc2::CommandHelper<frc2::CommandBase, ShootStop> {
  public:
 
-    ShootStop(Shooter* shooter);
+    ShootStop(Shooter& shooter);
     void Initialize() override;
    // void Execute() override;
     bool IsFinished() override;
     //void End() override;
 
  private:
-
-    Shooter* m_shooter;
     
 };

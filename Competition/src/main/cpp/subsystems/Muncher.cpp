@@ -4,6 +4,12 @@ Muncher::Muncher() : muncherMtr{MuncherConstants::VICTOR_ID_MUNCHER} {
 
 }
 
+Muncher& Muncher::GetInstance()
+{
+    static Muncher instance; // Guaranteed to be destroyed. Instantiated on first use.
+    return instance;
+}
+
 void Muncher::Periodic() {
   
 }

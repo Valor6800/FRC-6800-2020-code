@@ -16,7 +16,7 @@
 class ArmManual : public frc2::CommandHelper<frc2::CommandBase, ArmManual> {
  public:
    
-    ArmManual(Arm* arm, std::function<double()> value);
+    ArmManual(Arm& arm, std::function<double()> value);
 
     void Execute() override;
 
@@ -24,7 +24,6 @@ class ArmManual : public frc2::CommandHelper<frc2::CommandBase, ArmManual> {
 
  private:
 
-    Arm* m_arm;
     std::function<double()> m_value;
     
 };

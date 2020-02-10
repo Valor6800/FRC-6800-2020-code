@@ -33,13 +33,18 @@ class RobotContainer {
     RobotContainer();
 
  private:
- 
-   Drivetrain& drivetrain_ = Drivetrain::GetInstance();
-
-   frc::SendableChooser<frc2::Command*> chooser_; // Give options for autonomous actions
-
    frc::XboxController m_GamepadDriver{OIConstants::GAMEPAD_BASE_LOCATION};
    frc::XboxController m_GamepadOperator{OIConstants::GAMEPAD_OPERATOR_LOCATION};
+ 
+   Drivetrain& m_drivetrain = Drivetrain::GetInstance();
+   Intake& m_intake = Intake::GetInstance();
+   Hopper& m_hopper = Hopper::GetInstance();
+   Arm& m_arm = Arm::GetInstance();
+   Shooter& m_shooter = Shooter::GetInstance();
+   Lift& m_lift = Lift::GetInstance();
+   Muncher& m_muncher = Muncher::GetInstance();
+
+   frc::SendableChooser<frc2::Command*> chooser; // Give options for autonomous actions
    
    void ConfigureButtonBindings();
 };
