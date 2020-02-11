@@ -8,7 +8,6 @@
 #include "Constants.h"
 
 using namespace DriveConstants;
-using namespace AutoConstants;
 
 
 const frc::DifferentialDriveKinematics DriveConstants::kDriveKinematics(

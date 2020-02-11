@@ -63,42 +63,9 @@ constexpr auto kv = 2.25 * 1_V * 1_s / 1_m;
 constexpr auto ka = 0.315 * 1_V * 1_s * 1_s / 1_m;
 
 // Example value only - as above, this must be tuned for your drive!
-constexpr double kPDriveVel = 5.53;
+constexpr double kPDriveVel = 3.09;//3.44//4.14// 2.75//5.53;
 }  // namespace DriveConstants
 
-namespace AutoConstants {
-constexpr auto kMaxSpeed = 4_mps;
-constexpr auto kMaxAcceleration = 4_mps_sq;
-
-#define autoOffset
-// std::vector<cv::Point2d> AutoTest1 = {cv::Point2d(0.0,0.0), cv::Point2d(2.5,0), cv::Point2d(3.5,-2),
-//                              cv::Point2d(-1,-0)};
-
-
-//Definsive 2 ball auto
-//start pos allignment:
-    //Center line of robot alligned with tip of target triangle (2.44m off wall). 
-    //Front bar of robot parallel with initiation line.
-const std::vector<frc::Translation2d> Auto1Taj1Translations = {frc::Translation2d(2.5_m,0.0_m)};
-const std::vector<frc::Pose2d> Auto1Traj1Poses = {frc::Pose2d(0_m,0_m,frc::Rotation2d(0_deg)),frc::Pose2d(3.5_m,-2.0_m,frc::Rotation2d(-60_deg))};
-const std::vector<frc::Pose2d> Auto1Traj2Poses = {Auto1Traj1Poses[1],frc::Pose2d(-1_m,0_m,frc::Rotation2d(0_deg))};
-
-
-//Offensive 5 ball auto
-//start pos allignment:
-    //Center line of robot alligned with tip of target triangle (2.44m off wall). 
-    //Front bar of robot parallel with initiation line.
-const std::vector<frc::Translation2d> Auto2Taj1Translations = {frc::Translation2d(0.75_m,1.3_m),
-                                                               frc::Translation2d(2.2_m,1.25_m)};
-
-const std::vector<frc::Pose2d> Auto2Traj1Poses = {frc::Pose2d(0_m,0_m,frc::Rotation2d(63_deg)),frc::Pose2d(7_m,1.25_m,frc::Rotation2d(0_deg))};
-const std::vector<frc::Pose2d> Auto2Traj2Poses = {Auto2Traj1Poses[1],frc::Pose2d(2.2_m,0.75_m,frc::Rotation2d(20_deg))};
-
-// Reasonable baseline values for a RAMSETE follower in units of meters and
-// seconds
-constexpr double kRamseteB = 2;
-constexpr double kRamseteZeta = 0.7;
-}  // namespace AutoConstants
 
 namespace OIConstants {
 constexpr int kDriverControllerPort = 0;
@@ -107,3 +74,13 @@ constexpr int kDriverControllerPort = 0;
 constexpr double potUpperSetpoint = 0.8;
 constexpr double potLowerSetpoint = 0.2;
 
+//Old stuff
+// //Offensive 5 ball auto
+// //start pos allignment:
+//     //Center line of robot alligned with tip of target triangle (2.44m off wall). 
+//     //Front bar of robot parallel with initiation line.
+// const std::vector<frc::Translation2d> Auto2Taj1Translations = {frc::Translation2d(0.75_m,1.3_m),
+//                                                                frc::Translation2d(2.2_m,1.25_m)};
+
+// const std::vector<frc::Pose2d> Auto2Traj1Poses = {frc::Pose2d(0_m,0_m,frc::Rotation2d(63_deg)),frc::Pose2d(7_m,1.25_m,frc::Rotation2d(0_deg))};
+// const std::vector<frc::Pose2d> Auto2Traj2Poses = {Auto2Traj1Poses[1],frc::Pose2d(2.2_m,0.75_m,frc::Rotation2d(20_deg))};

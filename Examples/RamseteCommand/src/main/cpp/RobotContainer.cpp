@@ -21,6 +21,7 @@
 #include <frc/Timer.h>
 
 #include "Constants.h"
+#include "Trajectories.h"
 
 RobotContainer::RobotContainer() {
   // Initialize all of your commands and subsystems here
@@ -51,6 +52,7 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
 
     m_drive.ResetImu();
     m_drive.ResetEncoders();
+    m_drive.ResetOdometry(frc::Pose2d(0_m,0_m,frc::Rotation2d(0_deg)));
   // Create a voltage constraint to ensure we don't accelerate too fast
   frc::DifferentialDriveVoltageConstraint autoVoltageConstraint(
       frc::SimpleMotorFeedforward<units::meters>(
@@ -73,14 +75,14 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
 
         
 
-        AutoConstants::Auto2Traj1Poses[0],
+        Auto2Traj1Poses[0],
 
       // Pull Waypoints from Auto1Traj1Translations
       //{frc::Translation2d(5.8_m, 0.9_m),frc::Translation2d(5.8_m, 0.4_m)},
-        {AutoConstants::Auto2Taj1Translations},
+        {Auto2Taj1Translations},
 
       // Pull endpoint Pose from Auto1Traj1Poses
-        AutoConstants::Auto2Traj1Poses[1],
+        Auto2Traj1Poses[1],
       // Pass the config
         configF);
 
@@ -96,15 +98,14 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
     auto exampleTrajectory2 = frc::TrajectoryGenerator::GenerateTrajectory(
      //frc::Pose2d(3.05_m, 2.44_m, frc::Rotation2d(0_deg)),
 
-        AutoConstants::Auto2Traj2Poses[0],
+        Auto2Traj2Poses[0],
  
       // Pass through these two interior waypoints, making an 's' curve path
       {},
       // End 3 meters straight ahead of where we started, facing forward
-        AutoConstants::Auto2Traj2Poses[1],
+        Auto2Traj2Poses[1],
       // Pass the config
-      configB);
-
+      configF);
   frc2::RamseteCommand ramseteCommand(
       exampleTrajectory1, [this]() { return m_drive.GetPose(); },
       frc::RamseteController(AutoConstants::kRamseteB,
