@@ -78,7 +78,9 @@ void DriveSubsystem::LogOutput() {
   logging_file << "\n";
   
   frc::SmartDashboard::PutNumber("Heading", std::remainder(imu.GetAngle(), 360) * (kGyroReversed ? -1.0 : 1.0));
-  
+  frc::SmartDashboard::PutNumber("LeftEncoder",mLeftEncoder.GetPosition());
+  frc::SmartDashboard::PutNumber("RightEncoder",mRightEncoder.GetPosition());
+
 }
 
 void DriveSubsystem::Periodic() {
@@ -97,6 +99,7 @@ void DriveSubsystem::ArcadeDrive(double fwd, double rot) {
 void DriveSubsystem::TankDriveVolts(units::volt_t left, units::volt_t right) {
   mLeftLead.SetVoltage(left);
   mRightLead.SetVoltage(right);
+  m_drive.Feed();
 }
 
 void DriveSubsystem::ResetEncoders() {
