@@ -6,6 +6,8 @@
 #include <frc2/command/button/JoystickButton.h>
 #include <frc2/command/InstantCommand.h>
 #include <frc/smartdashboard/SendableChooser.h>
+#include <frc2/command/RamseteCommand.h>
+#include <frc2/command/SequentialCommandGroup.h>
 
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Shooter.h"
@@ -31,6 +33,7 @@
 class RobotContainer {
  public:
     RobotContainer();
+    frc2::Command* GetAutonomousCommand(int numTrajectories);
 
  private:
    frc::XboxController m_GamepadDriver{OIConstants::GAMEPAD_BASE_LOCATION};

@@ -17,6 +17,11 @@
 #include <units/units.h>
 #include <frc/geometry/Rotation2d.h>
 #include <frc/kinematics/DifferentialDriveWheelSpeeds.h>
+#include <frc/controller/SimpleMotorFeedforward.h>
+#include <frc/kinematics/DifferentialDriveKinematics.h>
+#include <frc/trajectory/constraint/DifferentialDriveVoltageConstraint.h>
+#include <frc/trajectory/Trajectory.h>
+#include <frc/trajectory/TrajectoryGenerator.h>
 
 #include "Constants.h"
 
@@ -69,6 +74,11 @@ class Drivetrain : public frc2::SubsystemBase{
     void Stop();
 
     double boostMultiplier;
+
+    frc::DifferentialDriveKinematics kDriveKinematics;
+    frc::SimpleMotorFeedforward<units::meters> kSimpleMotorFeedforward;
+    frc::TrajectoryConfig kTrajectoryConfig;
+    frc::DifferentialDriveVoltageConstraint kDifferentialDriveVoltageConstraint;
 
  private:
 

@@ -2,6 +2,10 @@
 #include <frc/kinematics/DifferentialDriveOdometry.h>
 
 Drivetrain::Drivetrain() : boostMultiplier{0.5},
+                           kDriveKinematics{DriveConstants::kTrackwidth},
+                           kSimpleMotorFeedforward{RamseteConstants::kS, RamseteConstants::kV, RamseteConstants::kA},
+                           kTrajectoryConfig{RamseteConstants::kMaxSpeed, RamseteConstants::kMaxAcceleration},
+                           kDifferentialDriveVoltageConstraint{kSimpleMotorFeedforward, kDriveKinematics, 10_V},
                            m_leftDriveLead{DriveConstants::CAN_ID_LEFT_LEAD, rev::CANSparkMax::MotorType::kBrushless},
                            m_leftDriveFollowA{DriveConstants::CAN_ID_LEFT_FOLLOW_A, rev::CANSparkMax::MotorType::kBrushless},
                            m_leftDriveFollowB{DriveConstants::CAN_ID_LEFT_FOLLOW_B, rev::CANSparkMax::MotorType::kBrushless},
@@ -13,6 +17,9 @@ Drivetrain::Drivetrain() : boostMultiplier{0.5},
 {
     drive.SetMaxOutput(kMaxOutput);
     drive.SetDeadband(kDeadband);
+
+    kTrajectoryConfig.SetKinematics(kDriveKinematics);
+    kTrajectoryConfig.AddConstraint(kDifferentialDriveVoltageConstraint);
 
     imu.Calibrate();
 
