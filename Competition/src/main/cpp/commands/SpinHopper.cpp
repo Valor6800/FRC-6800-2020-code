@@ -1,5 +1,4 @@
 #include "commands/SpinHopper.h"
-#include "../../include/RobotContainer.h"
 
 SpinHopper::SpinHopper(Hopper& hopper, std::function<double()> leftTrigger, std::function<bool()> leftBumper) : m_leftTrig{leftTrigger}, m_leftBumper{leftBumper} {
     AddRequirements({&hopper});
