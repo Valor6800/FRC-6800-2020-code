@@ -39,6 +39,11 @@ void Drivetrain::Periodic() {
     m_odometry.Update(frc::Rotation2d(units::degree_t(GetHeading())), GetLeftDistance(), GetRightDistance());
 }
 
+// frc::TrajectoryConfig& GetTrajConfigRef() {
+//     frc::TrajectoryConfig& trajConfigRef = kTrajectoryConfig;
+//     return trajConfigRef;
+// }
+
 void Drivetrain::InitDrives(rev::CANSparkMax::IdleMode idleMode) {
     m_leftDriveLead.SetIdleMode(idleMode);
     m_leftDriveFollowA.SetIdleMode(idleMode);
@@ -128,6 +133,7 @@ frc::DifferentialDriveWheelSpeeds Drivetrain::GetWheelSpeeds() {
 void Drivetrain::TankDriveVolts(units::volt_t leftVolts, units::volt_t rightVolts) {
     m_leftDriveLead.SetVoltage(leftVolts);
     m_rightDriveLead.SetVoltage(rightVolts);
+    // m_drive.Feed();
 }
 
 void Drivetrain::ArcadeDrive(double leftInput, double rightInput) {

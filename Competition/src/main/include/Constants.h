@@ -50,8 +50,7 @@ namespace RamseteConstants {
 
     constexpr double kPDriveVel = 5.53;
 
-    extern const frc::DifferentialDriveKinematics kDriveKinematics;
-    extern const frc::TrajectoryConfig kAutoConfig;
+    const frc::DifferentialDriveKinematics kDriveKinematics;
 
 }
 
@@ -66,20 +65,21 @@ namespace ShooterConstants {
 
     constexpr static int CAN_ID_SHOOTER_A = 7;
     constexpr static int CAN_ID_SHOOTER_B = 8;
+    constexpr static int VICTOR_ID_THROAT = 2;
     constexpr static int PWM_ID_HOOD = 0;
 
 }
 
 namespace IntakeConstants {
 
-    constexpr static int VICTOR_ID_INTAKE = 4;
+    constexpr static int VICTOR_ID_INTAKE = 3;
 
 }
 
 namespace HopperConstants {
 
-    constexpr static int VICTOR_ID_HOPPER_A = 2;
-    constexpr static int VICTOR_ID_HOPPER_B = 8;
+    constexpr static int VICTOR_ID_HOPPER_A = 4;
+
 
 }
 
