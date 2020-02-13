@@ -66,6 +66,8 @@ class Drivetrain : public frc2::SubsystemBase{
     frc::Pose2d GetPose();
     frc::DifferentialDriveWheelSpeeds GetWheelSpeeds();
 
+    //frc::TrajectoryConfig& GetTrajConfigRef();
+
     void TankDriveVolts(units::volt_t leftVolts, units::volt_t rightVolts);
     void ArcadeDrive(double leftInput, double rightInput);
     void RocketLeagueDrive(double straightInput, double reverseInput, double turnInput, bool limelightInput);
@@ -77,7 +79,7 @@ class Drivetrain : public frc2::SubsystemBase{
 
     frc::DifferentialDriveKinematics kDriveKinematics;
     frc::SimpleMotorFeedforward<units::meters> kSimpleMotorFeedforward;
-    frc::TrajectoryConfig kTrajectoryConfig;
+    static frc::TrajectoryConfig kTrajectoryConfig;
     frc::DifferentialDriveVoltageConstraint kDifferentialDriveVoltageConstraint;
 
  private:
