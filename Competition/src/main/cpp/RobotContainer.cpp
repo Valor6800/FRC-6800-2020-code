@@ -35,10 +35,17 @@ void RobotContainer::ConfigureButtonBindings() {
     frc2::JoystickButton operator_leftBumper{&m_GamepadOperator, 5};
     frc2::JoystickButton operator_rightBumper{&m_GamepadOperator, 6};
 
-    frc2::JoystickButton m_a{&m_GamepadDriver, 1};
-    frc2::JoystickButton operator_b{&m_GamepadOperator, 2};
-    frc2::JoystickButton m_x{&m_GamepadDriver, 3};
+    frc2::JoystickButton driver_a{&m_GamepadDriver, 1};
+    frc2::JoystickButton driver_b{&m_GamepadDriver, 2};
+    frc2::JoystickButton driver_x{&m_GamepadDriver, 3};
+
     frc2::JoystickButton operator_y{&m_GamepadOperator, 4};
+    frc2::JoystickButton operator_b{&m_GamepadOperator, 2};
+
+    //for running drivetrain for 8 min
+    driver_a.WhenPressed(frc2::InstantCommand([&] {m_drivetrain.RocketLeagueDrive(1, 0, 0, false); }, {&m_drivetrain}));
+    driver_x.WhenPressed(frc2::InstantCommand([&] {m_drivetrain.RocketLeagueDrive(0, -1, 0, false); }, {&m_drivetrain}));
+    driver_b.WhenPressed(frc2::InstantCommand([&] {m_drivetrain.RocketLeagueDrive(0, 0, 0, false); }, {&m_drivetrain}));
 
     
     driver_rightBumper.WhenPressed(frc2::InstantCommand([&] { m_drivetrain.SetMultiplier(1); }, {&m_drivetrain}));
@@ -49,8 +56,8 @@ void RobotContainer::ConfigureButtonBindings() {
     driver_leftBumper.WhenReleased(frc2::InstantCommand([&] { m_intake.SetIntakePower(0); }));
     driver_leftBumper.WhenReleased(frc2::InstantCommand([&] { m_hopper.SetHopperPower(0); }));
 
-    operator_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(1); }, {&m_shooter}));
-    operator_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
+    // operator_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(1); }, {&m_shooter}));
+    // operator_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
 
     operator_leftBumper.WhenPressed(frc2::InstantCommand([&] { m_intake.SetIntakePower(0.5); }, {&m_intake}));
     operator_leftBumper.WhenReleased(frc2::InstantCommand([&] { m_intake.SetIntakePower(0); }, {&m_intake}));
@@ -61,13 +68,20 @@ void RobotContainer::ConfigureButtonBindings() {
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
+    
+
+    m_drivetrain.ResetOdometry(frc::Pose2d(0_m, 0_m, frc::Rotation2d(0_deg)));
+    m_drivetrain.ResetEncoders();
+    m_drivetrain.ResetIMU();
+    /*
     //need to add in chooser with strings of auto names
     selectedAuto = "EightBallAuto";
 
     selectedPath = m_trajectories.GetAutosMap().at(selectedAuto);
 
-    // get trajectory method?
-    for (int i = 0; i < selectedPath.size(); i++) {
+    pathLength = selectedPath.size();
+
+    for (int i = 0; i < pathLength; i++) {
         if (selectedPath[i].action == ValorTrajectory::Path) {
             frc2::RamseteCommand ramseteCommand(selectedPath[i].trajectory,
                                                 [&] () { return m_drivetrain.GetPose(); },
@@ -81,11 +95,16 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
                                                 {&Drivetrain::GetInstance()});
 
             // sequential command group add ramsete command
+            autoCommandGroup->AddCommands(std::move(ramseteCommand));
         }
         else {
             // sequential command group add command for shoot
+            autoCommandGroup->AddCommands(frc2::InstantCommand([&] {m_intake.SetIntakePower(1); }, {&m_intake} ));
         }
     }
 
-    return &autoCommandGroup;
+    */
+
+   return &m_tenBallAuto;
+
 }
