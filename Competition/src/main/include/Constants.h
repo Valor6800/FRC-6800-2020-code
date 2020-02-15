@@ -53,7 +53,7 @@ namespace RamseteConstants {
 
     constexpr double kPDriveVel = 3.09;
 
-    constexpr units::length::meter_t  kStartPos = 4.88_m;
+    constexpr units::length::meter_t  kStartPos = 4.9_m;
     constexpr units::length::meter_t  kCenterline = 0.94_m;
 
 }
