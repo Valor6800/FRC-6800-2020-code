@@ -103,6 +103,7 @@ void DriveSubsystem::TankDriveVolts(units::volt_t left, units::volt_t right) {
 }
 
 void DriveSubsystem::ResetEncoders() {
+  SetCoast();
   mLeftEncoder.SetPosition(0);
   mRightEncoder.SetPosition(0);
 }
@@ -142,4 +143,12 @@ void DriveSubsystem::ResetOdometry(frc::Pose2d pose) {
   ResetEncoders();
   m_odometry.ResetPosition(pose,
                            frc::Rotation2d(units::degree_t(GetHeading())));
+}
+
+void DriveSubsystem::SetBrake() {
+  SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+}
+
+void DriveSubsystem::SetCoast() {
+  SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
 }
