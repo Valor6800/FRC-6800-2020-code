@@ -15,9 +15,9 @@
 
 #include "Constants.h"
 
-class HomeTrenchAuto : public frc2::CommandHelper<frc2::SequentialCommandGroup, HomeTrenchAuto> {
+class TenBallAuto : public frc2::CommandHelper<frc2::SequentialCommandGroup, TenBallAuto> {
  public:
-    HomeTrenchAuto();
+    TenBallAuto();
 
 private:
     Drivetrain& m_drivetrain = Drivetrain::GetInstance();
@@ -25,4 +25,9 @@ private:
     Trajectories m_trajectories;
 
     frc::Trajectory trajectory1;
+    frc::Trajectory trajectory2;
+    frc::Trajectory trajectory3;
+    frc::Trajectory trajectory4;
+    frc::Trajectory trajectory5;
+    frc::Trajectory trajectory6;
 };

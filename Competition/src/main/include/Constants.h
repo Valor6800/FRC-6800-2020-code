@@ -34,8 +34,8 @@ namespace DriveConstants {
 
 namespace RamseteConstants {
 
-    constexpr auto kMaxSpeed = 2_mps; // 4_mps
-    constexpr auto kMaxAcceleration = 2_mps_sq; //4_mps_sq;
+    constexpr auto kMaxSpeed = 4.4_mps; // 4_mps
+    constexpr auto kMaxAcceleration = 4_mps_sq; //4_mps_sq;
 
     constexpr double kRamseteB = 2;
     constexpr double kRamseteZeta = 0.7;
@@ -51,14 +51,17 @@ namespace RamseteConstants {
     constexpr auto kV = 2.25 * 1_V * 1_s / 1_m;
     constexpr auto kA = 0.315 * 1_V * 1_s * 1_s / 1_m;
 
-    constexpr double kPDriveVel = 5.53;
+    constexpr double kPDriveVel = 3.09;
+
+    constexpr units::length::meter_t  kStartPos = 4.88_m;
+    constexpr units::length::meter_t  kCenterline = 0.94_m;
 
 }
 
 namespace ArmConstants {
 
-    constexpr static int VICTOR_ID_LEFT_ARM = 7;
-    constexpr static int VICTOR_ID_RIGHT_ARM = 8;
+    constexpr static int VICTOR_ID_LEFT_ARM = 0;
+    constexpr static int VICTOR_ID_RIGHT_ARM = 1;
 
 }
 
@@ -85,14 +88,14 @@ namespace HopperConstants {
 
 namespace LiftConstants {
 
-    constexpr static int VICTOR_ID_LIFT_A = 7;
-    constexpr static int VICTOR_ID_LIFT_B = 8;
+    constexpr static int VICTOR_ID_LIFT_A = 5;
+    //constexpr static int VICTOR_ID_LIFT_B = 8;
 
 }
 
 namespace MuncherConstants {
 
-    constexpr static int VICTOR_ID_MUNCHER = 9;
+    constexpr static int VICTOR_ID_MUNCHER = 2;
 
 }
 

@@ -4,7 +4,8 @@
 Drivetrain::Drivetrain() : boostMultiplier{0.5},
                            kDriveKinematics{DriveConstants::kTrackwidth},
                            kSimpleMotorFeedforward{RamseteConstants::kS, RamseteConstants::kV, RamseteConstants::kA},
-                           kTrajectoryConfig{RamseteConstants::kMaxSpeed, RamseteConstants::kMaxAcceleration},
+                           kTrajectoryConfigF{RamseteConstants::kMaxSpeed, RamseteConstants::kMaxAcceleration},
+                           kTrajectoryConfigR{RamseteConstants::kMaxSpeed, RamseteConstants::kMaxAcceleration},
                            kDifferentialDriveVoltageConstraint{kSimpleMotorFeedforward, kDriveKinematics, 10_V},
                            m_leftDriveLead{DriveConstants::CAN_ID_LEFT_LEAD, rev::CANSparkMax::MotorType::kBrushless},
                            m_leftDriveFollowA{DriveConstants::CAN_ID_LEFT_FOLLOW_A, rev::CANSparkMax::MotorType::kBrushless},
@@ -18,8 +19,13 @@ Drivetrain::Drivetrain() : boostMultiplier{0.5},
     drive.SetMaxOutput(kMaxOutput);
     drive.SetDeadband(kDeadband);
 
-    kTrajectoryConfig.SetKinematics(kDriveKinematics);
-    kTrajectoryConfig.AddConstraint(kDifferentialDriveVoltageConstraint);
+    kTrajectoryConfigF.SetKinematics(kDriveKinematics);
+    kTrajectoryConfigF.AddConstraint(kDifferentialDriveVoltageConstraint);
+    kTrajectoryConfigF.SetReversed(false);
+
+    kTrajectoryConfigR.SetKinematics(kDriveKinematics);
+    kTrajectoryConfigR.AddConstraint(kDifferentialDriveVoltageConstraint);
+    kTrajectoryConfigR.SetReversed(true);
 
     imu.Calibrate();
 
@@ -91,6 +97,9 @@ void Drivetrain::ResetEncoders() {
 void Drivetrain::ResetOdometry(frc::Pose2d pose) {
     ResetEncoders();
     m_odometry.ResetPosition(pose, frc::Rotation2d(units::degree_t(GetHeading())));
+}
+void Drivetrain::ResetIMU() {
+    imu.Reset();
 }
 
 // rev::CANEncoder& GetLeftEncoder() {
