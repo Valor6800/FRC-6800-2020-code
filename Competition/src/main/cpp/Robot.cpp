@@ -42,9 +42,6 @@ void Robot::DisabledPeriodic() {
  * RobotContainer} class.
  */
 void Robot::AutonomousInit() {
-  Drivetrain::GetInstance().ResetOdometry(frc::Pose2d(0_m, 0_m, frc::Rotation2d(0_deg)));
-  Drivetrain::GetInstance().ResetEncoders();
-  Drivetrain::GetInstance().ResetIMU();
   m_autonomousCommand = m_container.GetAutonomousCommand();
 
   if (m_autonomousCommand != nullptr) {
