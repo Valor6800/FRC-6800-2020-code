@@ -17,6 +17,7 @@ void Robot::RobotInit() {
                      .Add("Max Speed", 0.5)
                      .WithWidget("Number Slider")
                      .GetEntry();
+
 }
 bool potFReached = true;
 bool potBReached = true;
@@ -40,7 +41,17 @@ if (m_autonomousCommand != nullptr) {
     m_autonomousCommand->Cancel();
     m_autonomousCommand = nullptr;
   }
+m_disabledCommand = m_container.GetDisabledCommand();
+
+if (m_disabledCommand != nullptr) {
+    m_disabledCommand->Schedule();
+  }
 }
+
+
+
+
+
 
 void Robot::DisabledPeriodic() {}
 

@@ -18,6 +18,7 @@
 
 #include "Constants.h"
 #include "subsystems/DriveSubsystem.h"
+#include "autos/TenBallAuto.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -31,8 +32,8 @@ class RobotContainer {
   RobotContainer();
 
   frc2::Command* GetAutonomousCommand();
-  //frc2::Command* GetTrajectories();
-
+  frc2::Command* GetDisabledCommand();
+  nt::NetworkTableEntry m_StartPos;
  private:
   // The driver's controller
   frc::XboxController m_driverController{OIConstants::kDriverControllerPort};
@@ -41,6 +42,8 @@ class RobotContainer {
 
   // The robot's subsystems
   DriveSubsystem m_drive;
+  TenBallAuto m_tenBallAuto;
+  
 
   frc2::InstantCommand m_driveHalfSpeed{[this] { m_drive.SetMaxOutput(0.5); },
                                         {}};
