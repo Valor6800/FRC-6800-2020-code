@@ -5,6 +5,9 @@
 #include <frc/trajectory/Trajectory.h>
 #include <frc/trajectory/TrajectoryGenerator.h>
 
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
+
 namespace OIConstants {
 
     constexpr static int GAMEPAD_BASE_LOCATION = 1;
@@ -50,8 +53,6 @@ namespace RamseteConstants {
 
     constexpr double kPDriveVel = 5.53;
 
-    const frc::DifferentialDriveKinematics kDriveKinematics;
-
 }
 
 namespace ArmConstants {
@@ -80,7 +81,6 @@ namespace HopperConstants {
 
     constexpr static int VICTOR_ID_HOPPER_A = 4;
 
-
 }
 
 namespace LiftConstants {
@@ -95,3 +95,5 @@ namespace MuncherConstants {
     constexpr static int VICTOR_ID_MUNCHER = 9;
 
 }
+
+#endif

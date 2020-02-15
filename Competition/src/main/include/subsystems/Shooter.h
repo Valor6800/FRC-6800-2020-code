@@ -7,6 +7,9 @@
 #include <frc/Servo.h>
 #include <frc/PWMVictorSPX.h>
 
+#ifndef SHOOTER_H
+#define SHOOTER_H
+
 class Shooter : public frc2::SubsystemBase {
  public:
 
@@ -27,3 +30,5 @@ class Shooter : public frc2::SubsystemBase {
     frc::Servo hood;
 
 };
+
+#endif

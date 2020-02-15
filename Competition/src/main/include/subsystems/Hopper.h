@@ -6,6 +6,9 @@
 
 #include "Constants.h"
 
+#ifndef HOPPER_H
+#define HOPPER_H
+
 class Hopper : public frc2::SubsystemBase {
  public:
 
@@ -23,3 +26,5 @@ class Hopper : public frc2::SubsystemBase {
     // photo electric sensors
 
 };
+
+#endif

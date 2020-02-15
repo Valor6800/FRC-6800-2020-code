@@ -25,6 +25,9 @@
 
 #include "Constants.h"
 
+#ifndef DRIVETRAIN_H
+#define DRIVETRAIN_H
+
 #define kP -0.01f
 #define kI 0
 #define kD 0
@@ -79,7 +82,7 @@ class Drivetrain : public frc2::SubsystemBase{
 
     frc::DifferentialDriveKinematics kDriveKinematics;
     frc::SimpleMotorFeedforward<units::meters> kSimpleMotorFeedforward;
-    static frc::TrajectoryConfig kTrajectoryConfig;
+    frc::TrajectoryConfig kTrajectoryConfig;
     frc::DifferentialDriveVoltageConstraint kDifferentialDriveVoltageConstraint;
 
  private:
@@ -114,3 +117,5 @@ class Drivetrain : public frc2::SubsystemBase{
     double turnTarget;
 
 };
+
+#endif

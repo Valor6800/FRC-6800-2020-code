@@ -5,6 +5,9 @@
 #include <frc/SpeedControllerGroup.h>
 #include "Constants.h"
 
+#ifndef MUNCHER_H
+#define MUNCHER_H
+
 class Muncher : public frc2::SubsystemBase {
  public:
  
@@ -21,3 +24,5 @@ class Muncher : public frc2::SubsystemBase {
     frc::PWMVictorSPX muncherMtr;
 
 };
+
+#endif
