@@ -8,6 +8,8 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc2/command/RamseteCommand.h>
 #include <frc2/command/SequentialCommandGroup.h>
+#include <frc2/command/PrintCommand.h>
+#include <frc2/command/CommandHelper.h>
 
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Shooter.h"
@@ -19,21 +21,17 @@
 
 #include "commands/Auto/HomeTrenchAuto.h"
 
+#include "ValorTrajectory.h"
+#include "Trajectories.h"
 #include "Constants.h"
-/**
- * This class is where the bulk of the robot should be declared.  Since
- * Command-based is a "declarative" paradigm, very little robot logic shouldP
- * actually be handled in the {@link Robot} periodic methods (other than the
- * scheduler calls).  Instead, the structure of the robot (including subsystems,
- * commands, and button mappings) should be declared here.
- */
 
-// using namespace Constants;
+#ifndef ROBOT_CONTAINER_H
+#define ROBOT_CONTAINER_H
 
 class RobotContainer {
  public:
     RobotContainer();
-    frc2::Command* GetAutonomousCommand(int numTrajectories);
+    frc2::Command* GetAutonomousCommand();
 
  private:
    frc::XboxController m_GamepadDriver{OIConstants::GAMEPAD_BASE_LOCATION};
@@ -47,7 +45,15 @@ class RobotContainer {
    Lift& m_lift = Lift::GetInstance();
    Muncher& m_muncher = Muncher::GetInstance();
 
+   Trajectories m_trajectories;
+
    frc::SendableChooser<frc2::Command*> chooser; // Give options for autonomous actions
+   std::string selectedAuto;
+   std::vector<ValorTrajectory> selectedPath;
+
+   frc2::SequentialCommandGroup* autoCommandGroup;
    
    void ConfigureButtonBindings();
 };
+
+#endif

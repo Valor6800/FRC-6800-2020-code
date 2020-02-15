@@ -5,6 +5,9 @@
 #include <frc/SpeedControllerGroup.h>
 #include "Constants.h"
 
+#ifndef LIFT_H
+#define LIFT_H
+
 class Lift : public frc2::SubsystemBase {
  public:
 
@@ -23,3 +26,5 @@ class Lift : public frc2::SubsystemBase {
     frc::SpeedControllerGroup liftMtrs{liftMtrA, liftMtrB};
 
 };
+
+#endif

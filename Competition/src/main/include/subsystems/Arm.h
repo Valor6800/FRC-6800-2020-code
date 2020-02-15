@@ -6,6 +6,9 @@
 #include <frc/SpeedControllerGroup.h>
 #include <frc/PWMVictorSPX.h>
 
+#ifndef ARM_H
+#define ARM_H
+
 class Arm : public frc2::SubsystemBase {
   public:
 
@@ -29,3 +32,5 @@ class Arm : public frc2::SubsystemBase {
     // add 2 encoders for arm
 
 };
+
+#endif

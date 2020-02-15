@@ -7,10 +7,12 @@
 
 #include "Constants.h"
 
+#ifndef VALOR_TRAJECTORY_H
+#define VALOR_TRAJECTORY_H
+
 struct ValorTrajectory {
     frc::Trajectory trajectory;
     enum Action { Path, Shoot } action;
 };
 
-// breaking down of individual trajectories?
-// trajectory config?
+#endif
