@@ -28,7 +28,9 @@ void Robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); }
  * robot is disabled.
  */
 void Robot::DisabledInit() {
-
+  Drivetrain::GetInstance().ResetOdometry(frc::Pose2d(0_m, 0_m, frc::Rotation2d(0_deg)));
+  Drivetrain::GetInstance().ResetEncoders();
+  Drivetrain::GetInstance().ResetIMU();
 }
 
 void Robot::DisabledPeriodic() {
@@ -40,6 +42,9 @@ void Robot::DisabledPeriodic() {
  * RobotContainer} class.
  */
 void Robot::AutonomousInit() {
+  Drivetrain::GetInstance().ResetOdometry(frc::Pose2d(0_m, 0_m, frc::Rotation2d(0_deg)));
+  Drivetrain::GetInstance().ResetEncoders();
+  Drivetrain::GetInstance().ResetIMU();
   m_autonomousCommand = m_container.GetAutonomousCommand();
 
   if (m_autonomousCommand != nullptr) {

@@ -16,6 +16,14 @@ class Trajectories {
 
         std::vector<ValorTrajectory> eightBallPath;
         ValorTrajectory EBpath1;
+        
+        std::vector<ValorTrajectory> tenBallPath;
+        ValorTrajectory TBpath1;
+        ValorTrajectory TBpath2;
+        ValorTrajectory TBpath3;
+        ValorTrajectory TBpath4;
+        ValorTrajectory TBpath5;
+        ValorTrajectory TBpath6;
 
     private:
         

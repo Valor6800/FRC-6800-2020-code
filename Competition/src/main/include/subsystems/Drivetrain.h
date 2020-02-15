@@ -59,6 +59,7 @@ class Drivetrain : public frc2::SubsystemBase{
     void InitDrives(rev::CANSparkMax::IdleMode idleMode);
     void ResetEncoders();
     void ResetOdometry(frc::Pose2d pose);
+    void ResetIMU();
     rev::CANEncoder& GetLeftEncoder();
     rev::CANEncoder& GetRightEncoder();
     double GetEncAvgDistance();
@@ -82,7 +83,8 @@ class Drivetrain : public frc2::SubsystemBase{
 
     frc::DifferentialDriveKinematics kDriveKinematics;
     frc::SimpleMotorFeedforward<units::meters> kSimpleMotorFeedforward;
-    frc::TrajectoryConfig kTrajectoryConfig;
+    frc::TrajectoryConfig kTrajectoryConfigF;
+    frc::TrajectoryConfig kTrajectoryConfigR;
     frc::DifferentialDriveVoltageConstraint kDifferentialDriveVoltageConstraint;
 
  private:

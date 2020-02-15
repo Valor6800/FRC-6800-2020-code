@@ -20,7 +20,9 @@
 #include "subsystems/Muncher.h"
 
 #include "commands/Auto/HomeTrenchAuto.h"
+#include "commands/Auto/TenBallAuto.h"
 
+#include <vector>
 #include "ValorTrajectory.h"
 #include "Trajectories.h"
 #include "Constants.h"
@@ -41,17 +43,23 @@ class RobotContainer {
    Intake& m_intake = Intake::GetInstance();
    Hopper& m_hopper = Hopper::GetInstance();
    Arm& m_arm = Arm::GetInstance();
-   Shooter& m_shooter = Shooter::GetInstance();
+   //Shooter& m_shooter = Shooter::GetInstance();
    Lift& m_lift = Lift::GetInstance();
    Muncher& m_muncher = Muncher::GetInstance();
+
+   HomeTrenchAuto m_homeTrenchAuto;
+   TenBallAuto m_tenBallAuto;
 
    Trajectories m_trajectories;
 
    frc::SendableChooser<frc2::Command*> chooser; // Give options for autonomous actions
    std::string selectedAuto;
-   std::vector<ValorTrajectory> selectedPath;
 
-   frc2::SequentialCommandGroup* autoCommandGroup;
+   std::vector<ValorTrajectory> selectedPath;
+   int pathLength;
+   
+   //frc2::SequentialCommandGroup* autoCommandGroup;
+   std::vector<std::unique_ptr<frc2::Command>> commands;
    
    void ConfigureButtonBindings();
 };
