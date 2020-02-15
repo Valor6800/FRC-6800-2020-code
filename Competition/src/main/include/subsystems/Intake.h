@@ -5,6 +5,9 @@
 
 #include "Constants.h"
 
+#ifndef INTAKE_H
+#define INTAKE_H
+
 class Intake : public frc2::SubsystemBase {
  public:
 
@@ -21,3 +24,5 @@ class Intake : public frc2::SubsystemBase {
     frc::PWMVictorSPX intakeMtr;
 
 };
+
+#endif
