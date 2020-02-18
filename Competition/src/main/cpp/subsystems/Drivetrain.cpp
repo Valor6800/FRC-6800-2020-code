@@ -6,7 +6,7 @@ Drivetrain::Drivetrain() : boostMultiplier{0.5},
                            kSimpleMotorFeedforward{RamseteConstants::kS, RamseteConstants::kV, RamseteConstants::kA},
                            kTrajectoryConfigF{RamseteConstants::kMaxSpeed, RamseteConstants::kMaxAcceleration},
                            kTrajectoryConfigR{RamseteConstants::kMaxSpeed, RamseteConstants::kMaxAcceleration},
-                           kDifferentialDriveVoltageConstraint{kSimpleMotorFeedforward, kDriveKinematics, 11_V},
+                           kDifferentialDriveVoltageConstraint{kSimpleMotorFeedforward, kDriveKinematics, 10_V},
                            m_leftDriveLead{DriveConstants::CAN_ID_LEFT_LEAD, rev::CANSparkMax::MotorType::kBrushless},
                            m_leftDriveFollowA{DriveConstants::CAN_ID_LEFT_FOLLOW_A, rev::CANSparkMax::MotorType::kBrushless},
                            m_leftDriveFollowB{DriveConstants::CAN_ID_LEFT_FOLLOW_B, rev::CANSparkMax::MotorType::kBrushless},
@@ -16,8 +16,8 @@ Drivetrain::Drivetrain() : boostMultiplier{0.5},
                            m_odometry{frc::Rotation2d(units::degree_t(GetHeading()))}
                            
 {
-    drive.SetMaxOutput(kMaxOutput);
-    drive.SetDeadband(kDeadband);
+    // drive.SetMaxOutput(kMaxOutput);
+    // drive.SetDeadband(kDeadband);
 
     kTrajectoryConfigF.SetKinematics(kDriveKinematics);
     kTrajectoryConfigF.AddConstraint(kDifferentialDriveVoltageConstraint);
@@ -30,9 +30,6 @@ Drivetrain::Drivetrain() : boostMultiplier{0.5},
     imu.Calibrate();
 
     InitDrives(rev::CANSparkMax::IdleMode::kCoast);
-
-    leftDrive.SetInverted(!leftDrive.GetInverted());
-    rightDrive.SetInverted(!rightDrive.GetInverted());
 }
 
 Drivetrain& Drivetrain::GetInstance()
@@ -43,12 +40,8 @@ Drivetrain& Drivetrain::GetInstance()
 
 void Drivetrain::Periodic() {
     m_odometry.Update(frc::Rotation2d(units::degree_t(GetHeading())), GetLeftDistance(), GetRightDistance());
+    frc::SmartDashboard::PutNumber("Heading", imu.GetAngle());
 }
-
-// frc::TrajectoryConfig& GetTrajConfigRef() {
-//     frc::TrajectoryConfig& trajConfigRef = kTrajectoryConfig;
-//     return trajConfigRef;
-// }
 
 void Drivetrain::InitDrives(rev::CANSparkMax::IdleMode idleMode) {
     m_leftDriveLead.SetIdleMode(idleMode);
@@ -87,6 +80,10 @@ void Drivetrain::InitDrives(rev::CANSparkMax::IdleMode idleMode) {
     m_leftPIDController.SetSmartMotionMinOutputVelocity(kMinVel);
     m_leftPIDController.SetSmartMotionMaxAccel(kMaxAccel);
     m_leftPIDController.SetSmartMotionAllowedClosedLoopError(kAllError);
+
+    // leftDrive.SetInverted(false);
+    // rightDrive.SetInverted(true);
+    //rightDrive.SetInverted(!rightDrive.GetInverted());
 }
 
 void Drivetrain::ResetEncoders() {
@@ -146,7 +143,7 @@ void Drivetrain::TankDriveVolts(units::volt_t leftVolts, units::volt_t rightVolt
 }
 
 void Drivetrain::ArcadeDrive(double leftInput, double rightInput) {
-    drive.ArcadeDrive(leftInput, -rightInput * .5, true);
+   // drive.ArcadeDrive(leftInput, -rightInput * .5, true);
 }
 
 void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, double turnInput, bool limelightInput) {
@@ -198,5 +195,10 @@ void Drivetrain::SetMultiplier(double multiplier) {
 }
 
 void Drivetrain::Stop() {
-    drive.StopMotor();
+    m_leftDriveLead.StopMotor();
+    m_leftDriveFollowA.StopMotor();
+    m_leftDriveFollowB.StopMotor();
+    m_rightDriveLead.StopMotor();
+    m_rightDriveFollowA.StopMotor();
+    m_rightDriveFollowB.StopMotor();
 }

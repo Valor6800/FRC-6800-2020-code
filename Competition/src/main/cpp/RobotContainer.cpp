@@ -30,6 +30,9 @@ void RobotContainer::ConfigureButtonBindings() {
     frc2::JoystickButton driver_rightBumper{&m_GamepadDriver, 6};
     frc2::JoystickButton driver_leftBumper{&m_GamepadDriver, 5};
 
+    frc2::JoystickButton driver_start{&m_GamepadDriver, 8};
+    frc2::JoystickButton driver_back{&m_GamepadDriver, 7};
+
     frc2::JoystickButton operator_start{&m_GamepadOperator, 8};
     frc2::JoystickButton operator_back{&m_GamepadOperator, 7};
     frc2::JoystickButton operator_leftBumper{&m_GamepadOperator, 5};
@@ -43,21 +46,34 @@ void RobotContainer::ConfigureButtonBindings() {
     frc2::JoystickButton operator_b{&m_GamepadOperator, 2};
 
     //for running drivetrain for 8 min
-    driver_a.WhenPressed(frc2::InstantCommand([&] {m_drivetrain.RocketLeagueDrive(1, 0, 0, false); }, {&m_drivetrain}));
-    driver_x.WhenPressed(frc2::InstantCommand([&] {m_drivetrain.RocketLeagueDrive(0, -1, 0, false); }, {&m_drivetrain}));
-    driver_b.WhenPressed(frc2::InstantCommand([&] {m_drivetrain.RocketLeagueDrive(0, 0, 0, false); }, {&m_drivetrain}));
+    // driver_a.WhenPressed(DriveManual(m_drivetrain,
+    //     [this] { return 1; },
+    //     [this] { return 0; },
+    //     [this] { return 0; },
+    //     [this] { return false; }));
+    // driver_x.WhenPressed(DriveManual(m_drivetrain,
+    //     [this] { return 0; },
+    //     [this] { return 1; },
+    //     [this] { return 0; },
+    //     [this] { return false; }));
+    // driver_b.WhenPressed(DriveManual(m_drivetrain,
+    //     [this] { return 0; },
+    //     [this] { return 0; },
+    //     [this] { return 0; },
+    //     [this] { return false; }));
 
-    
+
     driver_rightBumper.WhenPressed(frc2::InstantCommand([&] { m_drivetrain.SetMultiplier(1); }, {&m_drivetrain}));
     driver_rightBumper.WhenReleased(frc2::InstantCommand([&] { m_drivetrain.SetMultiplier(0.5); }, {&m_drivetrain}));
 
-    driver_leftBumper.WhenPressed(frc2::InstantCommand([&] { m_intake.SetIntakePower(0.5); }));
-    driver_leftBumper.WhenPressed(frc2::InstantCommand([&] { m_hopper.SetHopperPower(0.5); }));
-    driver_leftBumper.WhenReleased(frc2::InstantCommand([&] { m_intake.SetIntakePower(0); }));
-    driver_leftBumper.WhenReleased(frc2::InstantCommand([&] { m_hopper.SetHopperPower(0); }));
+    driver_leftBumper.WhenPressed(frc2::InstantCommand([&] { m_intake.SetIntakePower(0.5); m_hopper.SetHopperPower(0.5); }));
+    driver_leftBumper.WhenReleased(frc2::InstantCommand([&] { m_intake.SetIntakePower(0); m_hopper.SetHopperPower(0); }));
 
     // operator_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(1); }, {&m_shooter}));
     // operator_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
+
+    driver_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(1); }, {&m_shooter}));
+    driver_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
 
     operator_leftBumper.WhenPressed(frc2::InstantCommand([&] { m_intake.SetIntakePower(0.5); }, {&m_intake}));
     operator_leftBumper.WhenReleased(frc2::InstantCommand([&] { m_intake.SetIntakePower(0); }, {&m_intake}));
@@ -65,11 +81,10 @@ void RobotContainer::ConfigureButtonBindings() {
     operator_rightBumper.WhenReleased(frc2::InstantCommand([&] { m_intake.SetIntakePower(0); }, {&m_intake}));
     
     operator_y.WhenPressed(frc2::InstantCommand([&] { m_muncher.SetMunchPower(1); }, {&m_muncher}));
+    operator_y.WhenPressed(frc2::InstantCommand([&] { m_muncher.SetMunchPower(0); }, {&m_muncher}));
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
-    
-
     m_drivetrain.ResetOdometry(frc::Pose2d(0_m, 0_m, frc::Rotation2d(0_deg)));
     m_drivetrain.ResetEncoders();
     m_drivetrain.ResetIMU();

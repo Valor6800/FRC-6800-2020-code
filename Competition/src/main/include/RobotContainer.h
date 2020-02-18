@@ -43,7 +43,7 @@ class RobotContainer {
    Intake& m_intake = Intake::GetInstance();
    Hopper& m_hopper = Hopper::GetInstance();
    Arm& m_arm = Arm::GetInstance();
-   //Shooter& m_shooter = Shooter::GetInstance();
+   Shooter& m_shooter = Shooter::GetInstance();
    Lift& m_lift = Lift::GetInstance();
    Muncher& m_muncher = Muncher::GetInstance();
 
@@ -58,8 +58,6 @@ class RobotContainer {
    std::vector<ValorTrajectory> selectedPath;
    int pathLength;
    
-   //frc2::SequentialCommandGroup* autoCommandGroup;
-   std::vector<std::unique_ptr<frc2::Command>> commands;
    
    void ConfigureButtonBindings();
 };
