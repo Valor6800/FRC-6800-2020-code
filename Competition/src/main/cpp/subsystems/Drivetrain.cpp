@@ -157,7 +157,7 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
     turnValue = turnInput;
 
     directionX = (turnValue >= 0) ? 1 : -1;
-    turnValue = -std::pow(turnValue, 2) * kDriveMultiplierX * directionX;
+    turnValue = -std::pow(turnValue * kDriveMultiplierX, 2) * directionX;
     turnTarget = MaxRPM * turnValue;
     if (directionY == 1) {   //for inverting x and y in revese direction
       turnTarget = -turnTarget;
