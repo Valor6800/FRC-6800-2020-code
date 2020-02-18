@@ -3,7 +3,7 @@
 
 
 Intake::Intake() : intakeMtr{IntakeConstants::VICTOR_ID_INTAKE} {
-    intakeMtr.SetInverted(!intakeMtr.GetInverted());
+    //intakeMtr.SetInverted();
 }
 
 Intake& Intake::GetInstance()

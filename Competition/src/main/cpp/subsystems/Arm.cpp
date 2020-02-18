@@ -1,6 +1,6 @@
 #include "subsystems/Arm.h"
 
-Arm::Arm() : leftArmMtr{ArmConstants::VICTOR_ID_LEFT_ARM}, rightArmMtr{ArmConstants::VICTOR_ID_RIGHT_ARM} {
+Arm::Arm() : leftArmMtr{ArmConstants::TALON_ID_LEFT_ARM}, rightArmMtr{ArmConstants::TALON_ID_RIGHT_ARM} {
     
 }
 

@@ -16,12 +16,15 @@ class Hopper : public frc2::SubsystemBase {
 
     static Hopper& GetInstance();
 
+    void InitHopper();
+
     void SetHopperPower(double power);
 
     void Periodic() override;
 
  private:
     frc::PWMVictorSPX hopperMtr;
+    frc::PWMVictorSPX throatMtr;
 
     // photo electric sensors
 

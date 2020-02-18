@@ -60,16 +60,16 @@ namespace RamseteConstants {
 
 namespace ArmConstants {
 
-    constexpr static int VICTOR_ID_LEFT_ARM = 0;
-    constexpr static int VICTOR_ID_RIGHT_ARM = 1;
+    constexpr static int TALON_ID_LEFT_ARM = 6;
+    constexpr static int TALON_ID_RIGHT_ARM = 1;
 
 }
 
 namespace ShooterConstants {
 
-    constexpr static int CAN_ID_SHOOTER_A = 7;
-    constexpr static int CAN_ID_SHOOTER_B = 8;
-    constexpr static int VICTOR_ID_THROAT = 2;
+    constexpr static int CAN_ID_SHOOTER_LEAD = 7;
+    constexpr static int CAN_ID_SHOOTER_FOLLOW = 8;
+    constexpr static int VICTOR_ID_THROAT = 0;
     constexpr static int PWM_ID_HOOD = 0;
 
 }
@@ -82,7 +82,7 @@ namespace IntakeConstants {
 
 namespace HopperConstants {
 
-    constexpr static int VICTOR_ID_HOPPER_A = 4;
+    constexpr static int VICTOR_ID_HOPPER_A = 2;
 
 }
 
@@ -95,7 +95,7 @@ namespace LiftConstants {
 
 namespace MuncherConstants {
 
-    constexpr static int VICTOR_ID_MUNCHER = 2;
+    constexpr static int VICTOR_ID_MUNCHER = 4;
 
 }
 
