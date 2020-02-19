@@ -69,18 +69,18 @@ void RobotContainer::ConfigureButtonBindings() {
     driver_leftBumper.WhenPressed(frc2::InstantCommand([&] { m_intake.SetIntakePower(0.5); m_hopper.SetHopperPower(0.5); }));
     driver_leftBumper.WhenReleased(frc2::InstantCommand([&] { m_intake.SetIntakePower(0); m_hopper.SetHopperPower(0); }));
 
+    driver_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0.5); }, {&m_shooter}));
+    driver_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
+
     // operator_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(1); }, {&m_shooter}));
     // operator_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
 
-    driver_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(1); }, {&m_shooter}));
-    driver_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
-
-    operator_leftBumper.WhenPressed(frc2::InstantCommand([&] { m_intake.SetIntakePower(0.5); }, {&m_intake}));
+    operator_leftBumper.WhenPressed(frc2::InstantCommand([&] { m_intake.SetIntakePower(0.25); }, {&m_intake}));
     operator_leftBumper.WhenReleased(frc2::InstantCommand([&] { m_intake.SetIntakePower(0); }, {&m_intake}));
-    operator_rightBumper.WhenPressed(frc2::InstantCommand([&] { m_intake.SetIntakePower(-0.5); }, {&m_intake}));
+    operator_rightBumper.WhenPressed(frc2::InstantCommand([&] { m_intake.SetIntakePower(-0.25); }, {&m_intake}));
     operator_rightBumper.WhenReleased(frc2::InstantCommand([&] { m_intake.SetIntakePower(0); }, {&m_intake}));
     
-    operator_y.WhenPressed(frc2::InstantCommand([&] { m_muncher.SetMunchPower(1); }, {&m_muncher}));
+    operator_y.WhenPressed(frc2::InstantCommand([&] { m_muncher.SetMunchPower(0.25); }, {&m_muncher}));
     operator_y.WhenPressed(frc2::InstantCommand([&] { m_muncher.SetMunchPower(0); }, {&m_muncher}));
 }
 
