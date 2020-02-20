@@ -15,19 +15,20 @@ class Shooter : public frc2::SubsystemBase {
     Shooter();
 
     static Shooter& GetInstance();
+    void InitShooter();
+    
+    void Periodic() override;
 
     void SetShooterPower(double power);
-    void Periodic() override;
-    void InitShooter(rev::CANSparkMax::IdleMode idleMode);
     
  private:
     rev::CANSparkMax shootMtrLeft;
     rev::CANSparkMax shootMtrRight;
+
+    frc::Servo hoodServoLeft;
+    frc::Servo hoodServoRight;
     
     frc::SpeedControllerGroup shootMtrs{shootMtrLeft, shootMtrRight};
-    
-
-    frc::Servo hood;
 
 };
 

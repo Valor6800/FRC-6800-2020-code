@@ -15,12 +15,11 @@ class Hopper : public frc2::SubsystemBase {
     Hopper();
 
     static Hopper& GetInstance();
-
     void InitHopper();
 
-    void SetHopperPower(double power);
-
     void Periodic() override;
+
+    void SetHopperPower(double power);
 
  private:
     frc::PWMVictorSPX hopperMtr;

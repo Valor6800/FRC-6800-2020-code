@@ -1,17 +1,16 @@
 #include "subsystems/Hopper.h"
 
-Hopper::Hopper() : hopperMtr{HopperConstants::VICTOR_ID_HOPPER_A},
-                   throatMtr{ShooterConstants::VICTOR_ID_THROAT} {
+Hopper::Hopper() : hopperMtr{HopperConstants::PWM_ID_HOPPER}, throatMtr{ShooterConstants::PWM_ID_THROAT} {
     InitHopper();
 }
 
-Hopper& Hopper::GetInstance()
-{
-    static Hopper instance; // Guaranteed to be destroyed. Instantiated on first use.
+Hopper& Hopper::GetInstance() {
+    static Hopper instance;
     return instance;
 }
 
 void Hopper::InitHopper() {
+    hopperMtr.SetInverted(false);
     throatMtr.SetInverted(true);
 }
 

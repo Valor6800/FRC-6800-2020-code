@@ -1,32 +1,30 @@
 #include "subsystems/Shooter.h"
 
-Shooter::Shooter() : shootMtrLeft{ShooterConstants::CAN_ID_SHOOTER_LEAD, rev::CANSparkMax::MotorType::kBrushless}, 
-                     shootMtrRight{ShooterConstants::CAN_ID_SHOOTER_FOLLOW, rev::CANSparkMax::MotorType::kBrushless}, 
-                     hood{ShooterConstants::PWM_ID_HOOD} {
-    InitShooter(rev::CANSparkMax::IdleMode::kCoast);
+Shooter::Shooter() : shootMtrLeft{ShooterConstants::CAN_ID_SHOOTER_LEFT, rev::CANSparkMax::MotorType::kBrushless}, 
+                     shootMtrRight{ShooterConstants::CAN_ID_SHOOTER_RIGHT, rev::CANSparkMax::MotorType::kBrushless}, 
+                     hoodServoLeft{ShooterConstants::PWM_ID_HOOD_LEFT},
+                     hoodServoRight{ShooterConstants::PWM_ID_HOOD_RIGHT} {
+    InitShooter();
 }
 
 Shooter& Shooter::GetInstance()
 {
-    static Shooter instance; // Guaranteed to be destroyed. Instantiated on first use.
+    static Shooter instance;
     return instance;
+}
+
+void Shooter::InitShooter() {
+    shootMtrLeft.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+    shootMtrRight.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+
+    shootMtrLeft.SetInverted(true);
+    shootMtrRight.SetInverted(false);
 }
 
 void Shooter::Periodic() {
   
 }
 
-void Shooter::InitShooter(rev::CANSparkMax::IdleMode idleMode) {
-    shootMtrLeft.SetIdleMode(idleMode);
-    shootMtrRight.SetIdleMode(idleMode);
-
-    shootMtrLeft.SetInverted(true);
-    shootMtrRight.SetInverted(false);
-    
-
-}
-
 void Shooter::SetShooterPower(double power) {
-    shootMtrs.Set(power);
-    
+    shootMtrs.Set(power); 
 }

@@ -1,7 +1,7 @@
 // #include "commands/Auto/InitHomeTrench.h"
 
 // InitHomeTrench::InitHomeTrench(Drivetrain* drivetrain) : m_autoVoltageConstraint{frc::SimpleMotorFeedforward<units::meters>(RamseteConstants::kS, RamseteConstants::kV, RamseteConstants::kA), m_driveKinematics, 10_V},
-//                                                          m_config{RamseteConstants::kMaxSpeed, RamseteConstants::kMaxAcceleration},
+//                                                          m_config{DriveConstants::kMaxSpeed, DriveConstants::kMaxAcceleration},
 //                                                          m_driveKinematics{DriveConstants::kTrackwidth},
 //                                                          m_drivetrain{drivetrain} {
 

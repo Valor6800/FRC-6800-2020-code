@@ -4,8 +4,8 @@
 Drivetrain::Drivetrain() : boostMultiplier{0.5},
                            kDriveKinematics{DriveConstants::kTrackwidth},
                            kSimpleMotorFeedforward{RamseteConstants::kS, RamseteConstants::kV, RamseteConstants::kA},
-                           kTrajectoryConfigF{RamseteConstants::kMaxSpeed, RamseteConstants::kMaxAcceleration},
-                           kTrajectoryConfigR{RamseteConstants::kMaxSpeed, RamseteConstants::kMaxAcceleration},
+                           kTrajectoryConfigF{DriveConstants::kMaxSpeed, DriveConstants::kMaxAcceleration},
+                           kTrajectoryConfigR{DriveConstants::kMaxSpeed, DriveConstants::kMaxAcceleration},
                            kDifferentialDriveVoltageConstraint{kSimpleMotorFeedforward, kDriveKinematics, 10_V},
                            m_leftDriveLead{DriveConstants::CAN_ID_LEFT_LEAD, rev::CANSparkMax::MotorType::kBrushless},
                            m_leftDriveFollowA{DriveConstants::CAN_ID_LEFT_FOLLOW_A, rev::CANSparkMax::MotorType::kBrushless},
@@ -13,9 +13,7 @@ Drivetrain::Drivetrain() : boostMultiplier{0.5},
                            m_rightDriveLead{DriveConstants::CAN_ID_RIGHT_LEAD, rev::CANSparkMax::MotorType::kBrushless},
                            m_rightDriveFollowA{DriveConstants::CAN_ID_RIGHT_FOLLOW_A, rev::CANSparkMax::MotorType::kBrushless},
                            m_rightDriveFollowB{DriveConstants::CAN_ID_RIGHT_FOLLOW_B, rev::CANSparkMax::MotorType::kBrushless},
-                           m_odometry{frc::Rotation2d(units::degree_t(GetHeading()))}
-                           
-{
+                           m_odometry{frc::Rotation2d(units::degree_t(GetHeading()))} {
     // drive.SetMaxOutput(kMaxOutput);
     // drive.SetDeadband(kDeadband);
 
@@ -29,27 +27,21 @@ Drivetrain::Drivetrain() : boostMultiplier{0.5},
 
     imu.Calibrate();
 
-    InitDrives(rev::CANSparkMax::IdleMode::kCoast);
+    InitDrivetrain();
 }
 
-Drivetrain& Drivetrain::GetInstance()
-{
-    static Drivetrain instance; // Guaranteed to be destroyed. Instantiated on first use.
+Drivetrain& Drivetrain::GetInstance() {
+    static Drivetrain instance;
     return instance;
 }
 
-void Drivetrain::Periodic() {
-    m_odometry.Update(frc::Rotation2d(units::degree_t(GetHeading())), GetLeftDistance(), GetRightDistance());
-    frc::SmartDashboard::PutNumber("Heading", imu.GetAngle());
-}
-
-void Drivetrain::InitDrives(rev::CANSparkMax::IdleMode idleMode) {
-    m_leftDriveLead.SetIdleMode(idleMode);
-    m_leftDriveFollowA.SetIdleMode(idleMode);
-    m_leftDriveFollowB.SetIdleMode(idleMode);
-    m_rightDriveLead.SetIdleMode(idleMode);
-    m_rightDriveFollowA.SetIdleMode(idleMode);
-    m_rightDriveFollowB.SetIdleMode(idleMode);
+void Drivetrain::InitDrivetrain() {
+    m_leftDriveLead.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+    m_leftDriveFollowA.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+    m_leftDriveFollowB.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+    m_rightDriveLead.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+    m_rightDriveFollowA.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+    m_rightDriveFollowB.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
 
     m_leftDriveFollowA.Follow(m_leftDriveLead);
     m_leftDriveFollowB.Follow(m_leftDriveLead);
@@ -84,66 +76,15 @@ void Drivetrain::InitDrives(rev::CANSparkMax::IdleMode idleMode) {
     m_leftDriveLead.SetInverted(true);
     m_leftDriveFollowA.SetInverted(true);
     m_leftDriveFollowB.SetInverted(true);
+
+    m_rightDriveLead.SetInverted(false);
+    m_rightDriveFollowA.SetInverted(false);
+    m_rightDriveFollowB.SetInverted(false);
 }
 
-void Drivetrain::ResetEncoders() {
-    m_leftEncoder.SetPosition(0);
-    m_rightEncoder.SetPosition(0);
-}
-
-void Drivetrain::ResetOdometry(frc::Pose2d pose) {
-    ResetEncoders();
-    m_odometry.ResetPosition(pose, frc::Rotation2d(units::degree_t(GetHeading())));
-}
-void Drivetrain::ResetIMU() {
-    imu.Reset();
-}
-
-// rev::CANEncoder& GetLeftEncoder() {
-//     return m_leftEncoder;
-// }
-
-// rev::CANEncoder& GetRightEncoder() {
-//     return m_rightEncoder;
-// }
-
-double Drivetrain::GetEncAvgDistance() {
-    return ((m_leftEncoder.GetPosition() * RamseteConstants::kPositionConversionFactor) + (m_rightEncoder.GetPosition() * RamseteConstants::kPositionConversionFactor)) / 2.0;
-}
-
-units::meter_t Drivetrain::GetLeftDistance() {
-    return m_leftEncoder.GetPosition() * RamseteConstants::kPositionConversionFactor * 1_m;
-}
-
-units::meter_t Drivetrain::GetRightDistance() {
-    return m_rightEncoder.GetPosition() * RamseteConstants::kPositionConversionFactor * 1_m;
-}
-
-double Drivetrain::GetHeading() {
-    return std::remainder(imu.GetAngle(), 360) * (RamseteConstants::kGyroReversed ? -1.0 : 1.0);
-}
-
-double Drivetrain::GetTurnRate() {
-    return imu.GetRate() * (RamseteConstants::kGyroReversed ? -1.0 : 1.0);
-}
-
-frc::Pose2d Drivetrain::GetPose() { 
-    return m_odometry.GetPose(); 
-}
-
-frc::DifferentialDriveWheelSpeeds Drivetrain::GetWheelSpeeds() {
-    return { units::meters_per_second_t(m_leftEncoder.GetVelocity() * RamseteConstants::kVelocityConversionFactor),
-             units::meters_per_second_t(m_rightEncoder.GetVelocity() * RamseteConstants::kVelocityConversionFactor) };
-}
-
-void Drivetrain::TankDriveVolts(units::volt_t leftVolts, units::volt_t rightVolts) {
-    m_leftDriveLead.SetVoltage(leftVolts);
-    m_rightDriveLead.SetVoltage(rightVolts);
-    // m_drive.Feed();
-}
-
-void Drivetrain::ArcadeDrive(double leftInput, double rightInput) {
-   // drive.ArcadeDrive(leftInput, -rightInput * .5, true);
+void Drivetrain::Periodic() {
+    m_odometry.Update(frc::Rotation2d(units::degree_t(GetHeading())), GetLeftDistance(), GetRightDistance());
+    frc::SmartDashboard::PutNumber("Heading", imu.GetAngle());
 }
 
 void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, double turnInput, bool limelightInput) {
@@ -192,6 +133,59 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
 
 void Drivetrain::SetMultiplier(double multiplier) {
     boostMultiplier = multiplier;
+}
+
+void Drivetrain::TankDriveVolts(units::volt_t leftVolts, units::volt_t rightVolts) {
+    m_leftDriveLead.SetVoltage(leftVolts);
+    m_rightDriveLead.SetVoltage(rightVolts);
+    // m_drive.Feed();
+}
+
+void Drivetrain::ArcadeDrive(double leftInput, double rightInput) {
+   // drive.ArcadeDrive(leftInput, -rightInput * .5, true);
+}
+
+void Drivetrain::ResetEncoders() {
+    m_leftEncoder.SetPosition(0);
+    m_rightEncoder.SetPosition(0);
+}
+
+void Drivetrain::ResetOdometry(frc::Pose2d pose) {
+    ResetEncoders();
+    m_odometry.ResetPosition(pose, frc::Rotation2d(units::degree_t(GetHeading())));
+}
+
+void Drivetrain::ResetIMU() {
+    imu.Reset();
+}
+
+double Drivetrain::GetEncAvgDistance() {
+    return ((m_leftEncoder.GetPosition() * RamseteConstants::kPositionConversionFactor) + (m_rightEncoder.GetPosition() * RamseteConstants::kPositionConversionFactor)) / 2.0;
+}
+
+units::meter_t Drivetrain::GetLeftDistance() {
+    return m_leftEncoder.GetPosition() * RamseteConstants::kPositionConversionFactor * 1_m;
+}
+
+units::meter_t Drivetrain::GetRightDistance() {
+    return m_rightEncoder.GetPosition() * RamseteConstants::kPositionConversionFactor * 1_m;
+}
+
+double Drivetrain::GetHeading() {
+    return std::remainder(imu.GetAngle(), 360) * (RamseteConstants::kGyroReversed ? -1.0 : 1.0);
+}
+
+double Drivetrain::GetTurnRate() {
+    return imu.GetRate() * (RamseteConstants::kGyroReversed ? -1.0 : 1.0);
+}
+
+frc::Pose2d Drivetrain::GetPose() { 
+    return m_odometry.GetPose(); 
+}
+
+frc::DifferentialDriveWheelSpeeds Drivetrain::GetWheelSpeeds() {
+    return { units::meters_per_second_t(m_leftEncoder.GetVelocity() * RamseteConstants::kVelocityConversionFactor),
+             units::meters_per_second_t(m_rightEncoder.GetVelocity() * RamseteConstants::kVelocityConversionFactor) };
 }
 
 void Drivetrain::Stop() {

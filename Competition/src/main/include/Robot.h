@@ -12,6 +12,8 @@
 #include "networktables/NetworkTable.h"
 #include <frc/livewindow/LiveWindow.h>
 
+#include <commands/ShootStart.h>
+
 #include "RobotContainer.h"
 
 #ifndef ROBOT_H

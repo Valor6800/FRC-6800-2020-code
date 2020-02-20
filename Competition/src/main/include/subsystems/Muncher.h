@@ -14,13 +14,14 @@ class Muncher : public frc2::SubsystemBase {
     Muncher();
 
     static Muncher& GetInstance();
+    void InitMuncher();
+
+    void Periodic() override;
 
     void SetMunchPower(double power);
-    void Periodic() override;
 
  private:
 
-    // motor type not decided
     frc::PWMVictorSPX muncherMtr;
 
 };

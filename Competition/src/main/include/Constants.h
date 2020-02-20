@@ -13,6 +13,17 @@ namespace OIConstants {
     constexpr static int GAMEPAD_BASE_LOCATION = 1;
     constexpr static int GAMEPAD_OPERATOR_LOCATION = 0;
 
+    constexpr static int BUTTON_A = 1;
+    constexpr static int BUTTON_B = 2;
+    constexpr static int BUTTON_X = 3;
+    constexpr static int BUTTON_Y = 4;
+    constexpr static int LEFT_BUMPER = 5;
+    constexpr static int RIGHT_BUMPER = 6;
+    constexpr static int BUTTON_BACK = 7;
+    constexpr static int BUTTON_START = 8;
+    constexpr static int LEFT_STICK = 9;
+    constexpr static int RIGHT_STICK = 10;
+
 }
 
 namespace DriveConstants {
@@ -30,12 +41,68 @@ namespace DriveConstants {
     constexpr double kWheelDiameterInches = 6;
     constexpr double kGearRatio = 8.8;
 
-}
-
-namespace RamseteConstants {
-
     constexpr auto kMaxSpeed = 4.4_mps; // 4_mps
     constexpr auto kMaxAcceleration = 4_mps_sq; //4_mps_sq;
+
+}
+
+namespace ArmConstants {
+
+    constexpr static int TALON_ID_ARM_LEFT = 6;
+    constexpr static int TALON_ID_ARM_RIGHT = 1;
+
+    constexpr auto kArmOffset = 5_deg;
+
+    constexpr double kP = 0;
+
+    constexpr auto kMaxSpeed = 3_deg_per_s;
+    constexpr auto kMaxAcceleration = 10_deg / (1_s * 1_s);
+
+    constexpr auto kS = 1_V;
+    constexpr auto kCos = 1_V;
+    constexpr auto kV = 0.5_V * 1_s / 1_deg;
+    constexpr auto kA = 0.1_V * 1_s * 1_s / 1_deg;
+
+}
+
+namespace ShooterConstants {
+
+    constexpr static int CAN_ID_SHOOTER_LEFT = 7;
+    constexpr static int CAN_ID_SHOOTER_RIGHT = 8;
+    constexpr static int PWM_ID_THROAT = 0;
+    constexpr static int PWM_ID_HOOD_LEFT = 6;
+    constexpr static int PWM_ID_HOOD_RIGHT = 7;
+
+}
+
+namespace IntakeConstants {
+
+    constexpr static int PWM_ID_INTAKE = 3;
+
+}
+
+namespace HopperConstants {
+
+    constexpr static int PWM_ID_HOPPER = 2;
+
+}
+
+namespace LiftConstants {
+
+    constexpr static int PWM_ID_LIFT_LEFT = 4;
+    constexpr static int PWM_ID_LIFT_RIGHT = 5;
+    constexpr static int PWM_ID_RATCHET_LEFT = 8;
+    constexpr static int PWM_ID_RATCHET_RIGHT = 9;
+
+}
+
+namespace MuncherConstants {
+
+    constexpr static int PWM_ID_MUNCHER = 1;
+
+}
+
+ namespace RamseteConstants {
 
     constexpr double kRamseteB = 2;
     constexpr double kRamseteZeta = 0.7;
@@ -53,50 +120,10 @@ namespace RamseteConstants {
 
     constexpr double kPDriveVel = 3.09;
 
-    constexpr units::length::meter_t  kStartPos = 4.9_m;
-    constexpr units::length::meter_t  kCenterline = 0.94_m;
+    constexpr units::length::meter_t kStartPos = 4.9_m;
+    constexpr units::length::meter_t kCenterline = 0.94_m;
 
 }
 
-namespace ArmConstants {
-
-    constexpr static int TALON_ID_LEFT_ARM = 6;
-    constexpr static int TALON_ID_RIGHT_ARM = 1;
-
-}
-
-namespace ShooterConstants {
-
-    constexpr static int CAN_ID_SHOOTER_LEAD = 7;
-    constexpr static int CAN_ID_SHOOTER_FOLLOW = 8;
-    constexpr static int VICTOR_ID_THROAT = 0;
-    constexpr static int PWM_ID_HOOD = 0;
-
-}
-
-namespace IntakeConstants {
-
-    constexpr static int VICTOR_ID_INTAKE = 3;
-
-}
-
-namespace HopperConstants {
-
-    constexpr static int VICTOR_ID_HOPPER_A = 2;
-
-}
-
-namespace LiftConstants {
-
-    constexpr static int VICTOR_ID_LIFT_A = 5;
-    //constexpr static int VICTOR_ID_LIFT_B = 8;
-
-}
-
-namespace MuncherConstants {
-
-    constexpr static int VICTOR_ID_MUNCHER = 4;
-
-}
 
 #endif

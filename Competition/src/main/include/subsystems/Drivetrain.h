@@ -53,15 +53,21 @@ class Drivetrain : public frc2::SubsystemBase{
     Drivetrain();
 
     static Drivetrain& GetInstance();
+    void InitDrivetrain();
 
     void Periodic() override;
+
+    void RocketLeagueDrive(double straightInput, double reverseInput, double turnInput, bool limelightInput);
+    void SetMultiplier(double multiplier);
+    void TankDriveVolts(units::volt_t leftVolts, units::volt_t rightVolts);
+    void ArcadeDrive(double leftInput, double rightInput);
+
+    void Stop();
     
-    void InitDrives(rev::CANSparkMax::IdleMode idleMode);
     void ResetEncoders();
     void ResetOdometry(frc::Pose2d pose);
     void ResetIMU();
-    rev::CANEncoder& GetLeftEncoder();
-    rev::CANEncoder& GetRightEncoder();
+
     double GetEncAvgDistance();
     units::meter_t GetLeftDistance();
     units::meter_t GetRightDistance();
@@ -69,15 +75,6 @@ class Drivetrain : public frc2::SubsystemBase{
     double GetTurnRate();
     frc::Pose2d GetPose();
     frc::DifferentialDriveWheelSpeeds GetWheelSpeeds();
-
-    //frc::TrajectoryConfig& GetTrajConfigRef();
-
-    void TankDriveVolts(units::volt_t leftVolts, units::volt_t rightVolts);
-    void ArcadeDrive(double leftInput, double rightInput);
-    void RocketLeagueDrive(double straightInput, double reverseInput, double turnInput, bool limelightInput);
-
-    void SetMultiplier(double multiplier);
-    void Stop();
 
     double boostMultiplier;
 

@@ -7,32 +7,41 @@
 #include <frc/SpeedControllerGroup.h>
 #include <frc/PWMVictorSPX.h>
 #include <units/units.h>
+#include <frc/controller/ArmFeedforward.h>
+// #include <ctre/Phoenix.h>
+// #include <ctre/phoenix/motorcontrol/can/TalonSRX.h>
 
 #ifndef ARM_H
 #define ARM_H
 
-class Arm/* : public frc2::ProfiledPIDSubsystem<units::degrees>*/ : public frc2::SubsystemBase {
-    //using State = frc::TrapezoidProfile<units::degrees>::State;
+class Arm : public frc2::ProfiledPIDSubsystem<units::degrees> /*: public frc2::SubsystemBase*/{
+  
+  using State = frc::TrapezoidProfile<units::degrees>::State;
   public:
      Arm();
 
      static Arm& GetInstance();
-
-    //  void UseOutput(double output, State setpoint) override;
-    //  units::degree_t GetMeasurement() override;
+     void InitArm();
 
      void Periodic() override;
+
      void SetArmPower(double power);
+
+     void UseOutput(double output, State setpoint) override;
+     units::degree_t GetMeasurement() override;
 
  private:
 
      // talons
-     frc::PWMVictorSPX leftArmMtr;
-     frc::PWMVictorSPX rightArmMtr;
+     frc::PWMVictorSPX armMtrLeft;
+     frc::PWMVictorSPX armMtrRight;
+      
+    // TalonSRX armMtrLeft;
+    // TalonSRX armMtrRight;
+     frc::ArmFeedforward m_feedforward;
 
-     // 2 servos
-
-     frc::SpeedControllerGroup armMtrs{leftArmMtr, rightArmMtr};
+     units::volt_t feedforward;
+     
 
     // add 2 encoders for arm
 

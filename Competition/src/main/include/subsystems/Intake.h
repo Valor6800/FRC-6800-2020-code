@@ -14,6 +14,7 @@ class Intake : public frc2::SubsystemBase {
     Intake();
 
     static Intake& GetInstance();
+    void InitIntake();
 
     void SetIntakePower(double power);
 
