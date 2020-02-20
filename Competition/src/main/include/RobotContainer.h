@@ -10,6 +10,14 @@
 #include <frc2/command/SequentialCommandGroup.h>
 #include <frc2/command/PrintCommand.h>
 #include <frc2/command/CommandHelper.h>
+#include <frc/shuffleboard/Shuffleboard.h>
+#include <frc/shuffleboard/ShuffleboardLayout.h>
+#include <frc/shuffleboard/ShuffleboardTab.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include "networktables/NetworkTable.h"
+#include <frc/livewindow/LiveWindow.h>
 
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Shooter.h"
@@ -52,13 +60,20 @@ class RobotContainer {
 
    Trajectories m_trajectories;
 
-   frc::SendableChooser<frc2::Command*> chooser; // Give options for autonomous actions
+   frc::SendableChooser<frc2::Command*> chooser;
    std::string selectedAuto;
 
    std::vector<ValorTrajectory> selectedPath;
    int pathLength;
    
-   
+   nt::NetworkTableEntry intakePower;
+   nt::NetworkTableEntry hopperPower;
+   nt::NetworkTableEntry shooterPower;
+
+   double intakePow;
+   double hopperPow;
+   double shooterPow;
+
    void ConfigureButtonBindings();
 };
 

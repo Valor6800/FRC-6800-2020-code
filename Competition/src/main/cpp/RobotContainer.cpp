@@ -53,7 +53,9 @@ void RobotContainer::ConfigureButtonBindings() {
 
 
     // INTAKE/HOPPER IN
-    driver_leftBumper.WhenPressed(frc2::InstantCommand([&] { m_intake.SetIntakePower(0.75); m_hopper.SetHopperPower(0.8); }));
+    // 0.75 intake
+    // 0.8 hopper
+    driver_leftBumper.WhenPressed(frc2::InstantCommand([&] { m_intake.SetIntakePower(intakePow); m_hopper.SetHopperPower(hopperPow); }));
     driver_leftBumper.WhenReleased(frc2::InstantCommand([&] { m_intake.SetIntakePower(0); m_hopper.SetHopperPower(0); }));
 
     // BOOST MULTIPLIER
@@ -61,9 +63,12 @@ void RobotContainer::ConfigureButtonBindings() {
     driver_rightBumper.WhenReleased(frc2::InstantCommand([&] { m_drivetrain.SetMultiplier(0.5); }, {&m_drivetrain}));
 
     // SHOOTER
+    // 0.75
     driver_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
-    driver_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0.75); }, {&m_shooter}));
+    driver_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(shooterPow); }, {&m_shooter}));
 
+    driver_x.WhenPressed(frc2::InstantCommand([&] { m_arm.SetGoal(90_deg); }, {&m_arm}));
+    driver_y.WhenPressed(frc2::InstantCommand([&] { m_arm.SetGoal(ArmConstants::kArmOffset); }, {&m_arm}));
 
 
     // MUNCHER
@@ -99,6 +104,15 @@ void RobotContainer::ConfigureButtonBindings() {
     //     [this] { return 0; },
     //     [this] { return 0; },
     //     [this] { return false; }));
+
+
+    intakePower = frc::Shuffleboard::GetTab("Configuration").Add("Intake Power", 1).WithWidget("Number Slider").GetEntry();
+    hopperPower = frc::Shuffleboard::GetTab("Configuration").Add("Hopper Power", 1).WithWidget("Number Slider").GetEntry();
+    shooterPower = frc::Shuffleboard::GetTab("Configuration").Add("Shooter Power", 1).WithWidget("Number Slider").GetEntry();
+
+    intakePow = intakePower.GetDouble(0.25);
+    hopperPow = hopperPower.GetDouble(0.25);
+    shooterPow = shooterPower.GetDouble(0.25);
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
