@@ -73,13 +73,13 @@ void Drivetrain::InitDrivetrain() {
     m_leftPIDController.SetSmartMotionMaxAccel(kMaxAccel);
     m_leftPIDController.SetSmartMotionAllowedClosedLoopError(kAllError);
 
-    m_leftDriveLead.SetInverted(true);
-    m_leftDriveFollowA.SetInverted(true);
-    m_leftDriveFollowB.SetInverted(true);
+    m_leftDriveLead.SetInverted(false);
+    m_leftDriveFollowA.SetInverted(false);
+    m_leftDriveFollowB.SetInverted(false);
 
-    m_rightDriveLead.SetInverted(false);
-    m_rightDriveFollowA.SetInverted(false);
-    m_rightDriveFollowB.SetInverted(false);
+    m_rightDriveLead.SetInverted(true);
+    m_rightDriveFollowA.SetInverted(true);
+    m_rightDriveFollowB.SetInverted(true);
 }
 
 void Drivetrain::Periodic() {

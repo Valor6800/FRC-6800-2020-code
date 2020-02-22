@@ -9,8 +9,8 @@
 #include <units/units.h>
 #include <frc/controller/ArmFeedforward.h>
 
-#include <ctre/phoenix/CANifier.h>
-#include <ctre/phoenix/motorcontrol/can/TalonSRX.h>
+// #include <ctre/phoenix/CANifier.h>
+// #include <ctre/phoenix/motorcontrol/can/TalonSRX.h>
 
 #ifndef ARM_H
 #define ARM_H
@@ -34,11 +34,11 @@ class Arm : public frc2::ProfiledPIDSubsystem<units::degrees> /*: public frc2::S
  private:
 
      // talons
-    //  frc::PWMVictorSPX armMtrLeft;
-    //  frc::PWMVictorSPX armMtrRight;
+     frc::PWMVictorSPX armMtrLeft;
+     frc::PWMVictorSPX armMtrRight;
 
-     ctre::phoenix::motorcontrol::can::TalonSRX armMtrLeft;
-     ctre::phoenix::motorcontrol::can::TalonSRX armMtrRight;
+    //  ctre::phoenix::motorcontrol::can::TalonSRX armMtrLeft;
+    //  ctre::phoenix::motorcontrol::can::TalonSRX armMtrRight;
     
      frc::ArmFeedforward m_feedforward;
 
