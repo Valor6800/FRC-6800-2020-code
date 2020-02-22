@@ -15,6 +15,9 @@ Arm& Arm::GetInstance() {
 }
 
 void Arm::InitArm() {
+    armMtrLeft.ConfigFactoryDefault();
+    armMtrRight.ConfigFactoryDefault();
+
     armMtrLeft.SetInverted(false);
     armMtrRight.SetInverted(true);
 }
@@ -32,6 +35,7 @@ void Arm::UseOutput(double output, State setpoint) {
   feedforward = m_feedforward.Calculate(setpoint.position, setpoint.velocity);
 
   armMtrLeft.SetVoltage(units::volt_t(output) + feedforward);
+  armMtrLeft.
   armMtrRight.SetVoltage(units::volt_t(output) + feedforward);
 }
 

@@ -5,7 +5,7 @@ Trajectories::Trajectories() {
     InitTenBallHome();
     
     autos.insert({"EightBallHomeAuto", eightBallHome});
-    autos.insert({"TenBallAuto", tenBallHome});
+    autos.insert({"TenBallHomeAuto", tenBallHome});
 }
 
 std::unordered_map<std::string, std::vector<ValorTrajectory>> Trajectories::GetAutosMap() {
@@ -15,7 +15,7 @@ std::unordered_map<std::string, std::vector<ValorTrajectory>> Trajectories::GetA
 void Trajectories::InitStartPositions() {
     // need to measure for eight ball home
     startPositions.insert({"EightBallHomeAuto", 0.0_m});
-    startPositions.insert({"TenBallAuto", 4.9_m});
+    startPositions.insert({"TenBallHomeAuto", 4.9_m});
 }
 
 void Trajectories::InitEightBallHome() {
