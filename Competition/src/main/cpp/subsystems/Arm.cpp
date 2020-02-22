@@ -44,7 +44,7 @@
 //   return 0_deg;
 // }
 
-Arm::Arm() /*: armMtrLeft{ArmConstants::TALON_ID_ARM_LEFT}, armMtrRight{ArmConstants::TALON_ID_ARM_RIGHT} */{
+Arm::Arm() : armMtrLeft{ArmConstants::TALON_ID_ARM_LEFT}, armMtrRight{ArmConstants::TALON_ID_ARM_RIGHT} {
     InitArm();
 }
 
@@ -54,16 +54,16 @@ Arm& Arm::GetInstance() {
 }
 
 void Arm::InitArm() {
-//     armMtrLeft.ConfigFactoryDefault();
-//     armMtrRight.ConfigFactoryDefault();
+    armMtrLeft.ConfigFactoryDefault();
+    armMtrRight.ConfigFactoryDefault();
 
-//     armMtrLeft.ConfigForwardLimitSwitchSource(motorcontrol::LimitSwitchSource_Deactivated, motorcontrol::LimitSwitchNormal_Disabled, 10);
-//     armMtrLeft.ConfigReverseLimitSwitchSource(motorcontrol::LimitSwitchSource_Deactivated, motorcontrol::LimitSwitchNormal_Disabled, 10);
-//     armMtrRight.ConfigForwardLimitSwitchSource(motorcontrol::LimitSwitchSource_Deactivated, motorcontrol::LimitSwitchNormal_Disabled, 10);
-//     armMtrRight.ConfigReverseLimitSwitchSource(motorcontrol::LimitSwitchSource_Deactivated, motorcontrol::LimitSwitchNormal_Disabled, 10);
+    armMtrLeft.ConfigForwardLimitSwitchSource(motorcontrol::LimitSwitchSource_Deactivated, motorcontrol::LimitSwitchNormal_Disabled, 10);
+    armMtrLeft.ConfigReverseLimitSwitchSource(motorcontrol::LimitSwitchSource_Deactivated, motorcontrol::LimitSwitchNormal_Disabled, 10);
+    armMtrRight.ConfigForwardLimitSwitchSource(motorcontrol::LimitSwitchSource_Deactivated, motorcontrol::LimitSwitchNormal_Disabled, 10);
+    armMtrRight.ConfigReverseLimitSwitchSource(motorcontrol::LimitSwitchSource_Deactivated, motorcontrol::LimitSwitchNormal_Disabled, 10);
 
-    // armMtrLeft.SetInverted(false);
-    // armMtrRight.SetInverted(true);
+    armMtrLeft.SetInverted(false);
+    armMtrRight.SetInverted(true);
 }
 
 void Arm::Periodic() {
@@ -71,6 +71,6 @@ void Arm::Periodic() {
 }
 
 void Arm::SetArmPower(double power) {
-    // armMtrLeft.Set(ControlMode::PercentOutput, power * 0.5);
-    // armMtrRight.Set(ControlMode::PercentOutput, power * 0.5);
+    armMtrLeft.Set(ControlMode::PercentOutput, power * 0.5);
+    armMtrRight.Set(ControlMode::PercentOutput, power * 0.5);
 }

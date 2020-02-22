@@ -28,25 +28,6 @@
 #ifndef DRIVETRAIN_H
 #define DRIVETRAIN_H
 
-#define kP -0.01f
-#define kI 0
-#define kD 0
-#define kIz 0
-#define kFF 1.0/MaxRPM
-#define MaxRPM 5700
-#define kMaxOutput 1.0
-#define kMinOutput -1.0
-#define kMaxVel 1000
-#define kMinVel 0
-#define kMaxAccel 1500
-#define kAllError 0
-#define kDeadband 0.05
-#define kDeadbandY 0.02
-#define kDeadbandX 0.02
-#define kDriveMultiplierX 0.5
-#define kDriveMultiplierY 1
-#define kDriveOffset 1
-
 class Drivetrain : public frc2::SubsystemBase{
  public:
 

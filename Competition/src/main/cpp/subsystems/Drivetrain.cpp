@@ -49,29 +49,29 @@ void Drivetrain::InitDrivetrain() {
     m_rightDriveFollowA.Follow(m_rightDriveLead);
     m_rightDriveFollowB.Follow(m_rightDriveLead);
 
-    m_leftPIDController.SetP(kP);
-    m_leftPIDController.SetI(kI);
-    m_leftPIDController.SetD(kD);
-    m_leftPIDController.SetIZone(kIz);
-    m_leftPIDController.SetFF(kFF);
-    m_leftPIDController.SetOutputRange(kMinOutput, kMaxOutput);
+    m_leftPIDController.SetP(DriveConstants::kP);
+    m_leftPIDController.SetI(DriveConstants::kI);
+    m_leftPIDController.SetD(DriveConstants::kD);
+    m_leftPIDController.SetIZone(DriveConstants::kIz);
+    m_leftPIDController.SetFF(DriveConstants::kFF);
+    m_leftPIDController.SetOutputRange(DriveConstants::kMinOutput, DriveConstants::kMaxOutput);
 
-    m_rightPIDController.SetP(kP);
-    m_rightPIDController.SetI(kI);
-    m_rightPIDController.SetD(kD);
-    m_rightPIDController.SetIZone(kIz);
-    m_rightPIDController.SetFF(kFF);
-    m_rightPIDController.SetOutputRange(kMinOutput, kMaxOutput);
+    m_rightPIDController.SetP(DriveConstants::kP);
+    m_rightPIDController.SetI(DriveConstants::kI);
+    m_rightPIDController.SetD(DriveConstants::kD);
+    m_rightPIDController.SetIZone(DriveConstants::kIz);
+    m_rightPIDController.SetFF(DriveConstants::kFF);
+    m_rightPIDController.SetOutputRange(DriveConstants::kMinOutput, DriveConstants::kMaxOutput);
 
-    m_rightPIDController.SetSmartMotionMaxVelocity(kMaxVel);
-    m_rightPIDController.SetSmartMotionMinOutputVelocity(kMinVel);
-    m_rightPIDController.SetSmartMotionMaxAccel(kMaxAccel);
-    m_rightPIDController.SetSmartMotionAllowedClosedLoopError(kAllError);
+    m_rightPIDController.SetSmartMotionMaxVelocity(DriveConstants::kMaxVel);
+    m_rightPIDController.SetSmartMotionMinOutputVelocity(DriveConstants::kMinVel);
+    m_rightPIDController.SetSmartMotionMaxAccel(DriveConstants::kMaxAccel);
+    m_rightPIDController.SetSmartMotionAllowedClosedLoopError(DriveConstants::kAllError);
     
-    m_leftPIDController.SetSmartMotionMaxVelocity(kMaxVel);
-    m_leftPIDController.SetSmartMotionMinOutputVelocity(kMinVel);
-    m_leftPIDController.SetSmartMotionMaxAccel(kMaxAccel);
-    m_leftPIDController.SetSmartMotionAllowedClosedLoopError(kAllError);
+    m_leftPIDController.SetSmartMotionMaxVelocity(DriveConstants::kMaxVel);
+    m_leftPIDController.SetSmartMotionMinOutputVelocity(DriveConstants::kMinVel);
+    m_leftPIDController.SetSmartMotionMaxAccel(DriveConstants::kMaxAccel);
+    m_leftPIDController.SetSmartMotionAllowedClosedLoopError(DriveConstants::kAllError);
 
     m_leftDriveLead.SetInverted(false);
     m_leftDriveFollowA.SetInverted(false);
@@ -89,27 +89,27 @@ void Drivetrain::Periodic() {
 
 void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, double turnInput, bool limelightInput) {
     straightValue = reverseInput - straightInput;
-    if (std::abs(straightValue) < kDeadbandY) {
+    if (std::abs(straightValue) < DriveConstants::kDeadbandY) {
       straightValue = 0;
     }
     directionY = (straightValue > 0) ? 1 : -1;
-    straightTarget = MaxRPM * -std::pow(straightValue, 2) * directionY * kDriveMultiplierY * boostMultiplier;
+    straightTarget = DriveConstants::MaxRPM * -std::pow(straightValue, 2) * directionY * DriveConstants::kDriveMultiplierY * boostMultiplier;
    
     turnValue = turnInput;
 
     directionX = (turnValue >= 0) ? 1 : -1;
-    turnValue = -std::pow(turnValue * kDriveMultiplierX, 2) * directionX;
-    turnTarget = MaxRPM * turnValue;
+    turnValue = -std::pow(turnValue * DriveConstants::kDriveMultiplierX, 2) * directionX;
+    turnTarget = DriveConstants::MaxRPM * turnValue;
     if (directionY == 1) {   //for inverting x and y in revese direction
       turnTarget = -turnTarget;
     }
     
-    if (std::abs(turnValue) < kDeadbandX) {
-      if (std::abs(straightValue) < kDeadbandY) {
+    if (std::abs(turnValue) < DriveConstants::kDeadbandX) {
+      if (std::abs(straightValue) < DriveConstants::kDeadbandY) {
         turnTarget = 0; //if turning, don't use drive straightening
       }
       else {
-        turnTarget = (m_leftEncoder.GetVelocity() - m_rightEncoder.GetVelocity()) * kDriveOffset;
+        turnTarget = (m_leftEncoder.GetVelocity() - m_rightEncoder.GetVelocity()) * DriveConstants::kDriveOffset;
         // Robot tends to curve to the left at 50RPM slower
       }
     }
@@ -119,7 +119,7 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
     float tv = table->GetNumber("tv" , 0.0);
 
     if (limelightInput && tv == 1) {
-      turnTarget = kP * tx * MaxRPM;
+      turnTarget = DriveConstants::kP * tx * DriveConstants::MaxRPM;
     }
   
     m_leftPIDController.SetReference(straightTarget - turnTarget, rev::ControlType::kVelocity);

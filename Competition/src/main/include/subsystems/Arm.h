@@ -9,8 +9,7 @@
 #include <units/units.h>
 #include <frc/controller/ArmFeedforward.h>
 
-// #include <ctre/Phoenix.h>
-// #include <ctre/phoenix/motorcontrol/can/TalonSRX.h>
+#include <ctre/Phoenix.h>
 
 #ifndef ARM_H
 #define ARM_H
@@ -62,8 +61,8 @@ class Arm : public frc2::SubsystemBase {
      void SetArmPower(double power);
 
  private:
-    //  ctre::phoenix::motorcontrol::can::TalonSRX armMtrLeft;
-    //  ctre::phoenix::motorcontrol::can::TalonSRX armMtrRight;     
+    TalonSRX armMtrLeft;
+    TalonSRX armMtrRight;     
 
     // add 2 encoders for arm
 

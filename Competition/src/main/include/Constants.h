@@ -42,7 +42,29 @@ namespace DriveConstants {
     constexpr double kGearRatio = 8.8;
 
     constexpr auto kMaxSpeed = 4.4_mps; // 4_mps
-    constexpr auto kMaxAcceleration = 4_mps_sq; //4_mps_sq;
+    constexpr auto kMaxAcceleration = 4_mps_sq;
+
+    constexpr static double kP = -0.01;
+    constexpr static double kI = 0;
+    constexpr static double kD = 0;
+    constexpr static double kIz = 0;
+    // 1/5700
+    constexpr static double kFF = 0.00017543859;
+    constexpr static double MaxRPM = 5700;
+    constexpr static double kMaxOutput = 1.0;
+    constexpr static double kMinOutput = -1.0;
+    constexpr static double kMaxVel = 1000;
+    constexpr static double kMinVel = 0;
+    constexpr static double kMaxAccel = 1500;
+    constexpr static double kAllError = 0;
+    constexpr static double kDeadband = 0.05;
+    constexpr static double kDeadbandY = 0.02;
+    constexpr static double kDeadbandX = 0.02;
+    constexpr static double kDriveMultiplierX = 0.5;
+    constexpr static double kDriveMultiplierY = 1;
+    constexpr static double kDriveOffset = 1;
+
+    
 
 }
 
