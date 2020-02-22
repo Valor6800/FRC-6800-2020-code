@@ -32,6 +32,9 @@ void Robot::DisabledInit() {
   Drivetrain::GetInstance().ResetEncoders();
   Drivetrain::GetInstance().ResetIMU();
 
+  Shooter::GetInstance().SetShooterPower(0);
+  Hopper::GetInstance().SetHopperPower(0);
+  Drivetrain::GetInstance().TankDriveVolts(0_V, 0_V);
 }
 
 void Robot::DisabledPeriodic() {

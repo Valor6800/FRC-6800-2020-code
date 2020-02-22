@@ -10,6 +10,9 @@
 #include "commands/Munch.h"
 
 RobotContainer::RobotContainer() {
+    m_chooser.AddOption("TenBallAuto", &m_tenBallAuto);
+    m_chooser.AddOption("HomeTrenchAuto", &m_homeTrenchAuto);
+
     m_drivetrain.SetDefaultCommand(DriveManual(m_drivetrain,
         [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kRightHand); },
         [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kLeftHand); },
@@ -119,8 +122,9 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
     m_drivetrain.ResetOdometry(frc::Pose2d(0_m, 0_m, frc::Rotation2d(0_deg)));
     m_drivetrain.ResetEncoders();
     m_drivetrain.ResetIMU();
-    /*
+    
     //need to add in chooser with strings of auto names
+    /*
     selectedAuto = "EightBallAuto";
 
     selectedPath = m_trajectories.GetAutosMap().at(selectedAuto);
@@ -151,5 +155,5 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
 
     */
 
-   return &m_tenBallAuto;
+   return m_chooser.GetSelected();
 }

@@ -60,7 +60,7 @@ class RobotContainer {
 
    Trajectories m_trajectories;
 
-   frc::SendableChooser<frc2::Command*> chooser;
+   frc::SendableChooser<frc2::Command*> m_chooser;
    std::string selectedAuto;
 
    std::vector<ValorTrajectory> selectedPath;
