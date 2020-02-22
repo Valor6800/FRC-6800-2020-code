@@ -27,8 +27,8 @@
 #include "subsystems/Lift.h"
 #include "subsystems/Muncher.h"
 
-#include "commands/Auto/HomeTrenchAuto.h"
-#include "commands/Auto/TenBallAuto.h"
+#include "commands/Auto/TenBallHomeAuto.h"
+#include "commands/Auto/EightBallHomeAuto.h"
 
 #include <vector>
 #include "ValorTrajectory.h"
@@ -55,8 +55,8 @@ class RobotContainer {
    Lift& m_lift = Lift::GetInstance();
    Muncher& m_muncher = Muncher::GetInstance();
 
-   HomeTrenchAuto m_homeTrenchAuto;
-   TenBallAuto m_tenBallAuto;
+   EightBallHomeAuto m_eightBallHomeAuto;
+   TenBallHomeAuto m_tenBallHomeAuto;
 
    Trajectories m_trajectories;
 

@@ -40,6 +40,9 @@ void Shooter::Periodic() {
 }
 
 void Shooter::SetShooterPower(double power) {
-    m_shootMtrLeftPID.SetReference(power * kMaxRPM, rev::ControlType::kVelocity);
-    m_shootMtrRightPID.SetReference(power * kMaxRPM, rev::ControlType::kVelocity);
+    // m_shootMtrLeftPID.SetReference(power * kMaxRPM, rev::ControlType::kVelocity);
+    // m_shootMtrRightPID.SetReference(power * kMaxRPM, rev::ControlType::kVelocity);
+
+    shootMtrLeft.Set(power);
+    shootMtrRight.Set(power);
 }

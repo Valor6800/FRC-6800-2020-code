@@ -10,8 +10,12 @@
 #include "commands/Munch.h"
 
 RobotContainer::RobotContainer() {
-    m_chooser.AddOption("TenBallAuto", &m_tenBallAuto);
-    m_chooser.AddOption("HomeTrenchAuto", &m_homeTrenchAuto);
+    m_chooser.AddOption("TenBallHomeAuto", &m_tenBallHomeAuto);
+    m_chooser.AddOption("EightBallHomeAuto", &m_eightBallHomeAuto);
+
+    intakePower = frc::Shuffleboard::GetTab("Configuration").Add("Intake Power", 1).WithWidget("Text View").GetEntry();
+    hopperPower = frc::Shuffleboard::GetTab("Configuration").Add("Hopper Power", 1).WithWidget("Text View").GetEntry();
+    shooterPower = frc::Shuffleboard::GetTab("Configuration").Add("Shooter Power", 1).WithWidget("Text View").GetEntry();
 
     m_drivetrain.SetDefaultCommand(DriveManual(m_drivetrain,
         [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kRightHand); },
@@ -107,11 +111,6 @@ void RobotContainer::ConfigureButtonBindings() {
     //     [this] { return 0; },
     //     [this] { return 0; },
     //     [this] { return false; }));
-
-
-    intakePower = frc::Shuffleboard::GetTab("Configuration").Add("Intake Power", 1).WithWidget("Number Slider").GetEntry();
-    hopperPower = frc::Shuffleboard::GetTab("Configuration").Add("Hopper Power", 1).WithWidget("Number Slider").GetEntry();
-    shooterPower = frc::Shuffleboard::GetTab("Configuration").Add("Shooter Power", 1).WithWidget("Number Slider").GetEntry();
 
     intakePow = intakePower.GetDouble(0.25);
     hopperPow = hopperPower.GetDouble(0.25);
