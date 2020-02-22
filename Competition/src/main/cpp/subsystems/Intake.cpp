@@ -4,8 +4,7 @@ Intake::Intake() : intakeMtr{IntakeConstants::PWM_ID_INTAKE} {
     InitIntake();
 }
 
-Intake& Intake::GetInstance()
-{
+Intake& Intake::GetInstance() {
     static Intake instance;
     return instance;
 }

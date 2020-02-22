@@ -9,8 +9,7 @@ Arm::Arm() : frc2::ProfiledPIDSubsystem<units::degrees>
     SetGoal(State{ArmConstants::kArmOffset, 0_rad_per_s});
 }
 
-Arm& Arm::GetInstance()
-{
+Arm& Arm::GetInstance() {
     static Arm instance;
     return instance;
 }

@@ -5,10 +5,10 @@ Shooter::Shooter() : shootMtrLeft{ShooterConstants::CAN_ID_SHOOTER_LEFT, rev::CA
                      hoodServoLeft{ShooterConstants::PWM_ID_HOOD_LEFT},
                      hoodServoRight{ShooterConstants::PWM_ID_HOOD_RIGHT} {
     InitShooter();
+
 }
 
-Shooter& Shooter::GetInstance()
-{
+Shooter& Shooter::GetInstance() {
     static Shooter instance;
     return instance;
 }
@@ -16,6 +16,20 @@ Shooter& Shooter::GetInstance()
 void Shooter::InitShooter() {
     shootMtrLeft.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
     shootMtrRight.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+
+    m_shootMtrLeftPID.SetP(kProp);
+    m_shootMtrLeftPID.SetI(kInte);
+    m_shootMtrLeftPID.SetD(kDeriv);
+    m_shootMtrLeftPID.SetIZone(kIzone);
+    m_shootMtrLeftPID.SetFF(kFeedForward);
+    m_shootMtrLeftPID.SetOutputRange(miOutput, maOutput);
+
+    m_shootMtrRightPID.SetP(kProp);
+    m_shootMtrRightPID.SetI(kInte);
+    m_shootMtrRightPID.SetD(kDeriv);
+    m_shootMtrRightPID.SetIZone(kIzone);
+    m_shootMtrRightPID.SetFF(kFeedForward);
+    m_shootMtrRightPID.SetOutputRange(miOutput, maOutput);
 
     shootMtrLeft.SetInverted(true);
     shootMtrRight.SetInverted(false);
@@ -26,5 +40,6 @@ void Shooter::Periodic() {
 }
 
 void Shooter::SetShooterPower(double power) {
-    shootMtrs.Set(power); 
+    m_shootMtrLeftPID.SetReference(power * kMaxRPM, rev::ControlType::kVelocity);
+    m_shootMtrRightPID.SetReference(power * kMaxRPM, rev::ControlType::kVelocity);
 }
