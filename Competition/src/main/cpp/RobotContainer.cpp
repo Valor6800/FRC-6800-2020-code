@@ -14,6 +14,7 @@ RobotContainer::RobotContainer() {
 
     m_chooser.AddOption("TenBallHomeAuto", &m_tenBallHomeAuto);
     m_chooser.AddOption("EightBallHomeAuto", &m_eightBallHomeAuto);
+    frc::SmartDashboard::PutData("Auto modes", &m_chooser);
 
     intakePower = frc::Shuffleboard::GetTab("Configuration").Add("Intake Power", 1).WithWidget("Text View").GetEntry();
     hopperPower = frc::Shuffleboard::GetTab("Configuration").Add("Hopper Power", 1).WithWidget("Text View").GetEntry();
@@ -76,8 +77,8 @@ void RobotContainer::ConfigureButtonBindings() {
     driver_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
     driver_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(shooterPow); }, {&m_shooter}));
 
-    driver_x.WhenPressed(frc2::InstantCommand([&] { m_arm.SetGoal(90_deg); }, {&m_arm}));
-    driver_y.WhenPressed(frc2::InstantCommand([&] { m_arm.SetGoal(ArmConstants::kArmOffset); }, {&m_arm}));
+    // driver_x.WhenPressed(frc2::InstantCommand([&] { m_arm.SetGoal(90_deg); }, {&m_arm}));
+    // driver_y.WhenPressed(frc2::InstantCommand([&] { m_arm.SetGoal(ArmConstants::kArmOffset); }, {&m_arm}));
 
 
     // MUNCHER
