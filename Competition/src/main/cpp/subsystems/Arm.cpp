@@ -71,6 +71,6 @@ void Arm::Periodic() {
 }
 
 void Arm::SetArmPower(double power) {
-    armMtrLeft.Set(ControlMode::PercentOutput, power * 0.5);
-    armMtrRight.Set(ControlMode::PercentOutput, power * 0.5);
+    armMtrLeft.Set(ControlMode::PercentOutput, power * 0.25);
+    armMtrRight.Set(ControlMode::PercentOutput, power * 0.25);
 }
