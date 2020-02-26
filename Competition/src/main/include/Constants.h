@@ -99,7 +99,7 @@ namespace ShooterConstants {
 
 namespace IntakeConstants {
 
-    constexpr static int PWM_ID_INTAKE = 3;
+    constexpr static int PWM_ID_INTAKE = 1;
 
 }
 
