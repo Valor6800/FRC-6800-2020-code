@@ -1,5 +1,7 @@
-#include "RobotContainer.h"
+
 #include "Trajectories.h"
+#include "Constants.h"
+#include "subsystems/DriveSubsystem.h"
 
 #include <frc/controller/PIDController.h>
 #include <frc/controller/RamseteController.h>
@@ -18,10 +20,10 @@
 #include <frc/trajectory/TrajectoryGenerator.h>
 #include <vector>
 #include <frc2/command/CommandHelper.h>
-class TenBallAuto 
-: public frc2::CommandHelper<frc2::SequentialCommandGroup, TenBallAuto>{
+class TenBallAuto : frc2::SequentialCommandGroup  {
 public:
     TenBallAuto();
+    frc2::Command* GetTenBallAutoCommand();
 private:
     DriveSubsystem m_driveT;
 };

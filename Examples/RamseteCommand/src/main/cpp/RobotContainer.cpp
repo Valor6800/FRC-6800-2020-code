@@ -7,22 +7,6 @@
 
 #include "RobotContainer.h"
 
-#include <frc/controller/PIDController.h>
-#include <frc/controller/RamseteController.h>
-#include <frc/shuffleboard/Shuffleboard.h>
-#include <frc/trajectory/Trajectory.h>
-#include <frc/trajectory/TrajectoryGenerator.h>
-#include <frc/trajectory/constraint/DifferentialDriveVoltageConstraint.h>
-#include <frc2/command/InstantCommand.h>
-#include <frc2/command/RamseteCommand.h>
-#include <frc2/command/SequentialCommandGroup.h>
-#include <frc2/command/button/JoystickButton.h>
-#include <frc2/command/WaitCommand.h>
-#include <frc/Timer.h>
-
-#include "Constants.h"
-#include "Trajectories.h"
-
 RobotContainer::RobotContainer() {
   // Initialize all of your commands and subsystems here
 
@@ -53,13 +37,9 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
     m_drive.ResetImu();
     m_drive.ResetEncoders();
     m_drive.ResetOdometry(frc::Pose2d(0_m,0_m,frc::Rotation2d(0_deg)));
-    
-    return &m_tenBallAuto;
-   
+
+    frc2::RunCommand([this] { m_tenBallAuto.GetTenBallAutoCommand();});
 } 
 
 frc2::Command* RobotContainer::GetDisabledCommand() {
-      return new frc2::SequentialCommandGroup(
-        frc2::InstantCommand([this] { m_drive.SetBrake();}, {})
-      );
 }
