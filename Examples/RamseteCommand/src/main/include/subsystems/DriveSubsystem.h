@@ -144,8 +144,6 @@ class DriveSubsystem : public frc2::SubsystemBase {
    *
    * @param pose The pose to which to set the odometry.
    */
-  void SetBrake();
-  void SetCoast();
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be

@@ -1,7 +1,10 @@
 #include "autos/TenBallAuto.h"
 
 TenBallAuto::TenBallAuto(){
-    // Create a voltage constraint to ensure we don't accelerate too fast
+} 
+
+frc2::Command* TenBallAuto::GetTenBallAutoCommand() {
+// Create a voltage constraint to ensure we don't accelerate too fast
 frc::DifferentialDriveVoltageConstraint autoVoltageConstraint(
     frc::SimpleMotorFeedforward<units::meters>(
         DriveConstants::ks, DriveConstants::kv, DriveConstants::ka),
@@ -115,26 +118,26 @@ auto exampleTrajectory1 = frc::TrajectoryGenerator::GenerateTrajectory(
         configF);
 
     frc2::RamseteCommand ramseteCommand(
-    exampleTrajectory1, [this]() { return m_driveT.GetPose(); },
+    exampleTrajectory1, [this](){ return m_driveT.GetPose(); },
     frc::RamseteController(AutoConstants::kRamseteB,
                             AutoConstants::kRamseteZeta),
     frc::SimpleMotorFeedforward<units::meters>(
         DriveConstants::ks, DriveConstants::kv, DriveConstants::ka),
     DriveConstants::kDriveKinematics,
-    [this] { return m_driveT.GetWheelSpeeds(); },
+    [this](){ return m_driveT.GetWheelSpeeds(); },
     frc2::PIDController(DriveConstants::kPDriveVel, 0, 0),
     frc2::PIDController(DriveConstants::kPDriveVel, 0, 0),
     [this](auto left, auto right) { m_driveT.TankDriveVolts(left, right); },
     {&m_driveT});
 
     frc2::RamseteCommand ramseteCommandP2(
-    exampleTrajectory2, [this]() { return m_driveT.GetPose(); },
+    exampleTrajectory2, [this](){ return m_driveT.GetPose(); },
     frc::RamseteController(AutoConstants::kRamseteB,
                             AutoConstants::kRamseteZeta),
     frc::SimpleMotorFeedforward<units::meters>(
         DriveConstants::ks, DriveConstants::kv, DriveConstants::ka),
     DriveConstants::kDriveKinematics,
-    [this] { return m_driveT.GetWheelSpeeds(); },
+    [this](){ return m_driveT.GetWheelSpeeds(); },
     frc2::PIDController(DriveConstants::kPDriveVel, 0, 0),
     frc2::PIDController(DriveConstants::kPDriveVel, 0, 0),
     [this](auto left, auto right) { m_driveT.TankDriveVolts(left, right); },
@@ -143,78 +146,80 @@ auto exampleTrajectory1 = frc::TrajectoryGenerator::GenerateTrajectory(
 
 
     frc2::RamseteCommand ramseteCommandP3(
-    exampleTrajectory3, [this]() { return m_driveT.GetPose(); },
+    exampleTrajectory3, [this](){ return m_driveT.GetPose(); },
     frc::RamseteController(AutoConstants::kRamseteB,
                             AutoConstants::kRamseteZeta),
     frc::SimpleMotorFeedforward<units::meters>(
         DriveConstants::ks, DriveConstants::kv, DriveConstants::ka),
     DriveConstants::kDriveKinematics,
-    [this] { return m_driveT.GetWheelSpeeds(); },
+    [this](){ return m_driveT.GetWheelSpeeds(); },
     frc2::PIDController(DriveConstants::kPDriveVel, 0, 0),
     frc2::PIDController(DriveConstants::kPDriveVel, 0, 0),
     [this](auto left, auto right) { m_driveT.TankDriveVolts(left, right); },
     {&m_driveT});
 
     frc2::RamseteCommand ramseteCommandP4(
-    exampleTrajectory4, [this]() { return m_driveT.GetPose(); },
+    exampleTrajectory4, [this](){ return m_driveT.GetPose(); },
     frc::RamseteController(AutoConstants::kRamseteB,
                             AutoConstants::kRamseteZeta),
     frc::SimpleMotorFeedforward<units::meters>(
         DriveConstants::ks, DriveConstants::kv, DriveConstants::ka),
     DriveConstants::kDriveKinematics,
-    [this] { return m_driveT.GetWheelSpeeds(); },
+    [this](){ return m_driveT.GetWheelSpeeds(); },
     frc2::PIDController(DriveConstants::kPDriveVel, 0, 0),
     frc2::PIDController(DriveConstants::kPDriveVel, 0, 0),
     [this](auto left, auto right) { m_driveT.TankDriveVolts(left, right); },
     {&m_driveT});
 
     frc2::RamseteCommand ramseteCommandP5(
-    exampleTrajectory5, [this]() { return m_driveT.GetPose(); },
+    exampleTrajectory5, [this](){ return m_driveT.GetPose(); },
     frc::RamseteController(AutoConstants::kRamseteB,
                             AutoConstants::kRamseteZeta),
     frc::SimpleMotorFeedforward<units::meters>(
         DriveConstants::ks, DriveConstants::kv, DriveConstants::ka),
     DriveConstants::kDriveKinematics,
-    [this] { return m_driveT.GetWheelSpeeds(); },
+    [this](){ return m_driveT.GetWheelSpeeds(); },
     frc2::PIDController(DriveConstants::kPDriveVel, 0, 0),
     frc2::PIDController(DriveConstants::kPDriveVel, 0, 0),
     [this](auto left, auto right) { m_driveT.TankDriveVolts(left, right); },
     {&m_driveT});
 
     frc2::RamseteCommand ramseteCommandP6(
-    exampleTrajectory6, [this]() { return m_driveT.GetPose(); },
+    exampleTrajectory6, [this](){ return m_driveT.GetPose(); },
     frc::RamseteController(AutoConstants::kRamseteB,
                             AutoConstants::kRamseteZeta),
     frc::SimpleMotorFeedforward<units::meters>(
         DriveConstants::ks, DriveConstants::kv, DriveConstants::ka),
     DriveConstants::kDriveKinematics,
-    [this] { return m_driveT.GetWheelSpeeds(); },
+    [this](){ return m_driveT.GetWheelSpeeds(); },
     frc2::PIDController(DriveConstants::kPDriveVel, 0, 0),
     frc2::PIDController(DriveConstants::kPDriveVel, 0, 0),
     [this](auto left, auto right) { m_driveT.TankDriveVolts(left, right); },
     {&m_driveT});
+    
 
-    AddCommands(
-      std::move(ramseteCommand),
-      frc2::InstantCommand([this] { m_driveT.TankDriveVolts(0_V, 0_V); }, {}),
+    
+    return new SequentialCommandGroup(  
+        std::move(ramseteCommand),
+        frc2::InstantCommand([this] { m_driveT.TankDriveVolts(0_V, 0_V); }, {}),
 
-      //frc2::InstantCommand([this] { m_timer.Get(); }, {}),
+        //frc2::InstantCommand([this] { m_timer.Get(); }, {}),
   
-      std::move(ramseteCommandP2),
-      frc2::InstantCommand([this] { m_driveT.TankDriveVolts(0_V, 0_V);}, {}),
+        std::move(ramseteCommandP2),
+        frc2::InstantCommand([this] { m_driveT.TankDriveVolts(0_V, 0_V);}, {}),
 
-      std::move(ramseteCommandP3),
-      frc2::InstantCommand([this] { m_driveT.TankDriveVolts(0_V, 0_V); }, {}),
+        std::move(ramseteCommandP3),
+        frc2::InstantCommand([this] { m_driveT.TankDriveVolts(0_V, 0_V); }, {}),
 
-      //frc2::InstantCommand([this] { m_timer.Get(); }, {}),
+        //frc2::InstantCommand([this] { m_timer.Get(); }, {}),
   
-      std::move(ramseteCommandP4),
-      frc2::InstantCommand([this] { m_driveT.TankDriveVolts(0_V, 0_V); }, {}),
+        std::move(ramseteCommandP4),
+        frc2::InstantCommand([this] { m_driveT.TankDriveVolts(0_V, 0_V); }, {}),
 
-      std::move(ramseteCommandP5),
-      frc2::InstantCommand([this] { m_driveT.TankDriveVolts(0_V, 0_V); }, {}),
+        std::move(ramseteCommandP5),
+        frc2::InstantCommand([this] { m_driveT.TankDriveVolts(0_V, 0_V); }, {}),
 
-      std::move(ramseteCommandP6),
-      frc2::InstantCommand([this] { m_driveT.TankDriveVolts(0_V, 0_V); }, {})
-    );
-}
+        std::move(ramseteCommandP6),
+        frc2::InstantCommand([this] { m_driveT.TankDriveVolts(0_V, 0_V); }, {})
+        );
+    }

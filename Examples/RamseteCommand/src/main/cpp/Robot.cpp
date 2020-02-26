@@ -41,13 +41,7 @@ if (m_autonomousCommand != nullptr) {
     m_autonomousCommand->Cancel();
     m_autonomousCommand = nullptr;
   }
-m_disabledCommand = m_container.GetDisabledCommand();
-
-if (m_disabledCommand != nullptr) {
-    m_disabledCommand->Schedule();
-  }
 }
-
 
 
 

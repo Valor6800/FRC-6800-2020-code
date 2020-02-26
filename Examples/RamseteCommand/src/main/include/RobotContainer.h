@@ -15,6 +15,7 @@
 #include <frc2/command/PIDCommand.h>
 #include <frc2/command/ParallelRaceGroup.h>
 #include <frc2/command/RunCommand.h>
+#include <frc/Timer.h>
 
 #include "Constants.h"
 #include "subsystems/DriveSubsystem.h"
@@ -33,7 +34,7 @@ class RobotContainer {
 
   frc2::Command* GetAutonomousCommand();
   frc2::Command* GetDisabledCommand();
-  nt::NetworkTableEntry m_StartPos;
+  TenBallAuto m_tenBallAuto;
  private:
   // The driver's controller
   frc::XboxController m_driverController{OIConstants::kDriverControllerPort};
@@ -42,7 +43,7 @@ class RobotContainer {
 
   // The robot's subsystems
   DriveSubsystem m_drive;
-  TenBallAuto m_tenBallAuto;
+  
   
 
   frc2::InstantCommand m_driveHalfSpeed{[this] { m_drive.SetMaxOutput(0.5); },
