@@ -70,8 +70,13 @@ namespace DriveConstants {
 
 namespace ArmConstants {
 
+<<<<<<< HEAD
     constexpr static int TALON_ID_ARM_LEFT = 9;
     constexpr static int TALON_ID_ARM_RIGHT = 10;
+=======
+    constexpr static int TALON_ID_ARM_LEFT = 10;
+    constexpr static int TALON_ID_ARM_RIGHT = 9;
+>>>>>>> afda4bab3ab208afe72a1e93c9344cb0b731f8b0
 
     constexpr auto kArmOffset = 5_deg;
 
