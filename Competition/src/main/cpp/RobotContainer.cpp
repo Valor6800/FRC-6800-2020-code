@@ -21,47 +21,28 @@ RobotContainer::RobotContainer() {
     shooterPower = frc::Shuffleboard::GetTab("Configuration").Add("Shooter Power", 1).WithWidget("Text View").GetEntry();
 
     m_drivetrain.SetDefaultCommand(DriveManual(m_drivetrain,
-        [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kRightHand); },
-        [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kLeftHand); },
-        [this] { return m_GamepadDriver.GetX(frc::GenericHID::kLeftHand); },
-        [this] { return m_GamepadDriver.GetBumper(frc::GenericHID::kLeftHand); }));
+        [this] { return m_gamepadDriver.GetTriggerAxis(frc::GenericHID::kRightHand); },
+        [this] { return m_gamepadDriver.GetTriggerAxis(frc::GenericHID::kLeftHand); },
+        [this] { return m_gamepadDriver.GetX(frc::GenericHID::kLeftHand); },
+        [this] { return m_gamepadDriver.GetBumper(frc::GenericHID::kLeftHand); }));
 
     // m_arm.SetDefaultCommand(ArmManual(m_arm, 
     //     [this] { return m_GamepadOperator.GetY(frc::GenericHID::kLeftHand); }));
 
     m_arm.SetDefaultCommand(ArmManual(m_arm, 
-        [this] { return m_GamepadDriver.GetY(frc::GenericHID::kLeftHand); }));
+        [this] { return m_gamepadDriver.GetY(frc::GenericHID::kLeftHand); }));
 
     // m_lift.SetDefaultCommand(Climb(m_lift, 
     //     [this] { return m_GamepadOperator.GetY(frc::GenericHID::kRightHand); }));
 
     m_lift.SetDefaultCommand(Climb(m_lift, 
-         [this] { return m_GamepadDriver.GetY(frc::GenericHID::kRightHand); }));
+         [this] { return m_gamepadDriver.GetY(frc::GenericHID::kRightHand); }));
 
     // Configure the button bindings
     ConfigureButtonBindings();
 }
 
 void RobotContainer::ConfigureButtonBindings() {
-    frc2::JoystickButton driver_a{&m_GamepadDriver, OIConstants::BUTTON_A};
-    frc2::JoystickButton driver_b{&m_GamepadDriver, OIConstants::BUTTON_B};
-    frc2::JoystickButton driver_x{&m_GamepadDriver, OIConstants::BUTTON_X};
-    frc2::JoystickButton driver_y{&m_GamepadDriver, OIConstants::BUTTON_Y};
-    frc2::JoystickButton driver_leftBumper{&m_GamepadDriver, OIConstants::LEFT_BUMPER};
-    frc2::JoystickButton driver_rightBumper{&m_GamepadDriver, OIConstants::RIGHT_BUMPER};
-    frc2::JoystickButton driver_start{&m_GamepadDriver, OIConstants::BUTTON_START};
-    frc2::JoystickButton driver_back{&m_GamepadDriver, OIConstants::BUTTON_BACK};
-
-    frc2::JoystickButton operator_a{&m_GamepadOperator, OIConstants::BUTTON_A};
-    frc2::JoystickButton operator_b{&m_GamepadOperator, OIConstants::BUTTON_B};
-    frc2::JoystickButton operator_x{&m_GamepadOperator, OIConstants::BUTTON_X};
-    frc2::JoystickButton operator_y{&m_GamepadOperator, OIConstants::BUTTON_Y};
-    frc2::JoystickButton operator_leftBumper{&m_GamepadOperator, OIConstants::LEFT_BUMPER};
-    frc2::JoystickButton operator_rightBumper{&m_GamepadOperator, OIConstants::RIGHT_BUMPER};
-    frc2::JoystickButton operator_start{&m_GamepadOperator, OIConstants::BUTTON_START};
-    frc2::JoystickButton operator_back{&m_GamepadOperator, OIConstants::BUTTON_BACK};
-
-
     // INTAKE/HOPPER IN
     // 0.75 intake
     // 0.8 hopper
@@ -96,6 +77,9 @@ void RobotContainer::ConfigureButtonBindings() {
     // SHOOTER
     // operator_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(1); }, {&m_shooter}));
     // operator_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
+
+    operator_leftTrigger.ToggleWhenActive(frc2::InstantCommand([&] { m_lift.SetLiftPower(0.25); }).BeforeStarting([&] { m_lift.SetServoUnlock(); }).WithInterrupt([&] { return !m_lift.GetLimitSwitches(); }).AndThen([&] { m_lift.SetServoLock(); }));
+    operator_rightTrigger.WhileActiveContinous(frc2::InstantCommand([&] { m_lift.SetLiftPower(-0.25); }));
 
 
     //for running drivetrain for 8 min

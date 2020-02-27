@@ -18,6 +18,8 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include "networktables/NetworkTable.h"
 #include <frc/livewindow/LiveWindow.h>
+#include <frc/AnalogTrigger.h>
+#include <frc2/command/button/Trigger.h>
 
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Shooter.h"
@@ -44,9 +46,31 @@ class RobotContainer {
     frc2::Command* GetAutonomousCommand();
 
  private:
-   frc::XboxController m_GamepadDriver{OIConstants::GAMEPAD_BASE_LOCATION};
-   frc::XboxController m_GamepadOperator{OIConstants::GAMEPAD_OPERATOR_LOCATION};
+   frc::XboxController m_gamepadDriver{OIConstants::GAMEPAD_BASE_LOCATION};
+   frc::XboxController m_gamepadOperator{OIConstants::GAMEPAD_OPERATOR_LOCATION};
+
+   frc2::JoystickButton driver_a{&m_gamepadDriver, OIConstants::BUTTON_A};
+   frc2::JoystickButton driver_b{&m_gamepadDriver, OIConstants::BUTTON_B};
+   frc2::JoystickButton driver_x{&m_gamepadDriver, OIConstants::BUTTON_X};
+   frc2::JoystickButton driver_y{&m_gamepadDriver, OIConstants::BUTTON_Y};
+   frc2::JoystickButton driver_leftBumper{&m_gamepadDriver, OIConstants::LEFT_BUMPER};
+   frc2::JoystickButton driver_rightBumper{&m_gamepadDriver, OIConstants::RIGHT_BUMPER};
+   frc2::JoystickButton driver_start{&m_gamepadDriver, OIConstants::BUTTON_START};
+   frc2::JoystickButton driver_back{&m_gamepadDriver, OIConstants::BUTTON_BACK};
+
+   frc2::JoystickButton operator_a{&m_gamepadOperator, OIConstants::BUTTON_A};
+   frc2::JoystickButton operator_b{&m_gamepadOperator, OIConstants::BUTTON_B};
+   frc2::JoystickButton operator_x{&m_gamepadOperator, OIConstants::BUTTON_X};
+   frc2::JoystickButton operator_y{&m_gamepadOperator, OIConstants::BUTTON_Y};
+   frc2::JoystickButton operator_leftBumper{&m_gamepadOperator, OIConstants::LEFT_BUMPER};
+   frc2::JoystickButton operator_rightBumper{&m_gamepadOperator, OIConstants::RIGHT_BUMPER};
+   frc2::Trigger operator_leftTrigger{[this] { return m_gamepadOperator.GetTriggerAxis(frc::GenericHID::JoystickHand::kLeftHand) > 0.2; }};
+   frc2::Trigger operator_rightTrigger{[this] { return m_gamepadOperator.GetTriggerAxis(frc::GenericHID::JoystickHand::kRightHand) > 0.2; }};
+   frc2::JoystickButton operator_start{&m_gamepadOperator, OIConstants::BUTTON_START};
+   frc2::JoystickButton operator_back{&m_gamepadOperator, OIConstants::BUTTON_BACK};
+   
  
+   // SUBSYSTEMS
    Drivetrain& m_drivetrain = Drivetrain::GetInstance();
    Intake& m_intake = Intake::GetInstance();
    Hopper& m_hopper = Hopper::GetInstance();
@@ -55,6 +79,8 @@ class RobotContainer {
    Lift& m_lift = Lift::GetInstance();
    Muncher& m_muncher = Muncher::GetInstance();
 
+
+   // AUTO
    EightBallHomeAuto m_eightBallHomeAuto;
    TenBallHomeAuto m_tenBallHomeAuto;
 

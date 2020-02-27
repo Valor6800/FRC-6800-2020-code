@@ -5,6 +5,7 @@
 #include <frc/SpeedControllerGroup.h>
 #include "Constants.h"
 #include <frc/Servo.h>
+#include <frc/DigitalInput.h>
 
 #ifndef LIFT_H
 #define LIFT_H
@@ -20,6 +21,10 @@ class Lift : public frc2::SubsystemBase {
     void Periodic() override;
 
     void SetLiftPower(double power);
+    void SetServoUnlock();
+    void SetServoLock();
+
+    bool GetLimitSwitches();
     
  private:
 
@@ -30,6 +35,9 @@ class Lift : public frc2::SubsystemBase {
 
     frc::Servo ratchetServoLeft;
     frc::Servo ratchetServoRight;
+
+    frc::DigitalInput limitSwitchLeft;
+    frc::DigitalInput limitSwitchRight;
 
 };
 
