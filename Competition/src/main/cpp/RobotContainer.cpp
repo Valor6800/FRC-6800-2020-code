@@ -27,41 +27,24 @@ RobotContainer::RobotContainer() {
 }
 
 void RobotContainer::ConfigureButtonBindings() {
-    frc2::JoystickButton driver_rightBumper{&m_GamepadDriver, 6};
-    frc2::JoystickButton driver_leftBumper{&m_GamepadDriver, 5};
-
-    frc2::JoystickButton driver_start{&m_GamepadDriver, 8};
-    frc2::JoystickButton driver_back{&m_GamepadDriver, 7};
-
-    frc2::JoystickButton operator_start{&m_GamepadOperator, 8};
-    frc2::JoystickButton operator_back{&m_GamepadOperator, 7};
-    frc2::JoystickButton operator_leftBumper{&m_GamepadOperator, 5};
-    frc2::JoystickButton operator_rightBumper{&m_GamepadOperator, 6};
 
     frc2::JoystickButton driver_a{&m_GamepadDriver, 1};
     frc2::JoystickButton driver_b{&m_GamepadDriver, 2};
     frc2::JoystickButton driver_x{&m_GamepadDriver, 3};
+    frc2::JoystickButton driver_y{&m_GamepadDriver, 4};
+    frc2::JoystickButton driver_leftBumper{&m_GamepadDriver, 5};
+    frc2::JoystickButton driver_rightBumper{&m_GamepadDriver, 6};
+    frc2::JoystickButton driver_back{&m_GamepadDriver, 7};
+    frc2::JoystickButton driver_start{&m_GamepadDriver, 8};
 
-    frc2::JoystickButton operator_y{&m_GamepadOperator, 4};
+    frc2::JoystickButton operator_a{&m_GamepadOperator, 1};
     frc2::JoystickButton operator_b{&m_GamepadOperator, 2};
-
-    //for running drivetrain for 8 min
-    // driver_a.WhenPressed(DriveManual(m_drivetrain,
-    //     [this] { return 1; },
-    //     [this] { return 0; },
-    //     [this] { return 0; },
-    //     [this] { return false; }));
-    // driver_x.WhenPressed(DriveManual(m_drivetrain,
-    //     [this] { return 0; },
-    //     [this] { return 1; },
-    //     [this] { return 0; },
-    //     [this] { return false; }));
-    // driver_b.WhenPressed(DriveManual(m_drivetrain,
-    //     [this] { return 0; },
-    //     [this] { return 0; },
-    //     [this] { return 0; },
-    //     [this] { return false; }));
-
+    frc2::JoystickButton operator_x{&m_GamepadOperator, 3};
+    frc2::JoystickButton operator_y{&m_GamepadOperator, 4};
+    frc2::JoystickButton operator_leftBumper{&m_GamepadOperator, 5};
+    frc2::JoystickButton operator_rightBumper{&m_GamepadOperator, 6};
+    frc2::JoystickButton operator_back{&m_GamepadOperator, 7};
+    frc2::JoystickButton operator_start{&m_GamepadOperator, 8};
 
     driver_rightBumper.WhenPressed(frc2::InstantCommand([&] { m_drivetrain.SetMultiplier(1); }, {&m_drivetrain}));
     driver_rightBumper.WhenReleased(frc2::InstantCommand([&] { m_drivetrain.SetMultiplier(0.5); }, {&m_drivetrain}));
@@ -69,11 +52,8 @@ void RobotContainer::ConfigureButtonBindings() {
     driver_leftBumper.WhenPressed(frc2::InstantCommand([&] { m_intake.SetIntakePower(0.5); m_hopper.SetHopperPower(0.5); }));
     driver_leftBumper.WhenReleased(frc2::InstantCommand([&] { m_intake.SetIntakePower(0); m_hopper.SetHopperPower(0); }));
 
-    // operator_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(1); }, {&m_shooter}));
-    // operator_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
-
-    driver_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(1); }, {&m_shooter}));
-    driver_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
+    operator_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(1); }, {&m_shooter}));
+    operator_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
 
     operator_leftBumper.WhenPressed(frc2::InstantCommand([&] { m_intake.SetIntakePower(0.5); }, {&m_intake}));
     operator_leftBumper.WhenReleased(frc2::InstantCommand([&] { m_intake.SetIntakePower(0); }, {&m_intake}));
