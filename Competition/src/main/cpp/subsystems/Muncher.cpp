@@ -1,6 +1,6 @@
 #include "subsystems/Muncher.h"
 
-Muncher::Muncher() : muncherMtr{MuncherConstants::VICTOR_ID_MUNCHER} {
+Muncher::Muncher() : muncherMtr{MuncherConstants::PWM_ID_MUNCHER} {
 
 }
 
