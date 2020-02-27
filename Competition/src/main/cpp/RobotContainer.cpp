@@ -24,7 +24,7 @@ RobotContainer::RobotContainer() {
         [this] { return m_gamepadDriver.GetTriggerAxis(frc::GenericHID::kRightHand); },
         [this] { return m_gamepadDriver.GetTriggerAxis(frc::GenericHID::kLeftHand); },
         [this] { return m_gamepadDriver.GetX(frc::GenericHID::kLeftHand); },
-        [this] { return m_gamepadDriver.GetBumper(frc::GenericHID::kLeftHand); }));
+        [this] { return m_gamepadDriver.GetAButton(); }));
 
     m_arm.SetDefaultCommand(ArmManual(m_arm, 
         [this] { return m_gamepadOperator.GetY(frc::GenericHID::kLeftHand); }));
@@ -67,8 +67,8 @@ void RobotContainer::ConfigureButtonBindings() {
     // operator_rightTrigger.WhileActiveContinous(frc2::InstantCommand([&] { m_lift.SetLiftPower(-0.25); }));
 
     // HOOD
-    operator_x.WhenPressed(frc2::InstantCommand([&] { m_shooter.ExtendHood(); }).WithInterrupt([&] { return m_shooter.HoodExtended(); }));
-    operator_a.WhenPressed(frc2::InstantCommand([&] { m_shooter.RetractHood(); }).WithInterrupt([&] { return m_shooter.HoodRetracted(); }));
+    operator_x.WhenPressed(frc2::InstantCommand([&] { m_shooter.ExtendHood(); }).WithInterrupt([&] { return m_shooter.HoodExtended(); }).AndThen([&] { m_shooter.StopHood(); }));
+    operator_a.WhenPressed(frc2::InstantCommand([&] { m_shooter.RetractHood(); }).WithInterrupt([&] { return m_shooter.HoodRetracted(); }).AndThen([&] { m_shooter.StopHood(); }));
 
     // driver_b.WhenPressed(frc2::InstantCommand([&] { m_arm.SetGoal(90_deg); }));
 

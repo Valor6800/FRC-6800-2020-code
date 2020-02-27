@@ -34,6 +34,7 @@ class Shooter : public frc2::SubsystemBase {
     void SetShooterPower(double power);
     void ExtendHood();
     void RetractHood();
+    void StopHood();
 
     double GetPotentiometerAvg();
     bool HoodExtended();

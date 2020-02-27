@@ -59,6 +59,11 @@ void Shooter::RetractHood() {
     hoodServoRight.SetRaw(ShooterConstants::SERVO_CLOCKWISE);
 }
 
+void Shooter::StopHood() {
+    hoodServoLeft.SetRaw(ShooterConstants::SERVO_STATIONARY);
+    hoodServoRight.SetRaw(ShooterConstants::SERVO_STATIONARY);
+}
+
 double Shooter::GetPotentiometerAvg() {
     return (std::abs(hoodPotentiometerLeft.Get()) + std::abs(hoodPotentiometerRight.Get())) / 2.0;
 }
