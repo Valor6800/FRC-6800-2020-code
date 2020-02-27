@@ -44,25 +44,25 @@ namespace DriveConstants {
     constexpr auto kMaxSpeed = 4.4_mps; // 4_mps
     constexpr auto kMaxAcceleration = 4_mps_sq;
 
-    constexpr static double kP = -0.01;
-    constexpr static double kI = 0;
-    constexpr static double kD = 0;
-    constexpr static double kIz = 0;
+    constexpr static double kP = 0.01;
+    constexpr static double kI = 0.0;
+    constexpr static double kD = 0.0;
+    constexpr static double kIz = 0.0;
     // 1/5700
     constexpr static double kFF = 0.00017543859;
-    constexpr static double MaxRPM = 5700;
+    constexpr static double MaxRPM = 5700.0;
     constexpr static double kMaxOutput = 1.0;
     constexpr static double kMinOutput = -1.0;
-    constexpr static double kMaxVel = 1000;
-    constexpr static double kMinVel = 0;
-    constexpr static double kMaxAccel = 1500;
-    constexpr static double kAllError = 0;
+    constexpr static double kMaxVel = 1000.0;
+    constexpr static double kMinVel = 0.0;
+    constexpr static double kMaxAccel = 1500.0;
+    constexpr static double kAllError = 0.0;
     constexpr static double kDeadband = 0.05;
     constexpr static double kDeadbandY = 0.02;
     constexpr static double kDeadbandX = 0.02;
     constexpr static double kDriveMultiplierX = 0.5;
-    constexpr static double kDriveMultiplierY = 1;
-    constexpr static double kDriveOffset = 1;
+    constexpr static double kDriveMultiplierY = 1.0;
+    constexpr static double kDriveOffset = 1.0;
 
     
 
@@ -119,7 +119,7 @@ namespace HopperConstants {
 
 namespace LiftConstants {
 
-    constexpr static int PWM_ID_LIFT_LEFT = 4;
+    constexpr static int PWM_ID_LIFT_LEFT = 3;
     constexpr static int PWM_ID_LIFT_RIGHT = 5;
     constexpr static int PWM_ID_RATCHET_LEFT = 8;
     constexpr static int PWM_ID_RATCHET_RIGHT = 9;
@@ -130,7 +130,7 @@ namespace LiftConstants {
 
 namespace MuncherConstants {
 
-    constexpr static int PWM_ID_MUNCHER = 1;
+    constexpr static int PWM_ID_MUNCHER = 4;
 
 }
 
