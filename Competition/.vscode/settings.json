@@ -60,6 +60,22 @@
     "type_traits": "cpp",
     "tuple": "cpp",
     "typeinfo": "cpp",
-    "utility": "cpp"
+    "utility": "cpp",
+    "hash_map": "cpp",
+    "hash_set": "cpp",
+    "bitset": "cpp",
+    "list": "cpp",
+    "unordered_set": "cpp",
+    "algorithm": "cpp",
+    "iterator": "cpp",
+    "map": "cpp",
+    "memory_resource": "cpp",
+    "numeric": "cpp",
+    "random": "cpp",
+    "set": "cpp",
+    "string": "cpp",
+    "future": "cpp",
+    "iomanip": "cpp",
+    "cinttypes": "cpp"
   }
 }
