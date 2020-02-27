@@ -3,7 +3,9 @@
 Shooter::Shooter() : shootMtrLeft{ShooterConstants::CAN_ID_SHOOTER_LEFT, rev::CANSparkMax::MotorType::kBrushless}, 
                      shootMtrRight{ShooterConstants::CAN_ID_SHOOTER_RIGHT, rev::CANSparkMax::MotorType::kBrushless}, 
                      hoodServoLeft{ShooterConstants::PWM_ID_HOOD_LEFT},
-                     hoodServoRight{ShooterConstants::PWM_ID_HOOD_RIGHT} {
+                     hoodServoRight{ShooterConstants::PWM_ID_HOOD_RIGHT},
+                     hoodPotentiometerLeft{ShooterConstants::ID_HOOD_POTENTIOMETER_LEFT},
+                     hoodPotentiometerRight{ShooterConstants::ID_HOOD_POTENTIOMETER_RIGHT} {
     InitShooter();
 
 }
@@ -45,4 +47,26 @@ void Shooter::SetShooterPower(double power) {
 
     shootMtrLeft.Set(power);
     shootMtrRight.Set(power);
+}
+
+void Shooter::ExtendHood() {
+    hoodServoLeft.SetRaw(ShooterConstants::SERVO_CLOCKWISE);
+    hoodServoRight.SetRaw(ShooterConstants::SERVO_COUNTER_CLOCKWISE);
+}
+
+void Shooter::RetractHood() {
+    hoodServoLeft.SetRaw(ShooterConstants::SERVO_COUNTER_CLOCKWISE);
+    hoodServoRight.SetRaw(ShooterConstants::SERVO_CLOCKWISE);
+}
+
+double Shooter::GetPotentiometerAvg() {
+    return (std::abs(hoodPotentiometerLeft.Get()) + std::abs(hoodPotentiometerRight.Get())) / 2.0;
+}
+
+bool Shooter::HoodExtended() {
+    return GetPotentiometerAvg() >= ShooterConstants::POTENTIOMETER_HOOD_EXTENDED;
+}
+
+bool Shooter::HoodRetracted() {
+    return GetPotentiometerAvg() <= ShooterConstants::POTENTIOMETER_HOOD_RETRACTED;
 }

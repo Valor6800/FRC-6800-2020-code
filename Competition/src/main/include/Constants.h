@@ -94,6 +94,14 @@ namespace ShooterConstants {
     constexpr static int PWM_ID_THROAT = 0;
     constexpr static int PWM_ID_HOOD_LEFT = 6;
     constexpr static int PWM_ID_HOOD_RIGHT = 7;
+    constexpr static int ID_HOOD_POTENTIOMETER_LEFT = 0;
+    constexpr static int ID_HOOD_POTENTIOMETER_RIGHT = 0;
+
+    constexpr static int SERVO_CLOCKWISE = 999;
+    constexpr static int SERVO_COUNTER_CLOCKWISE = 1899;
+
+    constexpr static int POTENTIOMETER_HOOD_EXTENDED = 1.0;
+    constexpr static int POTENTIOMETER_HOOD_RETRACTED = -1.0;
 
 }
 
@@ -115,8 +123,8 @@ namespace LiftConstants {
     constexpr static int PWM_ID_LIFT_RIGHT = 5;
     constexpr static int PWM_ID_RATCHET_LEFT = 8;
     constexpr static int PWM_ID_RATCHET_RIGHT = 9;
-    constexpr static int DIGITAL_INPUT_ID_LIMIT_SWITCH_LEFT = 0;
-    constexpr static int DIGITAL_INPUT_ID_LIMIT_SWITCH_RIGHT = 0;
+    constexpr static int ID_LIMIT_SWITCH_LEFT = 0;
+    constexpr static int ID_LIMIT_SWITCH_RIGHT = 0;
 
 }
 

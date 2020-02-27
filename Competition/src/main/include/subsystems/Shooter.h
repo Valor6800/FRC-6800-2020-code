@@ -8,6 +8,7 @@
 #include "Constants.h"
 #include <frc/Servo.h>
 #include <frc/PWMVictorSPX.h>
+#include <frc/AnalogPotentiometer.h>
 
 #ifndef SHOOTER_H
 #define SHOOTER_H
@@ -31,6 +32,12 @@ class Shooter : public frc2::SubsystemBase {
     void Periodic() override;
 
     void SetShooterPower(double power);
+    void ExtendHood();
+    void RetractHood();
+
+    double GetPotentiometerAvg();
+    bool HoodExtended();
+    bool HoodRetracted();
     
  private:
     rev::CANSparkMax shootMtrLeft;
@@ -44,6 +51,9 @@ class Shooter : public frc2::SubsystemBase {
 
     frc::Servo hoodServoLeft;
     frc::Servo hoodServoRight;
+
+    frc::AnalogPotentiometer hoodPotentiometerLeft;
+    frc::AnalogPotentiometer hoodPotentiometerRight;
     
     frc::SpeedControllerGroup shootMtrs{shootMtrLeft, shootMtrRight};
 

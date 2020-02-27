@@ -4,8 +4,8 @@ Lift::Lift() : liftMtrLeft{LiftConstants::PWM_ID_LIFT_LEFT},
                liftMtrRight{LiftConstants::PWM_ID_LIFT_RIGHT},  
                ratchetServoLeft{LiftConstants::PWM_ID_RATCHET_LEFT},
                ratchetServoRight{LiftConstants::PWM_ID_RATCHET_RIGHT},
-               limitSwitchLeft{LiftConstants::DIGITAL_INPUT_ID_LIMIT_SWITCH_LEFT},
-               limitSwitchRight{LiftConstants::DIGITAL_INPUT_ID_LIMIT_SWITCH_RIGHT} {
+               limitSwitchLeft{LiftConstants::ID_LIMIT_SWITCH_LEFT},
+               limitSwitchRight{LiftConstants::ID_LIMIT_SWITCH_RIGHT} {
     InitLift();
 }
 
