@@ -5,7 +5,7 @@
 #include <rev/CANSparkMax.h>
 #include "Constants.h"
 #include <frc/SpeedControllerGroup.h>
-#include <frc/PWMVictorSPX.h>
+#include <ctre/Phoenix.h>
 #include <units/units.h>
 
 #ifndef ARM_H
@@ -27,12 +27,12 @@ class Arm/* : public frc2::ProfiledPIDSubsystem<units::degrees>*/ : public frc2:
  private:
 
      // talons
-     frc::PWMVictorSPX leftArmMtr;
-     frc::PWMVictorSPX rightArmMtr;
+     TalonSRX leftArmMtr;
+     TalonSRX rightArmMtr;
 
      // 2 servos
 
-     frc::SpeedControllerGroup armMtrs{leftArmMtr, rightArmMtr};
+    //  frc::SpeedControllerGroup armMtrs{leftArmMtr, rightArmMtr};
 
     // add 2 encoders for arm
 

@@ -2,7 +2,7 @@
 
 
 
-Intake::Intake() : intakeMtr{IntakeConstants::VICTOR_ID_INTAKE} {
+Intake::Intake() : intakeMtr{IntakeConstants::PWM_ID_INTAKE} {
     //intakeMtr.SetInverted();
 }
 
