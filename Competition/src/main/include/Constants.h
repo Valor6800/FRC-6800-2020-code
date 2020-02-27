@@ -15,6 +15,7 @@ namespace OIConstants {
 
 }
 
+
 namespace DriveConstants {
 
 // 1/2/3, 4/5/6 from pdp increasing towards intake
@@ -29,6 +30,25 @@ namespace DriveConstants {
 
     constexpr double kWheelDiameterInches = 6;
     constexpr double kGearRatio = 8.8;
+
+    constexpr static double kP = 0.01f;
+    constexpr static double kI = 0.0;
+    constexpr static double kD = 0.0;
+    constexpr static double kIz = 0.0;
+    constexpr static double kFF = 0.0001754;
+    constexpr static double MaxRPM = 5700;
+    constexpr static double kMaxOutput = 1.0;
+    constexpr static double kMinOutput = -1.0;
+    constexpr static double kMaxVel = 1000;
+    constexpr static double kMinVel = 0;
+    constexpr static double kMaxAccel = 1500;
+    constexpr static double kAllError = 0;
+    constexpr static double kDeadband = 0.05;
+    constexpr static double kDeadbandY = 0.02;
+    constexpr static double kDeadbandX = 0.02;
+    constexpr static double kDriveMultiplierX = 0.5;
+    constexpr static double kDriveMultiplierY = 1;
+    constexpr static double kDriveOffset = 1;
 
 }
 
@@ -60,8 +80,8 @@ namespace RamseteConstants {
 
 namespace ArmConstants {
 
-    constexpr static int TALON_ID_LEFT_ARM = 6;
-    constexpr static int TALON_ID_RIGHT_ARM = 1;
+    constexpr static int TALON_ID_LEFT_ARM = 10;
+    constexpr static int TALON_ID_RIGHT_ARM = 9;
 
 }
 
@@ -76,7 +96,7 @@ namespace ShooterConstants {
 
 namespace IntakeConstants {
 
-    constexpr static int VICTOR_ID_INTAKE = 3;
+    constexpr static int VICTOR_ID_INTAKE = 1;
 
 }
 

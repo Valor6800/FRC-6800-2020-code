@@ -17,7 +17,7 @@ RobotContainer::RobotContainer() {
         [this] { return m_GamepadDriver.GetBumper(frc::GenericHID::kLeftHand); }));
 
     m_arm.SetDefaultCommand(ArmManual(m_arm, 
-        [this] { return m_GamepadDriver.GetY(frc::GenericHID::kLeftHand); }));
+        [this] { return m_GamepadOperator.GetY(frc::GenericHID::kLeftHand); }));
 
     m_lift.SetDefaultCommand(Climb(m_lift, 
         [this] { return m_GamepadDriver.GetY(frc::GenericHID::kRightHand); }));
@@ -72,7 +72,7 @@ void RobotContainer::ConfigureButtonBindings() {
     // operator_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(1); }, {&m_shooter}));
     // operator_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
 
-    driver_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(1); }, {&m_shooter}));
+    driver_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(.75); }, {&m_shooter}));
     driver_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
 
     operator_leftBumper.WhenPressed(frc2::InstantCommand([&] { m_intake.SetIntakePower(0.5); }, {&m_intake}));
