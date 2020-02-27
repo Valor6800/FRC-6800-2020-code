@@ -76,7 +76,7 @@ namespace ShooterConstants {
 
 namespace IntakeConstants {
 
-    constexpr static int VICTOR_ID_INTAKE = 3;
+    constexpr static int VICTOR_ID_INTAKE = 1;
 
 }
 
