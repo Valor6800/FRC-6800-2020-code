@@ -81,9 +81,8 @@ void Drivetrain::InitDrives(rev::CANSparkMax::IdleMode idleMode) {
     m_leftPIDController.SetSmartMotionMaxAccel(kMaxAccel);
     m_leftPIDController.SetSmartMotionAllowedClosedLoopError(kAllError);
 
-    // leftDrive.SetInverted(false);
-    // rightDrive.SetInverted(true);
-    //rightDrive.SetInverted(!rightDrive.GetInverted());
+    m_leftDriveLead.SetInverted(false);
+    m_rightDriveLead.SetInverted(true);
 }
 
 void Drivetrain::ResetEncoders() {
