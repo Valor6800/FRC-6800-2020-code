@@ -15,6 +15,13 @@ namespace OIConstants {
 
 }
 
+namespace LimelightConstants {
+    constexpr static int LED_MODE_ON = 3;
+    constexpr static int LED_MODE_OFF = 1;
+    constexpr static int TRACK_MODE_ON = 0;
+    constexpr static int TRACK_MODE_OFF = 1;
+}
+
 namespace DriveConstants {
 
 // 1/2/3, 4/5/6 from pdp increasing towards intake
