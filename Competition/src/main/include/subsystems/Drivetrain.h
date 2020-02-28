@@ -118,6 +118,8 @@ class Drivetrain : public frc2::SubsystemBase{
     double turnValue;
     double turnTarget;
 
+    int limelight_state;
+
 };
 
 #endif
