@@ -8,6 +8,7 @@
 #include <frc/PWMVictorSPX.h>
 #include <units/units.h>
 #include <frc/controller/ArmFeedforward.h>
+#include <frc/DigitalInput.h>
 
 #include <ctre/Phoenix.h>
 
@@ -60,9 +61,14 @@ class Arm : public frc2::SubsystemBase {
 
      void SetArmPower(double power);
 
+     bool GetRestLimitSwitches();
+
  private:
     TalonSRX armMtrLeft;
-    TalonSRX armMtrRight;     
+    TalonSRX armMtrRight;
+
+    frc::DigitalInput restLimitSwitchLeft;
+    frc::DigitalInput restLimitSwitchRight;
 
     // add 2 encoders for arm
 

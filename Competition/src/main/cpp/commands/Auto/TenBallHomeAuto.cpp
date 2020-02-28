@@ -75,7 +75,8 @@ TenBallHomeAuto::TenBallHomeAuto() {
                                         [&] (auto left, auto right) { m_drivetrain.TankDriveVolts(left, right); },
                                         {&Drivetrain::GetInstance()});
 
-    AddCommands(frc2::ParallelRaceGroup(std::move(ramseteCommand1), frc2::InstantCommand([&] { m_intake.SetIntakePower(0.5); }, {&m_intake})), 
+    AddCommands(frc2::InstantCommand([&] {m_arm.SetArmPower(-0.25); }).WithInterrupt([&] { return m_arm.GetRestLimitSwitches(); }),
+                frc2::ParallelRaceGroup(std::move(ramseteCommand1), frc2::InstantCommand([&] { m_intake.SetIntakePower(0.5); }, {&m_intake})), 
                 frc2::ParallelRaceGroup(std::move(ramseteCommand2), frc2::InstantCommand([&] { m_intake.SetIntakePower(0.5); }, {&m_intake})), 
                 ShootStart(m_shooter).WithTimeout(1.5_s),
                 frc2::ParallelRaceGroup(std::move(ramseteCommand3), frc2::InstantCommand([&] { m_intake.SetIntakePower(0.5); }, {&m_intake})), 

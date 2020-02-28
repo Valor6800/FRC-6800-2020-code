@@ -57,10 +57,10 @@ void Arm::InitArm() {
     armMtrLeft.ConfigFactoryDefault();
     armMtrRight.ConfigFactoryDefault();
 
-    armMtrLeft.ConfigForwardLimitSwitchSource(motorcontrol::LimitSwitchSource_Deactivated, motorcontrol::LimitSwitchNormal_Disabled, 10);
-    armMtrLeft.ConfigReverseLimitSwitchSource(motorcontrol::LimitSwitchSource_Deactivated, motorcontrol::LimitSwitchNormal_Disabled, 10);
-    armMtrRight.ConfigForwardLimitSwitchSource(motorcontrol::LimitSwitchSource_Deactivated, motorcontrol::LimitSwitchNormal_Disabled, 10);
-    armMtrRight.ConfigReverseLimitSwitchSource(motorcontrol::LimitSwitchSource_Deactivated, motorcontrol::LimitSwitchNormal_Disabled, 10);
+    // armMtrLeft.ConfigForwardLimitSwitchSource(motorcontrol::LimitSwitchSource_Deactivated, motorcontrol::LimitSwitchNormal_Disabled, 10);
+    // armMtrLeft.ConfigReverseLimitSwitchSource(motorcontrol::LimitSwitchSource_Deactivated, motorcontrol::LimitSwitchNormal_Disabled, 10);
+    // armMtrRight.ConfigForwardLimitSwitchSource(motorcontrol::LimitSwitchSource_Deactivated, motorcontrol::LimitSwitchNormal_Disabled, 10);
+    // armMtrRight.ConfigReverseLimitSwitchSource(motorcontrol::LimitSwitchSource_Deactivated, motorcontrol::LimitSwitchNormal_Disabled, 10);
 
     armMtrLeft.SetInverted(false);
     armMtrRight.SetInverted(true);
@@ -73,4 +73,8 @@ void Arm::Periodic() {
 void Arm::SetArmPower(double power) {
     armMtrLeft.Set(ControlMode::PercentOutput, power * 0.25);
     armMtrRight.Set(ControlMode::PercentOutput, power * 0.25);
+}
+
+bool Arm::GetRestLimitSwitches() {
+    return restLimitSwitchLeft.Get() && restLimitSwitchRight.Get();
 }

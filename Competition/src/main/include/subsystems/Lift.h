@@ -24,7 +24,7 @@ class Lift : public frc2::SubsystemBase {
     void SetServoUnlock();
     void SetServoLock();
 
-    bool GetLimitSwitches();
+    bool GetClimbLimitSwitches();
     
  private:
 
@@ -36,8 +36,8 @@ class Lift : public frc2::SubsystemBase {
     frc::Servo ratchetServoLeft;
     frc::Servo ratchetServoRight;
 
-    frc::DigitalInput limitSwitchLeft;
-    frc::DigitalInput limitSwitchRight;
+    frc::DigitalInput climbLimitSwitchLeft;
+    frc::DigitalInput climbLimitSwitchRight;
 
 };
 

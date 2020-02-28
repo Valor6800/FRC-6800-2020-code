@@ -26,6 +26,7 @@ class EightBallHomeAuto : public frc2::CommandHelper<frc2::SequentialCommandGrou
 private:
     Drivetrain& m_drivetrain = Drivetrain::GetInstance();
     Intake& m_intake = Intake::GetInstance();
+    Arm& m_arm = Arm::GetInstance();
     Shooter& m_shooter = Shooter::GetInstance();
 
     Trajectories m_trajectories;

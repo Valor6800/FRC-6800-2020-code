@@ -37,6 +37,6 @@ void Lift::SetServoLock() {
     ratchetServoRight.Set(0.5);
 }
 
-bool Lift::GetLimitSwitches() {
-    return limitSwitchLeft.Get() && limitSwitchRight.Get();
+bool Lift::GetClimbLimitSwitches() {
+    return climbLimitSwitchLeft.Get() && climbLimitSwitchRight.Get();
 }

@@ -62,8 +62,11 @@ void RobotContainer::ConfigureButtonBindings() {
     operator_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
     operator_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0.75); }, {&m_shooter}));
 
+    // operator_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}).BeforeStarting([&] { m_shooter.RetractHood(); }));
+    // operator_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0.75); }, {&m_shooter}).BeforeStarting([&] { m_shooter.ExtendHood(); }));
+
     // CLIMB
-    // operator_leftTrigger.ToggleWhenActive(frc2::InstantCommand([&] { m_lift.SetLiftPower(0.25); }).BeforeStarting([&] { m_lift.SetServoUnlock(); }).WithInterrupt([&] { return !m_lift.GetLimitSwitches(); }).AndThen([&] { m_lift.SetServoLock(); }));
+    // operator_leftTrigger.ToggleWhenActive(frc2::InstantCommand([&] { m_lift.SetLiftPower(0.25); }).BeforeStarting([&] { m_lift.SetServoUnlock(); }).WithInterrupt([&] { return !m_lift.GetClimbLimitSwitches(); }).AndThen([&] { m_lift.SetServoLock(); }));
     // operator_rightTrigger.WhileActiveContinous(frc2::InstantCommand([&] { m_lift.SetLiftPower(-0.25); }));
 
     // HOOD

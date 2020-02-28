@@ -101,8 +101,8 @@ namespace ShooterConstants {
     constexpr static int SERVO_COUNTER_CLOCKWISE = 1899;
     constexpr static int SERVO_STATIONARY = 999;
 
-    constexpr static int POTENTIOMETER_HOOD_EXTENDED = 0.8;
-    constexpr static int POTENTIOMETER_HOOD_RETRACTED = 0.2;
+    constexpr static int POTENTIOMETER_HOOD_EXTENDED = 0.6;
+    constexpr static int POTENTIOMETER_HOOD_RETRACTED = 0.5;
 
 }
 
