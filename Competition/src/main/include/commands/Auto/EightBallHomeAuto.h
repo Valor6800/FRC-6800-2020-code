@@ -14,6 +14,7 @@
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Intake.h"
 #include "subsystems/Shooter.h"
+#include "subsystems/Arm.h"
 
 #include "commands/ShootStart.h"
 

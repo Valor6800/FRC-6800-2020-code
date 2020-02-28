@@ -25,7 +25,7 @@ EightBallHomeAuto::EightBallHomeAuto() {
                                         {&Drivetrain::GetInstance()});
 
     AddCommands(ShootStart(m_shooter).WithTimeout(1.5_s),
-                frc2::InstantCommand([&] {m_arm.SetArmPower(-0.25); }).WithInterrupt([&] { return m_arm.GetRestLimitSwitches(); }),
+                frc2::InstantCommand([&] {m_arm.SetArmPower(-0.15); }).WithInterrupt([&] { return m_arm.GetRestLimitSwitches(); }).WithTimeout(1_s),
                 frc2::ParallelRaceGroup(std::move(ramseteCommand1), frc2::InstantCommand([&] { m_intake.SetIntakePower(0.5); }, {&m_intake})), 
                 frc2::ParallelRaceGroup(std::move(ramseteCommand2), frc2::InstantCommand([&] { m_intake.SetIntakePower(0.5); }, {&m_intake})), 
                 ShootStart(m_shooter).WithTimeout(1.5_s));
