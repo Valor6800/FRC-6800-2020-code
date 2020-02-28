@@ -2,7 +2,8 @@
 
 Shooter::Shooter() : shootMtrLeft{ShooterConstants::CAN_ID_SHOOTER_LEAD, rev::CANSparkMax::MotorType::kBrushless}, 
                      shootMtrRight{ShooterConstants::CAN_ID_SHOOTER_FOLLOW, rev::CANSparkMax::MotorType::kBrushless}, 
-                     hood{ShooterConstants::PWM_ID_HOOD} {
+                     hood_left{ShooterConstants::PWM_ID_HOOD_LEFT},
+                     hood_right{ShooterConstants::PWM_ID_HOOD_RIGHT} {
     InitShooter(rev::CANSparkMax::IdleMode::kCoast);
 }
 

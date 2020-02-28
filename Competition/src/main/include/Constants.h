@@ -88,7 +88,8 @@ namespace ShooterConstants {
     constexpr static int CAN_ID_SHOOTER_LEAD = 7;
     constexpr static int CAN_ID_SHOOTER_FOLLOW = 8;
     constexpr static int PWM_ID_THROAT = 0;
-    constexpr static int PWM_ID_HOOD = 6;
+    constexpr static int PWM_ID_HOOD_LEFT = 6;
+    constexpr static int PWM_ID_HOOD_RIGHT = 9;
 
 }
 
@@ -106,10 +107,10 @@ namespace HopperConstants {
 
 namespace LiftConstants {
 
-    constexpr static int PWM_ID_LIFT_A = 3;
-    constexpr static int PWM_ID_LIFT_B = 5;
-    constexpr static int PWM_ID_LEFT_A_SERVO_LOCK = 7;
-    constexpr static int PWM_ID_LEFT_B_SERVO_LOCK = 7;
+    constexpr static int PWM_ID_LIFT_LEFT = 3;
+    constexpr static int PWM_ID_LIFT_RIGHT = 5;
+    constexpr static int PWM_ID_LIFT_LEFT_SERVO_LOCK = 7;
+    constexpr static int PWM_ID_LIFT_RIGHT_SERVO_LOCK = 8;
 
 }
 

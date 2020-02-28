@@ -26,8 +26,8 @@ class Shooter : public frc2::SubsystemBase {
     
     frc::SpeedControllerGroup shootMtrs{shootMtrLeft, shootMtrRight};
     
-
-    frc::Servo hood;
+    frc::Servo hood_left;
+    frc::Servo hood_right;
 
 };
 

@@ -1,6 +1,6 @@
 #include "subsystems/Lift.h"
 
-Lift::Lift() : liftMtrA{LiftConstants::PWM_ID_LIFT_A}, liftMtrB{LiftConstants::PWM_ID_LIFT_B} {
+Lift::Lift() : liftMtrLeft{LiftConstants::PWM_ID_LIFT_LEFT}, liftMtrRight{LiftConstants::PWM_ID_LIFT_RIGHT} {
     
 }
 
@@ -15,6 +15,6 @@ void Lift::Periodic() {
 }
 
 void Lift::SetLiftPower(double power) {
-    liftMtrA.Set(power);
-    liftMtrB.Set(power);
+    liftMtrLeft.Set(power);
+    liftMtrRight.Set(power);
 }

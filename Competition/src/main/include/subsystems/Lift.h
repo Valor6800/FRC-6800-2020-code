@@ -20,8 +20,8 @@ class Lift : public frc2::SubsystemBase {
 
  private:
 
-    frc::PWMVictorSPX liftMtrA;
-    frc::PWMVictorSPX liftMtrB;
+    frc::PWMVictorSPX liftMtrLeft;
+    frc::PWMVictorSPX liftMtrRight;
 
     //frc::SpeedControllerGroup liftMtrs{liftMtrA, liftMtrB};
 
