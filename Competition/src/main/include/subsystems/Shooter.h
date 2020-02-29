@@ -6,6 +6,15 @@
 #include "Constants.h"
 #include <frc/Servo.h>
 #include <frc/PWMVictorSPX.h>
+#include <frc/AnalogPotentiometer.h>
+#include <frc/shuffleboard/Shuffleboard.h>
+#include <frc/shuffleboard/ShuffleboardLayout.h>
+#include <frc/shuffleboard/ShuffleboardTab.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include "networktables/NetworkTable.h"
+#include <frc/livewindow/LiveWindow.h>
 
 #ifndef SHOOTER_H
 #define SHOOTER_H
@@ -26,8 +35,8 @@ class Shooter : public frc2::SubsystemBase {
     
     frc::SpeedControllerGroup shootMtrs{shootMtrLeft, shootMtrRight};
     
-    frc::Servo hood_left;
-    frc::Servo hood_right;
+    frc::Servo hoodServoLeft;
+    frc::Servo hoodServoRight;
 
 };
 

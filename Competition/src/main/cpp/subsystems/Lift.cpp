@@ -17,8 +17,8 @@ void Lift::Periodic() {
   ratchetServoLeft.Set(ratchetServoLeft.Get());
   ratchetServoRight.Set(ratchetServoRight.Get());
 
-  frc::SmartDashboard::PutNumber("Left servo position", ratchetServoLeft.Get());
-  frc::SmartDashboard::PutNumber("Right servo position", ratchetServoRight.Get());
+  frc::SmartDashboard::PutNumber("Left ratchet position", ratchetServoLeft.Get());
+  frc::SmartDashboard::PutNumber("Right ratchet position", ratchetServoRight.Get());
 }
 
 void Lift::SetLiftPower(double power) {
