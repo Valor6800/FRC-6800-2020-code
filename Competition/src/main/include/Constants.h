@@ -119,6 +119,10 @@ namespace LiftConstants {
     constexpr static int PWM_ID_LIFT_RIGHT = 5;
     constexpr static int PWM_ID_LIFT_LEFT_SERVO_LOCK = 7;
     constexpr static int PWM_ID_LIFT_RIGHT_SERVO_LOCK = 8;
+    constexpr static double RATCHET_UNLOCK_LEFT_POS = 0.65;
+    constexpr static double RATCHET_UNLOCK_RIGHT_POS = 0.63;
+    constexpr static double RATCHET_LOCK_LEFT_POS = 0.3;
+    constexpr static double RATCHET_LOCK_RIGHT_POS = 0.1;
 
 }
 

@@ -35,11 +35,11 @@ void Shooter::SetShooterPower(double power) {
 
 void Shooter::ExtendHood() {
     hoodServoLeft.SetRaw(1899);
-    hoodServoRight.SetRaw(0);
+    hoodServoRight.SetRaw(99);
 }
 
 void Shooter::RetractHood() {
-    hoodServoLeft.SetRaw(0);
+    hoodServoLeft.SetRaw(99);
     hoodServoRight.SetRaw(1899);
 }
 
