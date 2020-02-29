@@ -2,10 +2,8 @@
 
 #include <frc2/command/SubsystemBase.h>
 #include <frc2/command/ProfiledPIDSubsystem.h>
-#include <rev/CANSparkMax.h>
 #include "Constants.h"
 #include <frc/SpeedControllerGroup.h>
-#include <ctre/Phoenix.h>
 #include <units/units.h>
 
 #ifndef ARM_H
@@ -25,10 +23,6 @@ class Arm/* : public frc2::ProfiledPIDSubsystem<units::degrees>*/ : public frc2:
      void SetArmPower(double power);
 
  private:
-
-     // talons
-     TalonSRX leftArmMtr;
-     TalonSRX rightArmMtr;
 
      // 2 servos
 
