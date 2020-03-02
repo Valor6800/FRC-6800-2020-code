@@ -95,8 +95,8 @@ namespace ShooterConstants {
     constexpr static int CAN_ID_SHOOTER_LEAD = 7;
     constexpr static int CAN_ID_SHOOTER_FOLLOW = 8;
     constexpr static int PWM_ID_THROAT = 0;
-    constexpr static int PWM_ID_HOOD_LEFT = 6;
-    constexpr static int PWM_ID_HOOD_RIGHT = 9;
+    constexpr static int PWM_ID_HOOD_LEFT = 9;
+    constexpr static int PWM_ID_HOOD_RIGHT = 6;
     constexpr static int ID_HOOD_POTENTIOMETER = 0;
 
 }

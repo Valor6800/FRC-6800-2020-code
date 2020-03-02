@@ -15,7 +15,7 @@ Shooter& Shooter::GetInstance()
 }
 
 void Shooter::Periodic() {
-  frc::SmartDashboard::PutNumber("hood potentiometer", hoodPotentiometer.Get());
+  frc::SmartDashboard::PutNumber("hood potentiometer", hoodPotentiometer.);
 }
 
 void Shooter::InitShooter(rev::CANSparkMax::IdleMode idleMode) {
