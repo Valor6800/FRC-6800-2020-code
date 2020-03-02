@@ -4,6 +4,7 @@ Shooter::Shooter() : shootMtrLeft{ShooterConstants::CAN_ID_SHOOTER_LEAD, rev::CA
                      shootMtrRight{ShooterConstants::CAN_ID_SHOOTER_FOLLOW, rev::CANSparkMax::MotorType::kBrushless}, 
                      hood{ShooterConstants::PWM_ID_HOOD} {
     InitShooter(rev::CANSparkMax::IdleMode::kCoast);
+    shooterPower = frc::Shuffleboard::GetTab("Configuration").Add("Shooter_Power", 1).WithWidget("Text View").GetEntry();
 }
 
 Shooter& Shooter::GetInstance()
@@ -13,7 +14,8 @@ Shooter& Shooter::GetInstance()
 }
 
 void Shooter::Periodic() {
-  
+    
+    shooterPow = shooterPower.GetDouble(0.25);
 }
 
 void Shooter::InitShooter(rev::CANSparkMax::IdleMode idleMode) {
@@ -29,4 +31,8 @@ void Shooter::InitShooter(rev::CANSparkMax::IdleMode idleMode) {
 void Shooter::SetShooterPower(double power) {
     shootMtrs.Set(power);
     
+}
+
+double Shooter::GetShooterNTPower() {
+    return shooterPow;
 }

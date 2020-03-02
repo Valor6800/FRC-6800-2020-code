@@ -157,7 +157,7 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
     turnValue = turnInput;
 
     directionX = (turnValue >= 0) ? 1 : -1;
-    turnValue = -std::pow(turnValue * kDriveMultiplierX, 2) * directionX;
+    turnValue = std::pow(turnValue * kDriveMultiplierX, 2) * directionX;
     turnTarget = MaxRPM * turnValue;
     if (directionY == 1) {   //for inverting x and y in revese direction
       turnTarget = -turnTarget;
@@ -182,11 +182,11 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
 
         // Check state of limelight
         // If previously was off, turn on LED and start tracking
-        if (limelight_state == 0) {
+        //if (limelight_state == 0) {
             table->PutNumber("ledMode", LimelightConstants::LED_MODE_ON);
             table->PutNumber("camMode", LimelightConstants::TRACK_MODE_ON);
             limelight_state = 1;
-        }
+        //}
 
         // Limelight has target, track and move robot
         if (tv == 1)
@@ -195,11 +195,11 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
 
         // Check state of limelight
         // If previously was on, turn off LED and stop tracking
-        if (limelight_state == 1) {
+       // if (limelight_state == 1) {
             table->PutNumber("ledMode", LimelightConstants::LED_MODE_OFF);
             table->PutNumber("camMode", LimelightConstants::TRACK_MODE_OFF);
             limelight_state = 0;
-        }
+        //}
     }
   
     m_leftPIDController.SetReference(straightTarget - turnTarget, rev::ControlType::kVelocity);
