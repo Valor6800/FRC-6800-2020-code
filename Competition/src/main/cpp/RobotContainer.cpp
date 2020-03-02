@@ -19,8 +19,8 @@ RobotContainer::RobotContainer() {
     // m_arm.SetDefaultCommand(ArmManual(m_arm, 
     //     [this] { return m_GamepadOperator.GetY(frc::GenericHID::kLeftHand); }));
 
-    // m_lift.SetDefaultCommand(Climb(m_lift, 
-    //     [this] { return m_GamepadOperator.GetY(frc::GenericHID::kRightHand); }));
+    m_lift.SetDefaultCommand(Climb(m_lift, 
+        [this] { return m_GamepadOperator.GetY(frc::GenericHID::kRightHand); }));
 
     // Configure the button bindings
     ConfigureButtonBindings();

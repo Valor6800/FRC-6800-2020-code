@@ -26,6 +26,7 @@ class Lift : public frc2::SubsystemBase {
 
     void SetLiftPower(double power);
     void Periodic() override;
+    void LiftDrive(double stickInput);
 
     void LockRatchet();
     void UnlockRatchet();

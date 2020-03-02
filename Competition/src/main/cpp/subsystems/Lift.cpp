@@ -19,6 +19,7 @@ void Lift::Periodic() {
 }
 
 void Lift::SetLiftPower(double power) {
+    //liftMtrs.Set(power);
     liftMtrLeft.Set(power);
     liftMtrRight.Set(power);
 }
@@ -32,4 +33,15 @@ void Lift::LockRatchet() {
 void Lift::UnlockRatchet() {
     ratchetServoLeft.Set(0.65);
     ratchetServoRight.Set(0.63);
+}
+
+void Lift::LiftDrive(double stickInput) {
+    if (std::abs(stickInput) > LiftConstants::kDeadbandY) {
+        liftMtrLeft.Set(-stickInput);
+        liftMtrRight.Set(stickInput);
+    }
+    else {
+        liftMtrLeft.Set(0);
+        liftMtrRight.Set(0);
+    }
 }
