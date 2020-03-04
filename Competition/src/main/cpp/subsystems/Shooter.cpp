@@ -15,7 +15,7 @@ Shooter& Shooter::GetInstance()
 }
 
 void Shooter::Periodic() {
-  frc::SmartDashboard::PutNumber("hood potentiometer", hoodPotentiometer.);
+  frc::SmartDashboard::PutNumber("hood potentiometer", hoodPotentiometer.Get());
 }
 
 void Shooter::InitShooter(rev::CANSparkMax::IdleMode idleMode) {
@@ -46,4 +46,12 @@ void Shooter::RetractHood() {
 void Shooter::StopHood() {
     hoodServoLeft.SetRaw(999);
     hoodServoRight.SetRaw(999);
+}
+
+bool Shooter::HoodExtended() {
+    return hoodPotentiometer.Get() <= 0.725;
+}
+
+bool Shooter::HoodRetracted() {
+    return hoodPotentiometer.Get() >= 0.785;
 }

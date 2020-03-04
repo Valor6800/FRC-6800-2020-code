@@ -3,6 +3,7 @@
 #include <frc2/command/Command.h>
 #include <frc2/command/CommandScheduler.h>
 #include <frc/XboxController.h>
+#include <frc2/command/ParallelRaceGroup.h>
 #include <frc2/command/button/JoystickButton.h>
 #include <frc2/command/InstantCommand.h>
 #include <frc/smartdashboard/SendableChooser.h>

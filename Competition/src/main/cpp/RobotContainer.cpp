@@ -64,10 +64,8 @@ void RobotContainer::ConfigureButtonBindings() {
 
     // operator_b.WhenPressed(frc2::InstantCommand([&] { m_lift.LockRatchet(); }));
 
-    operator_a.WhenPressed(frc2::InstantCommand([&] { m_shooter.ExtendHood(); }));
-    operator_a.WhenReleased(frc2::InstantCommand([&] { m_shooter.StopHood(); }));
-    operator_b.WhenPressed(frc2::InstantCommand([&] { m_shooter.RetractHood(); }));
-    operator_b.WhenReleased(frc2::InstantCommand([&] { m_shooter.StopHood(); }));    
+    operator_a.WhenPressed(frc2::InstantCommand([&] { m_shooter.ExtendHood(); }).WithInterrupt([&] { return m_shooter.HoodExtended(); }).AndThen([&] { m_shooter.StopHood(); }));
+    operator_b.WhenPressed(frc2::InstantCommand([&] { m_shooter.RetractHood(); }).WithInterrupt([&] { return m_shooter.HoodRetracted(); }).AndThen([&] { m_shooter.StopHood(); }));    
     // operator_y.WhenPressed(frc2::InstantCommand([&] { m_muncher.SetMunchPower(1); }, {&m_muncher}));
     // operator_y.WhenPressed(frc2::InstantCommand([&] { m_muncher.SetMunchPower(0); }, {&m_muncher}));
 }

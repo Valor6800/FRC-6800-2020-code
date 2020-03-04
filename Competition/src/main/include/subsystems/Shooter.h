@@ -33,6 +33,8 @@ class Shooter : public frc2::SubsystemBase {
     void ExtendHood();
     void RetractHood();
     void StopHood();
+    bool HoodExtended();
+    bool HoodRetracted();
     
  private:
     rev::CANSparkMax shootMtrLeft;
