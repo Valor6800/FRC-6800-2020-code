@@ -36,3 +36,26 @@ void Shooter::SetShooterPower(double power) {
 double Shooter::GetShooterNTPower() {
     return shooterPow;
 }
+
+void Shooter::ExtendHood() {
+    hoodServoLeft.SetRaw(1899);
+    hoodServoRight.SetRaw(99);
+}
+
+void Shooter::RetractHood() {
+    hoodServoLeft.SetRaw(99);
+    hoodServoRight.SetRaw(1899);
+}
+
+void Shooter::StopHood() {
+    hoodServoLeft.SetRaw(999);
+    hoodServoRight.SetRaw(999);
+}
+
+bool Shooter::HoodExtended() {
+    return hoodPotentiometer.Get() <= 0.725;
+}
+
+bool Shooter::HoodRetracted() {
+    return hoodPotentiometer.Get() >= 0.785;
+}
