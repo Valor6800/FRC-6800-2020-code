@@ -15,6 +15,7 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include "networktables/NetworkTable.h"
 #include <frc/livewindow/LiveWindow.h>
+#include <frc/AnalogPotentiometer.h>
 
 #ifndef SHOOTER_H
 #define SHOOTER_H
@@ -29,6 +30,12 @@ class Shooter : public frc2::SubsystemBase {
     void Periodic() override;
     void InitShooter(rev::CANSparkMax::IdleMode idleMode);
     double GetShooterNTPower();
+
+    void ExtendHood();
+    void RetractHood();
+    void StopHood();
+    bool HoodExtended();
+    bool HoodRetracted();
     
  private:
     rev::CANSparkMax shootMtrLeft;
@@ -37,8 +44,10 @@ class Shooter : public frc2::SubsystemBase {
     
     frc::SpeedControllerGroup shootMtrs{shootMtrLeft, shootMtrRight};
     
+    frc::Servo hoodServoLeft;
+    frc::Servo hoodServoRight;
 
-    frc::Servo hood;
+    frc::AnalogPotentiometer hoodPotentiometer;
     nt::NetworkTableEntry shooterPower;
 
    double shooterPow;
