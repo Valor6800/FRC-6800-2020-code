@@ -41,8 +41,9 @@
 #define kMaxAccel 1500
 #define kAllError 0
 #define kDeadband 0.05
-#define kDeadbandY 0.02
-#define kDeadbandX 0.02
+// changed x and y deadband to .05 for testing
+#define kDeadbandY 0.05
+#define kDeadbandX 0.05
 #define kDriveMultiplierX 0.5
 #define kDriveMultiplierY 1
 #define kDriveOffset 1

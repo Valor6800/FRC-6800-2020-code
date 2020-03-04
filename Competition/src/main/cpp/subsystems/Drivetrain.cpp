@@ -201,9 +201,15 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
             limelight_state = 0;
         //}
     }
-  
-    m_leftPIDController.SetReference(straightTarget - turnTarget, rev::ControlType::kVelocity);
-    m_rightPIDController.SetReference(straightTarget + turnTarget, rev::ControlType::kVelocity);
+    if (std::abs(straightTarget) < kDeadbandY && std::abs(turnTarget) < kDeadbandX) {
+        m_leftDriveLead.Set(0);
+        m_rightDriveLead.Set(0);
+    }
+    else {
+        m_leftPIDController.SetReference(straightTarget - turnTarget, rev::ControlType::kVelocity);
+        m_rightPIDController.SetReference(straightTarget + turnTarget, rev::ControlType::kVelocity);
+    }
+    
 
     frc::SmartDashboard::PutNumber("TurnVelocity", turnTarget);
     frc::SmartDashboard::PutNumber("ForwardVelocity", straightTarget);
