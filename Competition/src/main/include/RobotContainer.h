@@ -58,12 +58,12 @@ class RobotContainer {
    Lift& m_lift = Lift::GetInstance();
    Muncher& m_muncher = Muncher::GetInstance();
 
-   //HomeTrenchAuto m_homeTrenchAuto;
+   HomeTrenchAuto m_homeTrenchAuto;
    TenBallAuto m_tenBallAuto;
 
    Trajectories m_trajectories;
 
-   frc::SendableChooser<frc2::Command*> chooser; // Give options for autonomous actions
+   frc::SendableChooser<frc2::Command*> m_chooser; // Give options for autonomous actions
    std::string selectedAuto;
    nt::NetworkTableEntry shooterPower;
 

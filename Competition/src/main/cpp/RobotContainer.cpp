@@ -11,8 +11,6 @@
 
 RobotContainer::RobotContainer() {
 
-    
-
     m_drivetrain.SetDefaultCommand(DriveManual(m_drivetrain,
         [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kLeftHand); },
         [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kRightHand); },
@@ -24,6 +22,10 @@ RobotContainer::RobotContainer() {
 
     m_lift.SetDefaultCommand(Climb(m_lift, 
         [this] { return m_GamepadDriver.GetY(frc::GenericHID::kRightHand); }));
+
+    m_chooser.AddOption("TenBallAuto", &m_tenBallAuto);
+    m_chooser.AddOption("EightBallAuto", &m_homeTrenchAuto);
+    frc::SmartDashboard::PutData("SelectCommand", &m_chooser);
 
     // Configure the button bindings
     ConfigureButtonBindings();
@@ -142,6 +144,6 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
 
     */
 
-   return &m_tenBallAuto;
+   return m_chooser.GetSelected();
 
 }
