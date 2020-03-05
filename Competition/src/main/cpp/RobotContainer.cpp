@@ -78,8 +78,8 @@ void RobotContainer::ConfigureButtonBindings() {
     driver_leftBumper.WhenPressed(frc2::InstantCommand([&] { m_intake.SetIntakePower(0.8); m_hopper.SetHopperPower(1); }));
     driver_leftBumper.WhenReleased(frc2::InstantCommand([&] { m_intake.SetIntakePower(0); m_hopper.SetHopperPower(0); }));
 
-    operator_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(m_shooter.GetShooterNTPower()); }, {&m_shooter}));
-    operator_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
+    operator_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(m_shooter.GetShooterNTPower()); m_shooter.SetHoodTarget(0.715); }, {&m_shooter}));
+    operator_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); m_shooter.SetHoodTarget(0.8); }, {&m_shooter}));
 
     // driver_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(1); }, {&m_shooter}));
     // driver_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); }, {&m_shooter}));
@@ -95,10 +95,14 @@ void RobotContainer::ConfigureButtonBindings() {
     // operator_a.WhenPressed(frc2::InstantCommand([&] { m_shooter.ExtendHood(); }).WithInterrupt([&] { return m_shooter.HoodExtended(); }).AndThen([&] { m_shooter.StopHood(); }));
     // operator_b.WhenPressed(frc2::InstantCommand([&] { m_shooter.RetractHood(); }).WithInterrupt([&] { return m_shooter.HoodRetracted(); }).AndThen([&] { m_shooter.StopHood(); }));
 
-    operator_a.WhenPressed(frc2::InstantCommand([&] { m_shooter.ExtendHood(); }));
-    operator_a.WhenReleased(frc2::InstantCommand([&] { m_shooter.StopHood(); }));
-    operator_b.WhenPressed(frc2::InstantCommand([&] { m_shooter.RetractHood(); }));
-    operator_b.WhenReleased(frc2::InstantCommand([&] { m_shooter.StopHood(); }));
+    operator_a.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetHoodTarget(0.715); }));
+    operator_b.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetHoodTarget(0.8); }));
+    //operator_a.WhenReleased(frc2::InstantCommand([&] { m_shooter.StopHood(); }));
+
+    // operator_x.WhenPressed(frc2::InstantCommand([&] { m_shooter.ExtendHood(); }));
+    // operator_x.WhenReleased(frc2::InstantCommand([&] { m_shooter.StopHood(); }));
+    // operator_b.WhenPressed(frc2::InstantCommand([&] { m_shooter.RetractHood(); }));
+    // operator_b.WhenReleased(frc2::InstantCommand([&] { m_shooter.StopHood(); }));
     
 }
 

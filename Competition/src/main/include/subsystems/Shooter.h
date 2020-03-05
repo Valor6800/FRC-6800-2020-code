@@ -36,6 +36,8 @@ class Shooter : public frc2::SubsystemBase {
     void StopHood();
     bool HoodExtended();
     bool HoodRetracted();
+    void SetExtending();
+    void SetHoodTarget(double target);
     
  private:
     rev::CANSparkMax shootMtrLeft;
@@ -49,6 +51,14 @@ class Shooter : public frc2::SubsystemBase {
 
     frc::AnalogPotentiometer hoodPotentiometer;
     nt::NetworkTableEntry shooterPower;
+    nt::NetworkTableEntry potentiometerBoolean;
+
+    double hoodTarget;
+
+    bool retracting;
+    bool extending;
+
+    double deadzone;
 
    double shooterPow;
 
