@@ -67,7 +67,7 @@ namespace RamseteConstants {
 
 namespace ArmConstants {
 
-    constexpr static int TALON_ID_LEFT_ARM = 6;
+    constexpr static int TALON_ID_LEFT_ARM = 8;
     constexpr static int TALON_ID_RIGHT_ARM = 1;
 
 }
