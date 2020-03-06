@@ -52,6 +52,9 @@ void Drivetrain::InitDrives(rev::CANSparkMax::IdleMode idleMode) {
     m_rightDriveFollowA.SetIdleMode(idleMode);
     m_rightDriveFollowB.SetIdleMode(idleMode);
 
+    m_leftDriveLead.Follow(rev::CANSparkMax::kFollowerDisabled, 0);
+    m_rightDriveLead.Follow(rev::CANSparkMax::kFollowerDisabled, 0);
+
     m_leftDriveFollowA.Follow(m_leftDriveLead);
     m_leftDriveFollowB.Follow(m_leftDriveLead);
 
