@@ -14,10 +14,11 @@ class Intake : public frc2::SubsystemBase {
     Intake();
 
     static Intake& GetInstance();
-
-    void SetIntakePower(double power);
+    void InitIntake();
 
     void Periodic() override;
+
+    void SetIntakePower(double power);
 
  private:
 

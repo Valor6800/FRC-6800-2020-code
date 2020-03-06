@@ -28,41 +28,25 @@
 #ifndef DRIVETRAIN_H
 #define DRIVETRAIN_H
 
-#define kP -0.01f
-#define kI 0
-#define kD 0
-#define kIz 0
-#define kFF 1.0/MaxRPM
-#define MaxRPM 5700
-#define kMaxOutput 1.0
-#define kMinOutput -1.0
-#define kMaxVel 1000
-#define kMinVel 0
-#define kMaxAccel 1500
-#define kAllError 0
-#define kDeadband 0.05
-// changed x and y deadband to .05 for testing
-#define kDeadbandY 0.05
-#define kDeadbandX 0.05
-#define kDriveMultiplierX 0.5
-#define kDriveMultiplierY 1
-#define kDriveOffset 1
-
-class Drivetrain : public frc2::SubsystemBase{
+class Drivetrain : public frc2::SubsystemBase {
  public:
 
     Drivetrain();
 
     static Drivetrain& GetInstance();
+    void InitDrivetrain();
 
     void Periodic() override;
+
+    void RocketLeagueDrive(double straightInput, double reverseInput, double turnInput, bool limelightInput);
+    void SetMultiplier(double multiplier);
+    void TankDriveVolts(units::volt_t leftVolts, units::volt_t rightVolts);
+    void ArcadeDrive(double leftInput, double rightInput);
     
-    void InitDrives(rev::CANSparkMax::IdleMode idleMode);
     void ResetEncoders();
     void ResetOdometry(frc::Pose2d pose);
     void ResetIMU();
-    rev::CANEncoder& GetLeftEncoder();
-    rev::CANEncoder& GetRightEncoder();
+
     double GetEncAvgDistance();
     units::meter_t GetLeftDistance();
     units::meter_t GetRightDistance();
@@ -71,16 +55,7 @@ class Drivetrain : public frc2::SubsystemBase{
     frc::Pose2d GetPose();
     frc::DifferentialDriveWheelSpeeds GetWheelSpeeds();
 
-    //frc::TrajectoryConfig& GetTrajConfigRef();
-
-    void TankDriveVolts(units::volt_t leftVolts, units::volt_t rightVolts);
-    void ArcadeDrive(double leftInput, double rightInput);
-    void RocketLeagueDrive(double straightInput, double reverseInput, double turnInput, bool limelightInput);
-
-    void SetMultiplier(double multiplier);
     void Stop();
-
-    double boostMultiplier;
 
     frc::DifferentialDriveKinematics kDriveKinematics;
     frc::SimpleMotorFeedforward<units::meters> kSimpleMotorFeedforward;
@@ -105,11 +80,6 @@ class Drivetrain : public frc2::SubsystemBase{
     rev::CANEncoder m_leftEncoder = m_leftDriveLead.GetEncoder();
     rev::CANEncoder m_rightEncoder = m_rightDriveLead.GetEncoder();
 
-   //  frc::SpeedControllerGroup leftDrive{m_leftDriveLead, m_leftDriveFollowA, m_leftDriveFollowB};
-   //  frc::SpeedControllerGroup rightDrive{m_rightDriveLead, m_rightDriveFollowA, m_rightDriveFollowB};
-
-   //  frc::DifferentialDrive drive{leftDrive, rightDrive};
-
     frc::DifferentialDriveOdometry m_odometry;
 
     double directionY;
@@ -119,7 +89,9 @@ class Drivetrain : public frc2::SubsystemBase{
     double turnValue;
     double turnTarget;
 
-    int limelight_state;
+    double boostMultiplier;
+
+    int limelightState;
 
 };
 

@@ -1,14 +1,15 @@
 #include "subsystems/Intake.h"
 
-
-
-Intake::Intake() : intakeMtr{IntakeConstants::VICTOR_ID_INTAKE} {
-    //intakeMtr.SetInverted();
+Intake::Intake() : intakeMtr{IntakeConstants::PWM_ID_INTAKE} {
+    InitIntake();
 }
 
-Intake& Intake::GetInstance()
-{
-    static Intake instance; // Guaranteed to be destroyed. Instantiated on first use.
+void Intake::InitIntake() {
+    intakeMtr.SetInverted(false);
+}
+
+Intake& Intake::GetInstance() {
+    static Intake instance;
     return instance;
 }
 

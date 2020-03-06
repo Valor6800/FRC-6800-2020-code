@@ -1,13 +1,17 @@
 #include "subsystems/Arm.h"
 
-Arm::Arm() : leftArmMtr{ArmConstants::TALON_ID_LEFT_ARM}, rightArmMtr{ArmConstants::TALON_ID_RIGHT_ARM} {
-    
+Arm::Arm() : leftArmMtr{ArmConstants::TALON_ID_LEFT_ARM}, 
+             rightArmMtr{ArmConstants::TALON_ID_RIGHT_ARM} {
+    InitArm();   
 }
 
-Arm& Arm::GetInstance()
-{
-    static Arm instance; // Guaranteed to be destroyed. Instantiated on first use.
+Arm& Arm::GetInstance() {
+    static Arm instance;
     return instance;
+}
+
+void Arm::InitArm() {
+
 }
 
 void Arm::Periodic() {

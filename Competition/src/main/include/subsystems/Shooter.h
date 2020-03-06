@@ -22,26 +22,27 @@
 
 class Shooter : public frc2::SubsystemBase {
  public:
+
     Shooter();
 
     static Shooter& GetInstance();
+    void InitShooter();
 
-    void SetShooterPower(double power);
     void Periodic() override;
-    void InitShooter(rev::CANSparkMax::IdleMode idleMode);
+    
+    void SetShooterPower(double power);
+    
     double GetShooterNTPower();
 
     void ExtendHood();
     void RetractHood();
     void StopHood();
-    bool HoodExtended();
-    bool HoodRetracted();
-    void SetExtending();
+
     void SetHoodTarget(double target);
     
  private:
+
     rev::CANSparkMax shootMtrLeft;
-    // 8 is good
     rev::CANSparkMax shootMtrRight;
     
     frc::SpeedControllerGroup shootMtrs{shootMtrLeft, shootMtrRight};
@@ -55,12 +56,11 @@ class Shooter : public frc2::SubsystemBase {
 
     double hoodTarget;
 
-    bool retracting;
     bool extending;
 
     double deadzone;
 
-   double shooterPow;
+    double shooterPow;
 
 };
 

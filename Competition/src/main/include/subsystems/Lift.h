@@ -4,6 +4,15 @@
 #include <frc/PWMVictorSPX.h>
 #include <frc/SpeedControllerGroup.h>
 #include "Constants.h"
+#include <frc/Servo.h>
+#include <frc/shuffleboard/Shuffleboard.h>
+#include <frc/shuffleboard/ShuffleboardLayout.h>
+#include <frc/shuffleboard/ShuffleboardTab.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include "networktables/NetworkTable.h"
+#include <frc/livewindow/LiveWindow.h>
 
 #ifndef LIFT_H
 #define LIFT_H
@@ -14,16 +23,27 @@ class Lift : public frc2::SubsystemBase {
     Lift();
 
     static Lift& GetInstance();
+    void InitLift();
+
+    void Periodic() override;
+
+    void LiftDrive(double stickInput);
 
     void SetLiftPower(double power);
-    void Periodic() override;
+
+    void UnlockRatchet();
+    void LockRatchet();
+    
 
  private:
 
-    frc::PWMVictorSPX liftMtrA;
-    //frc::PWMVictorSPX liftMtrB;
+    frc::PWMVictorSPX liftMtrLeft;
+    frc::PWMVictorSPX liftMtrRight;
 
-    //frc::SpeedControllerGroup liftMtrs{liftMtrA, liftMtrB};
+    frc::SpeedControllerGroup liftMtrs{liftMtrLeft, liftMtrRight};
+
+    frc::Servo ratchetServoLeft;
+    frc::Servo ratchetServoRight;
 
 };
 

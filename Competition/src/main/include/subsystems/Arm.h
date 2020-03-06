@@ -11,17 +11,16 @@
 #ifndef ARM_H
 #define ARM_H
 
-class Arm/* : public frc2::ProfiledPIDSubsystem<units::degrees>*/ : public frc2::SubsystemBase {
-    //using State = frc::TrapezoidProfile<units::degrees>::State;
+class Arm : public frc2::SubsystemBase {
   public:
+
      Arm();
 
      static Arm& GetInstance();
-
-    //  void UseOutput(double output, State setpoint) override;
-    //  units::degree_t GetMeasurement() override;
+     void InitArm();
 
      void Periodic() override;
+
      void SetArmPower(double power);
 
  private:
@@ -30,11 +29,7 @@ class Arm/* : public frc2::ProfiledPIDSubsystem<units::degrees>*/ : public frc2:
      frc::PWMVictorSPX leftArmMtr;
      frc::PWMVictorSPX rightArmMtr;
 
-     // 2 servos
-
      frc::SpeedControllerGroup armMtrs{leftArmMtr, rightArmMtr};
-
-    // add 2 encoders for arm
 
 };
 
