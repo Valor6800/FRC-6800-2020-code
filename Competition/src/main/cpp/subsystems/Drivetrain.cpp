@@ -45,6 +45,13 @@ void Drivetrain::Periodic() {
 }
 
 void Drivetrain::InitDrives(rev::CANSparkMax::IdleMode idleMode) {
+    m_leftDriveLead.RestoreFactoryDefaults();
+    m_leftDriveFollowA.RestoreFactoryDefaults();
+    m_leftDriveFollowB.RestoreFactoryDefaults();
+    m_rightDriveLead.RestoreFactoryDefaults();
+    m_rightDriveFollowA.RestoreFactoryDefaults();
+    m_rightDriveFollowB.RestoreFactoryDefaults();
+
     m_leftDriveLead.SetIdleMode(idleMode);
     m_leftDriveFollowA.SetIdleMode(idleMode);
     m_leftDriveFollowB.SetIdleMode(idleMode);
