@@ -17,10 +17,10 @@ RobotContainer::RobotContainer() {
         [this] { return m_GamepadDriver.GetYButton(); }));
 
     m_arm.SetDefaultCommand(ArmManual(m_arm, 
-        [this] { return m_GamepadDriver.GetY(frc::GenericHID::kLeftHand); }));
+        [this] { return m_GamepadOperator.GetY(frc::GenericHID::kLeftHand); }));
 
     m_lift.SetDefaultCommand(Climb(m_lift, 
-        [this] { return m_GamepadDriver.GetY(frc::GenericHID::kRightHand); }));
+        [this] { return m_GamepadOperator.GetY(frc::GenericHID::kRightHand); }));
 
     // Configure the button bindings
     ConfigureButtonBindings();

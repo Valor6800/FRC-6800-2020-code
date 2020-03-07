@@ -7,6 +7,7 @@
 #include <frc/SpeedControllerGroup.h>
 #include <frc/PWMVictorSPX.h>
 #include <units/units.h>
+#include <ctre/Phoenix.h>
 
 #ifndef ARM_H
 #define ARM_H
@@ -21,20 +22,17 @@ class Arm/* : public frc2::ProfiledPIDSubsystem<units::degrees>*/ : public frc2:
     //  void UseOutput(double output, State setpoint) override;
     //  units::degree_t GetMeasurement() override;
 
+     void InitArm();
+
      void Periodic() override;
      void SetArmPower(double power);
 
  private:
 
      // talons
-     frc::PWMVictorSPX leftArmMtr;
-     frc::PWMVictorSPX rightArmMtr;
+     TalonSRX armMtrLeft;
+     TalonSRX armMtrRight;
 
-     // 2 servos
-
-     frc::SpeedControllerGroup armMtrs{leftArmMtr, rightArmMtr};
-
-    // add 2 encoders for arm
 
 };
 
