@@ -76,4 +76,8 @@ TenBallAuto::TenBallAuto() {
                                         {&Drivetrain::GetInstance()});
 
     AddCommands(std::move(ramseteCommand1), std::move(ramseteCommand2), std::move(ramseteCommand3), std::move(ramseteCommand4), std::move(ramseteCommand5), std::move(ramseteCommand6));
+
+    // AddCommands(frc2::ParallelCommandGroup(
+    //     frc2::SequentialCommandGroup(std::move(ramseteCommand1), std::move(ramseteCommand2), std::move(ramseteCommand3), std::move(ramseteCommand4), std::move(ramseteCommand5), std::move(ramseteCommand6)),
+    //     frc2::RunCommand([&] { m_intake.SetIntakePower(0.8); }) ));
 }
