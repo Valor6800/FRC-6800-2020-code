@@ -10,9 +10,6 @@
 #include "commands/Munch.h"
 
 RobotContainer::RobotContainer() {
-
-    
-
     m_drivetrain.SetDefaultCommand(DriveManual(m_drivetrain,
         [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kLeftHand); },
         [this] { return m_GamepadDriver.GetTriggerAxis(frc::GenericHID::kRightHand); },
@@ -30,8 +27,6 @@ RobotContainer::RobotContainer() {
 }
 
 void RobotContainer::ConfigureButtonBindings() {
-
-    
 
     frc2::JoystickButton driver_rightBumper{&m_GamepadDriver, 6};
     frc2::JoystickButton driver_leftBumper{&m_GamepadDriver, 5};
@@ -92,17 +87,10 @@ void RobotContainer::ConfigureButtonBindings() {
     operator_y.WhenPressed(frc2::InstantCommand([&] { m_muncher.SetMunchPower(1); }, {&m_muncher}));
     operator_y.WhenPressed(frc2::InstantCommand([&] { m_muncher.SetMunchPower(0); }, {&m_muncher}));
 
-    // operator_a.WhenPressed(frc2::InstantCommand([&] { m_shooter.ExtendHood(); }).WithInterrupt([&] { return m_shooter.HoodExtended(); }).AndThen([&] { m_shooter.StopHood(); }));
-    // operator_b.WhenPressed(frc2::InstantCommand([&] { m_shooter.RetractHood(); }).WithInterrupt([&] { return m_shooter.HoodRetracted(); }).AndThen([&] { m_shooter.StopHood(); }));
 
-    operator_a.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetHoodTarget(0.715); }));
-    operator_b.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetHoodTarget(0.8); }));
-    //operator_a.WhenReleased(frc2::InstantCommand([&] { m_shooter.StopHood(); }));
-
-    // operator_x.WhenPressed(frc2::InstantCommand([&] { m_shooter.ExtendHood(); }));
-    // operator_x.WhenReleased(frc2::InstantCommand([&] { m_shooter.StopHood(); }));
-    // operator_b.WhenPressed(frc2::InstantCommand([&] { m_shooter.RetractHood(); }));
-    // operator_b.WhenReleased(frc2::InstantCommand([&] { m_shooter.StopHood(); }));
+    
+    operator_a.WhenPressed(frc2::InstantCommand([&] { m_lift.UnlockRatchet(); }));
+    operator_b.WhenPressed(frc2::InstantCommand([&] { m_lift.LockRatchet(); }));
     
 }
 
