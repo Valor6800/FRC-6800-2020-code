@@ -22,10 +22,22 @@ void Arm::InitArm() {
 }
 
 void Arm::Periodic() {
-  
+    frc::SmartDashboard::PutNumber("arm applied power", appliedPow);
 }
 
 void Arm::SetArmPower(double power) {
-    armMtrLeft.Set(ControlMode::PercentOutput, power * 0.25);
-    armMtrRight.Set(ControlMode::PercentOutput, power * 0.25);
+    if (std::abs(power) <= 0.05) {
+        armMtrLeft.Set(ControlMode::PercentOutput, 0);
+        armMtrRight.Set(ControlMode::PercentOutput, 0);
+    } else if (power < -.05) {
+        armMtrLeft.Set(ControlMode::PercentOutput, -0.5);
+        armMtrRight.Set(ControlMode::PercentOutput, -0.5);
+    } else if (power > .05 && power < 0.85) {
+        armMtrLeft.Set(ControlMode::PercentOutput, -0.042);
+        armMtrRight.Set(ControlMode::PercentOutput, -0.042);
+    } else {
+        armMtrLeft.Set(ControlMode::PercentOutput, 0.1);
+        armMtrRight.Set(ControlMode::PercentOutput, 0.1);
+    }
+    appliedPow = power;
 }

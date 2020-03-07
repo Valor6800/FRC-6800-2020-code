@@ -9,6 +9,15 @@
 #include <units/units.h>
 #include <ctre/Phoenix.h>
 
+#include <frc/shuffleboard/Shuffleboard.h>
+#include <frc/shuffleboard/ShuffleboardLayout.h>
+#include <frc/shuffleboard/ShuffleboardTab.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include "networktables/NetworkTable.h"
+#include <frc/livewindow/LiveWindow.h>
+
 #ifndef ARM_H
 #define ARM_H
 
@@ -33,6 +42,7 @@ class Arm/* : public frc2::ProfiledPIDSubsystem<units::degrees>*/ : public frc2:
      TalonSRX armMtrLeft;
      TalonSRX armMtrRight;
 
+     double appliedPow;
 
 };
 

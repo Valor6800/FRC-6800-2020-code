@@ -81,14 +81,15 @@ namespace RamseteConstants {
     constexpr double kPDriveVel = 3.09;
 
     constexpr units::length::meter_t  kStartPos = 4.9_m;
+    //constexpr units::deg_t kStartAngularOffset = 15_deg;
     constexpr units::length::meter_t  kCenterline = 0.94_m;
 
 }
 
 namespace ArmConstants {
 
-    constexpr static int TALON_ID_LEFT_ARM = 10;
-    constexpr static int TALON_ID_RIGHT_ARM = 9;
+    constexpr static int TALON_ID_LEFT_ARM = 9;
+    constexpr static int TALON_ID_RIGHT_ARM = 10;
 
 }
 

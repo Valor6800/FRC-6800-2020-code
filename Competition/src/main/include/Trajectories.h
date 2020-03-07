@@ -25,6 +25,10 @@ class Trajectories {
         ValorTrajectory TBpath5;
         ValorTrajectory TBpath6;
 
+        std::vector<ValorTrajectory> sixBallPath;
+        ValorTrajectory SBpath1;
+        ValorTrajectory SBpath2;
+
     private:
         
 };
