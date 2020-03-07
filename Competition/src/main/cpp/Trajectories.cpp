@@ -1,6 +1,25 @@
 #include "Trajectories.h"
 
 Trajectories::Trajectories() {
+    SBpath1.action = ValorTrajectory::Path;
+    SBpath2.action = ValorTrajectory::Path;
+
+    SBpath1.trajectory = frc::TrajectoryGenerator::GenerateTrajectory(frc::Pose2d(0_m, 0_m, frc::Rotation2d(0_deg)),
+                                                                      {},
+                                                                      frc::Pose2d(5_m, 0.2_m, frc::Rotation2d(-15_deg)),
+                                                                      Drivetrain::GetInstance().kTrajectoryConfigF);
+
+    SBpath2.trajectory = frc::TrajectoryGenerator::GenerateTrajectory(frc::Pose2d(5_m, 0.2_m, frc::Rotation2d(-15_deg)),
+                                                                      {},
+                                                                      frc::Pose2d(0_m, 0_m, frc::Rotation2d(0_deg)),
+                                                                      Drivetrain::GetInstance().kTrajectoryConfigR);
+    sixBallPath.push_back(SBpath1);
+    sixBallPath.push_back(SBpath2);
+
+    autos.insert({"SixBallAuto", sixBallPath});
+
+
+
     EBpath1.action = ValorTrajectory::Path;
     EBpath1.trajectory = frc::TrajectoryGenerator::GenerateTrajectory(frc::Pose2d(0_m,0_m,frc::Rotation2d(0_deg)),
                                                                       { frc::Translation2d(1_m, -0.5_m) },
@@ -18,6 +37,7 @@ Trajectories::Trajectories() {
     TBpath4.action = ValorTrajectory::Path;
     TBpath5.action = ValorTrajectory::Path;
     TBpath6.action = ValorTrajectory::Path;
+
 
     // const std::vector<frc::Pose2d> Auto3Traj1Poses = {frc::Pose2d(0_m,0_m,frc::Rotation2d(0_deg)),frc::Pose2d(3.7_m,(-7.64_m  + kStartPos),frc::Rotation2d(-60_deg))};
 //         //return

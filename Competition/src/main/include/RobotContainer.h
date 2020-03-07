@@ -32,6 +32,7 @@
 
 #include "commands/Auto/HomeTrenchAuto.h"
 #include "commands/Auto/TenBallAuto.h"
+#include "commands/Auto/SixBallAuto.h"
 
 #include <vector>
 #include "ValorTrajectory.h"
@@ -60,6 +61,7 @@ class RobotContainer {
 
    //HomeTrenchAuto m_homeTrenchAuto;
    TenBallAuto m_tenBallAuto;
+   SixBallAuto m_sixBallAuto;
 
    Trajectories m_trajectories;
 
