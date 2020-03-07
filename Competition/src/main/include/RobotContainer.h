@@ -61,7 +61,7 @@ class RobotContainer {
 
    //HomeTrenchAuto m_homeTrenchAuto;
    TenBallAuto m_tenBallAuto;
-   SixBallAuto m_sixBallAuto;
+   //SixBallAuto m_sixBallAuto;
 
    Trajectories m_trajectories;
 

@@ -129,6 +129,7 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
 
     */
 
-   return &m_sixBallAuto;
+   //return &m_sixBallAuto;
+   return &m_tenBallAuto;
 
 }
