@@ -75,9 +75,32 @@ TenBallAuto::TenBallAuto() {
                                         [&] (auto left, auto right) { m_drivetrain.TankDriveVolts(left, right); },
                                         {&Drivetrain::GetInstance()});
 
+<<<<<<< HEAD
     AddCommands(std::move(ramseteCommand1), std::move(ramseteCommand2), std::move(ramseteCommand3), std::move(ramseteCommand4), std::move(ramseteCommand5), std::move(ramseteCommand6));
 
     // AddCommands(frc2::ParallelCommandGroup(
     //     frc2::SequentialCommandGroup(std::move(ramseteCommand1), std::move(ramseteCommand2), std::move(ramseteCommand3), std::move(ramseteCommand4), std::move(ramseteCommand5), std::move(ramseteCommand6)),
     //     frc2::RunCommand([&] { m_intake.SetIntakePower(0.8); }) ));
+=======
+     // AddCommands(frc2::ParallelCommandGroup(
+    //     frc2::SequentialCommandGroup(std::move(ramseteCommand1), std::move(ramseteCommand2), std::move(ramseteCommand3), std::move(ramseteCommand4), std::move(ramseteCommand5), std::move(ramseteCommand6)),
+    //     frc2::RunCommand([&] { m_intake.SetIntakePower(1); }) ));
+
+    AddCommands(frc2::SequentialCommandGroup(
+                    frc2::ParallelCommandGroup(std::move(ramseteCommand1), frc2::RunCommand([&] { m_intake.SetIntakePower(1); }).WithTimeout(2_s)), 
+                    std::move(ramseteCommand2),
+                    frc2::ParallelCommandGroup(std::move(ramseteCommand3), frc2::RunCommand([&] { m_intake.SetIntakePower(1); }).WithTimeout(2_s)), 
+                    std::move(ramseteCommand4),
+                    frc2::ParallelCommandGroup(std::move(ramseteCommand5), frc2::RunCommand([&] { m_intake.SetIntakePower(1); }).WithTimeout(2_s)), 
+                    std::move(ramseteCommand6))
+               );
+    // AddCommands(frc2::SequentialCommandGroup(
+    //                 frc2::ParallelCommandGroup(std::move(ramseteCommand1), frc2::RunCommand([&] { m_intake.SetIntakePower(1); })), 
+    //                 frc2::ParallelCommandGroup(std::move(ramseteCommand2), frc2::RunCommand([&] { m_shooter.SetShooterPower(0.8); m_shooter.SetHoodTarget(0.715); }),
+    //                 frc2::ParallelCommandGroup(std::move(ramseteCommand3), frc2::RunCommand([&] { m_intake.SetIntakePower(1); })), 
+    //                 std::move(ramseteCommand4),
+    //                 frc2::ParallelCommandGroup(std::move(ramseteCommand5), frc2::RunCommand([&] { m_intake.SetIntakePower(1); })), 
+    //                 std::move(ramseteCommand6))
+    //            );
+>>>>>>> added cancelling auto command in disabled init,halfed speed&acceleration in second to last trajectory config in ten ball auto, added intaking in auto, changed ramsete constants and max accel
 }

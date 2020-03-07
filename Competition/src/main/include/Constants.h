@@ -62,7 +62,7 @@ namespace DriveConstants {
 namespace RamseteConstants {
 
     constexpr auto kMaxSpeed = 4.4_mps; // 4_mps
-    constexpr auto kMaxAcceleration = 4_mps_sq; //4_mps_sq;
+    constexpr auto kMaxAcceleration = 3.5_mps_sq; //4_mps_sq;
 
     constexpr double kRamseteB = 2;
     constexpr double kRamseteZeta = 0.7;
@@ -74,11 +74,11 @@ namespace RamseteConstants {
 
     constexpr bool kGyroReversed = true;
 
-    constexpr auto kS = 0.146_V;
-    constexpr auto kV = 2.25 * 1_V * 1_s / 1_m;
-    constexpr auto kA = 0.315 * 1_V * 1_s * 1_s / 1_m;
+    constexpr auto kS = 0.183_V;
+    constexpr auto kV = 2.27 * 1_V * 1_s / 1_m;
+    constexpr auto kA = 0.442 * 1_V * 1_s * 1_s / 1_m;
 
-    constexpr double kPDriveVel = 3.09;
+    constexpr double kPDriveVel = 5.62;
 
     constexpr units::length::meter_t  kStartPos = 4.9_m;
     //constexpr units::deg_t kStartAngularOffset = 15_deg;

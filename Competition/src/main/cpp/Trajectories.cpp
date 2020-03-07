@@ -76,7 +76,7 @@ Trajectories::Trajectories() {
     TBpath5.trajectory = frc::TrajectoryGenerator::GenerateTrajectory(frc::Pose2d(1.5_m,(-RamseteConstants::kCenterline + RamseteConstants::kStartPos),frc::Rotation2d(0_deg)),
                                                                       {frc::Translation2d(2.2_m,(-RamseteConstants::kCenterline + RamseteConstants::kStartPos))},
                                                                       frc::Pose2d(5_m,(-RamseteConstants::kCenterline + RamseteConstants::kStartPos),frc::Rotation2d(0_deg)),
-                                                                      Drivetrain::GetInstance().kTrajectoryConfigF);
+                                                                      Drivetrain::GetInstance().kTrajectoryConfigCenterLineF);
     TBpath6.trajectory = frc::TrajectoryGenerator::GenerateTrajectory(frc::Pose2d(5_m,(-RamseteConstants::kCenterline + RamseteConstants::kStartPos),frc::Rotation2d(0_deg)),
                                                                       {},
                                                                       frc::Pose2d(4_m,(-RamseteConstants::kCenterline + RamseteConstants::kStartPos -0.2_m),frc::Rotation2d(15_deg)),

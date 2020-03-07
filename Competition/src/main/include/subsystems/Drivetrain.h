@@ -68,6 +68,8 @@ class Drivetrain : public frc2::SubsystemBase{
     frc::SimpleMotorFeedforward<units::meters> kSimpleMotorFeedforward;
     frc::TrajectoryConfig kTrajectoryConfigF;
     frc::TrajectoryConfig kTrajectoryConfigR;
+    frc::TrajectoryConfig kTrajectoryConfigCenterLineF;
+    frc::TrajectoryConfig kTrajectoryConfigCenterLineR;
     frc::DifferentialDriveVoltageConstraint kDifferentialDriveVoltageConstraint;
 
  private:
