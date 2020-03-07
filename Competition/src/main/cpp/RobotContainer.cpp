@@ -86,8 +86,6 @@ void RobotContainer::ConfigureButtonBindings() {
     
     operator_y.WhenPressed(frc2::InstantCommand([&] { m_muncher.SetMunchPower(1); }, {&m_muncher}));
     operator_y.WhenPressed(frc2::InstantCommand([&] { m_muncher.SetMunchPower(0); }, {&m_muncher}));
-
-
     
     operator_a.WhenPressed(frc2::InstantCommand([&] { m_lift.UnlockRatchet(); }));
     operator_b.WhenPressed(frc2::InstantCommand([&] { m_lift.LockRatchet(); }));
