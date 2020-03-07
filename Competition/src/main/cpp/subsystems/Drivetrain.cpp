@@ -162,12 +162,12 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
       straightValue = 0;
     }
     directionY = (straightValue >= 0) ? 1 : -1;
-    straightTarget = DriveConstants::MAX_RPM * -std::pow(straightValue, 2) * directionY * kDriveMultiplierY * boostMultiplier;
+    straightTarget = DriveConstants::MAX_RPM * -std::pow(straightValue, 2) * directionY * DriveConstants::kDriveMultiplierY * boostMultiplier;
    
     turnValue = turnInput;
 
     directionX = (turnValue >= 0) ? 1 : -1;
-    turnValue = std::pow(turnValue * kDriveMultiplierX, 2) * directionX;
+    turnValue = std::pow(turnValue * DriveConstants::kDriveMultiplierX, 2) * directionX;
     turnTarget = DriveConstants::MAX_RPM * -turnValue;
     // if (directionY == 1) {   //for inverting x and y in revese direction
     //   turnTarget = -turnTarget;

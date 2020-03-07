@@ -50,6 +50,12 @@ namespace DriveConstants {
     constexpr static double kMaxAccel = 1500;
     constexpr static double kAllError = 0;
     constexpr static double kDeadband = 0.05;
+    // changed x and y deadband to .05 for testing
+    constexpr static double kDeadbandY = 0.05;
+    constexpr static double kDeadbandX = 0.05;
+    constexpr static double kDriveMultiplierX = 0.5;
+    constexpr static double kDriveMultiplierY = 1;
+    constexpr static double kDriveOffset = 1;
 
 }
 
