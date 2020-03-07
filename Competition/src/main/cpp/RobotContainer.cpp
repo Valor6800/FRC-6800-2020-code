@@ -89,6 +89,8 @@ void RobotContainer::ConfigureButtonBindings() {
     
     operator_a.WhenPressed(frc2::InstantCommand([&] { m_lift.UnlockRatchet(); }));
     operator_b.WhenPressed(frc2::InstantCommand([&] { m_lift.LockRatchet(); }));
+
+    operator_x.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetHoodTarget(0.8); } ));
     
 }
 

@@ -8,8 +8,11 @@
 #include <frc2/command/RamseteCommand.h>
 #include <frc/controller/RamseteController.h>
 #include <frc/controller/PIDController.h>
+#include <frc2/command/RunCommand.h>
+#include <frc2/command/ParallelCommandGroup.h>
 
 #include "subsystems/Drivetrain.h"
+#include "subsystems/Intake.h"
 
 #include "commands/ShootStart.h"
 
@@ -21,6 +24,7 @@ class TenBallAuto : public frc2::CommandHelper<frc2::SequentialCommandGroup, Ten
 
 private:
     Drivetrain& m_drivetrain = Drivetrain::GetInstance();
+    Intake& m_intake = Intake::GetInstance();
 
     Trajectories m_trajectories;
 

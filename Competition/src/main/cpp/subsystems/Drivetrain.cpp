@@ -151,17 +151,17 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
     if (std::abs(straightValue) < kDeadbandY) {
       straightValue = 0;
     }
-    directionY = (straightValue > 0) ? 1 : -1;
+    directionY = (straightValue >= 0) ? 1 : -1;
     straightTarget = MaxRPM * -std::pow(straightValue, 2) * directionY * kDriveMultiplierY * boostMultiplier;
    
     turnValue = turnInput;
 
     directionX = (turnValue >= 0) ? 1 : -1;
     turnValue = std::pow(turnValue * kDriveMultiplierX, 2) * directionX;
-    turnTarget = MaxRPM * turnValue;
-    if (directionY == 1) {   //for inverting x and y in revese direction
-      turnTarget = -turnTarget;
-    }
+    turnTarget = MaxRPM * -turnValue;
+    // if (directionY == 1) {   //for inverting x and y in revese direction
+    //   turnTarget = -turnTarget;
+    // }
     
     if (std::abs(turnValue) < kDeadbandX) {
       if (std::abs(straightValue) < kDeadbandY) {
@@ -201,14 +201,14 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
             limelight_state = 0;
         //}
     }
-    if (std::abs(straightTarget) < kDeadbandY && std::abs(turnTarget) < kDeadbandX) {
-        m_leftDriveLead.Set(0);
-        m_rightDriveLead.Set(0);
-    }
-    else {
+    // if (std::abs(straightTarget) < kDeadbandY && std::abs(turnTarget) < kDeadbandX) {
+    //     m_leftDriveLead.Set(0);
+    //     m_rightDriveLead.Set(0);
+    // }
+    // else {
         m_leftPIDController.SetReference(straightTarget - turnTarget, rev::ControlType::kVelocity);
         m_rightPIDController.SetReference(straightTarget + turnTarget, rev::ControlType::kVelocity);
-    }
+    //}
     
 
     frc::SmartDashboard::PutNumber("TurnVelocity", turnTarget);
