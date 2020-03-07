@@ -28,7 +28,12 @@
 #ifndef DRIVETRAIN_H
 #define DRIVETRAIN_H
 
-
+// changed x and y deadband to .05 for testing
+#define kDeadbandY 0.05
+#define kDeadbandX 0.05
+#define kDriveMultiplierX 0.5
+#define kDriveMultiplierY 1
+#define kDriveOffset 1
 
 class Drivetrain : public frc2::SubsystemBase{
  public:

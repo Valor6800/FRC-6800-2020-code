@@ -3,6 +3,8 @@
 #include <frc2/command/SubsystemBase.h>
 #include <rev/CANSparkMax.h>
 #include <frc/SpeedControllerGroup.h>
+#include <rev/CANEncoder.h>
+#include <rev/CANPIDController.h>
 #include "Constants.h"
 #include <frc/Servo.h>
 #include <frc/PWMVictorSPX.h>
@@ -43,8 +45,12 @@ class Shooter : public frc2::SubsystemBase {
     rev::CANSparkMax shootMtrLeft;
     // 8 is good
     rev::CANSparkMax shootMtrRight;
-    
-    frc::SpeedControllerGroup shootMtrs{shootMtrLeft, shootMtrRight};
+
+    rev::CANEncoder encoderLeft = shootMtrLeft.GetEncoder();
+    rev::CANEncoder encoderRight = shootMtrRight.GetEncoder();
+
+    rev::CANPIDController m_shootMtrLeftPID = shootMtrLeft.GetPIDController();
+    rev::CANPIDController m_shootMtrRightPID = shootMtrRight.GetPIDController();
     
     frc::Servo hoodServoLeft;
     frc::Servo hoodServoRight;
@@ -53,6 +59,12 @@ class Shooter : public frc2::SubsystemBase {
     nt::NetworkTableEntry shooterPower;
     nt::NetworkTableEntry potentiometerBoolean;
 
+    nt::NetworkTableEntry kP_entry;
+    nt::NetworkTableEntry kI_entry;
+    nt::NetworkTableEntry kD_entry;
+    nt::NetworkTableEntry kFF_entry;
+    nt::NetworkTableEntry kIzone_entry;
+
     double hoodTarget;
 
     bool retracting;
@@ -60,7 +72,13 @@ class Shooter : public frc2::SubsystemBase {
 
     double deadzone;
 
-   double shooterPow;
+    double shooterPow;
+
+    double kP;
+    double kI;
+    double kD;
+    double kFF;
+    double kIzone;
 
 };
 
