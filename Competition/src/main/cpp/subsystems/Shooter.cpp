@@ -9,11 +9,11 @@ Shooter::Shooter() : shootMtrLeft{ShooterConstants::CAN_ID_SHOOTER_LEAD, rev::CA
     InitShooter(rev::CANSparkMax::IdleMode::kCoast);
     shooterPower = frc::Shuffleboard::GetTab("Configuration").Add("Shooter_Power", 1).WithWidget("Text View").GetEntry();
 
-    kP_entry = frc::Shuffleboard::GetTab("Configuration").Add("kP", 1).WithWidget("Text View").GetEntry();
-    kI_entry = frc::Shuffleboard::GetTab("Configuration").Add("kI", 1).WithWidget("Text View").GetEntry();
-    kD_entry = frc::Shuffleboard::GetTab("Configuration").Add("kD", 1).WithWidget("Text View").GetEntry();
-    kFF_entry = frc::Shuffleboard::GetTab("Configuration").Add("kFF", 1).WithWidget("Text View").GetEntry();
-    kIzone_entry = frc::Shuffleboard::GetTab("Configuration").Add("kIzone", 1).WithWidget("Text View").GetEntry();
+    // kP_entry = frc::Shuffleboard::GetTab("Configuration").Add("kP", 1).WithWidget("Text View").GetEntry();
+    // kI_entry = frc::Shuffleboard::GetTab("Configuration").Add("kI", 1).WithWidget("Text View").GetEntry();
+    // kD_entry = frc::Shuffleboard::GetTab("Configuration").Add("kD", 1).WithWidget("Text View").GetEntry();
+    // kFF_entry = frc::Shuffleboard::GetTab("Configuration").Add("kFF", 1).WithWidget("Text View").GetEntry();
+    // kIzone_entry = frc::Shuffleboard::GetTab("Configuration").Add("kIzone", 1).WithWidget("Text View").GetEntry();
 
     hoodTarget = hoodPotentiometer.Get();
 }
@@ -26,11 +26,11 @@ Shooter& Shooter::GetInstance() {
 void Shooter::Periodic() {
     shooterPow = shooterPower.GetDouble(0.25);
 
-    kP = kP_entry.GetDouble(0);
-    kI = kI_entry.GetDouble(0);
-    kD = kD_entry.GetDouble(0);
-    kFF = kFF_entry.GetDouble(0);
-    kIzone = kIzone_entry.GetDouble(0);
+    // kP = kP_entry.GetDouble(0);
+    // kI = kI_entry.GetDouble(0);
+    // kD = kD_entry.GetDouble(0);
+    // kFF = kFF_entry.GetDouble(0);
+    // kIzone = kIzone_entry.GetDouble(0);
 
     frc::SmartDashboard::PutNumber("hood potentiometer", hoodPotentiometer.Get());
     frc::SmartDashboard::PutBoolean("extended", HoodExtended());
@@ -38,6 +38,8 @@ void Shooter::Periodic() {
     frc::SmartDashboard::PutBoolean("Should stop", (hoodPotentiometer.Get() < hoodTarget + deadzone && hoodPotentiometer.Get() > hoodTarget - deadzone));
     frc::SmartDashboard::PutBoolean("Should extend", extending && hoodPotentiometer.Get() >= hoodTarget);
     frc::SmartDashboard::PutBoolean("Should retract", (!extending && hoodPotentiometer.Get() <= hoodTarget));
+
+
 
     if (hoodPotentiometer.Get() < hoodTarget + deadzone && hoodPotentiometer.Get() > hoodTarget - deadzone) {
         StopHood();
@@ -54,27 +56,29 @@ void Shooter::InitShooter(rev::CANSparkMax::IdleMode idleMode) {
     shootMtrLeft.SetIdleMode(idleMode);
     shootMtrRight.SetIdleMode(idleMode);
 
-    m_shootMtrLeftPID.SetP(kP);
-    m_shootMtrLeftPID.SetI(kI);
-    m_shootMtrLeftPID.SetD(kD);
-    m_shootMtrLeftPID.SetIZone(kIzone);
-    m_shootMtrLeftPID.SetFF(kFF);
+    m_shootMtrLeftPID.SetP(ShooterConstants::kP);
+    m_shootMtrLeftPID.SetI(ShooterConstants::kI);
+    m_shootMtrLeftPID.SetD(ShooterConstants::kD);
+    m_shootMtrLeftPID.SetIZone(ShooterConstants::kIz);
+    m_shootMtrLeftPID.SetFF(ShooterConstants::kFF);
     m_shootMtrLeftPID.SetOutputRange(ShooterConstants::MIN_OUTPUT, ShooterConstants::MAX_OUTPUT);
+  
 
-    m_shootMtrRightPID.SetP(kP);
-    m_shootMtrRightPID.SetI(kI);
-    m_shootMtrRightPID.SetD(kD);
-    m_shootMtrRightPID.SetIZone(kIzone);
-    m_shootMtrRightPID.SetFF(kFF);
-    m_shootMtrRightPID.SetOutputRange(ShooterConstants::MIN_OUTPUT, ShooterConstants::MAX_OUTPUT);
+    //shootMtrLeft.RestoreFactoryDefaults();
+    //shootMtrRight.RestoreFactoryDefaults();
 
     shootMtrLeft.SetInverted(true);
-    shootMtrRight.SetInverted(false);
+
+    //shootMtrLeft.Follow(rev::CANSparkMax::kFollowerDisabled,false);
+    //shootMtrRight.Follow(shootMtrLeft,true);
+
+   
 }
 
 void Shooter::SetShooterPower(double power) {
     m_shootMtrLeftPID.SetReference(power * ShooterConstants::MAX_RPM, rev::ControlType::kVelocity);
-    m_shootMtrRightPID.SetReference(power * ShooterConstants::MAX_RPM, rev::ControlType::kVelocity);
+    // shootMtrLeft.Set(power);
+    // shootMtrRight.Set(power);
 }
 
 double Shooter::GetShooterNTPower() {

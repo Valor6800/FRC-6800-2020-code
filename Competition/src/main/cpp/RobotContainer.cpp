@@ -62,7 +62,7 @@ void RobotContainer::ConfigureButtonBindings() {
     //     [this] { return 0; },
     //     [this] { return 0; },
     //     [this] { return 0; },
-    //     [this] { return false; }));
+    //     [this] { return false; }));ijt
     
 
 
@@ -72,7 +72,7 @@ void RobotContainer::ConfigureButtonBindings() {
     driver_leftBumper.WhenPressed(frc2::InstantCommand([&] { m_intake.SetIntakePower(0.8); m_hopper.SetHopperPower(1); }));
     driver_leftBumper.WhenReleased(frc2::InstantCommand([&] { m_intake.SetIntakePower(0); m_hopper.SetHopperPower(0); }));
 
-    operator_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0.8); m_shooter.SetHoodTarget(0.715); }, {&m_shooter}));
+    operator_back.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0.7); m_shooter.SetHoodTarget(0.715); }, {&m_shooter}));
     operator_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(0); m_shooter.SetHoodTarget(0.8); }, {&m_shooter}));
 
     // driver_start.WhenPressed(frc2::InstantCommand([&] { m_shooter.SetShooterPower(1); }, {&m_shooter}));

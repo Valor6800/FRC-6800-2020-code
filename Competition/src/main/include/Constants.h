@@ -99,6 +99,12 @@ namespace ShooterConstants {
 
     constexpr static double MAX_RPM = 5700;
 
+    constexpr static double kP = 0.00065;
+    constexpr static double kI = 0;
+    constexpr static double kD = 10000;
+    constexpr static double kIz = 0;
+    constexpr static double kFF = 0.000175;
+
 }
 
 namespace IntakeConstants {
