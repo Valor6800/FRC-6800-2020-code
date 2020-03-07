@@ -34,12 +34,22 @@ Drivetrain& Drivetrain::GetInstance() {
 }
 
 void Drivetrain::InitDrivetrain() {
+    m_leftDriveLead.RestoreFactoryDefaults();
+    m_leftDriveFollowA.RestoreFactoryDefaults();
+    m_leftDriveFollowB.RestoreFactoryDefaults();
+    m_rightDriveLead.RestoreFactoryDefaults();
+    m_rightDriveFollowA.RestoreFactoryDefaults();
+    m_rightDriveFollowB.RestoreFactoryDefaults();
+
     m_leftDriveLead.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
     m_leftDriveFollowA.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
     m_leftDriveFollowB.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
     m_rightDriveLead.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
     m_rightDriveFollowA.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
     m_rightDriveFollowB.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+
+    m_leftDriveLead.Follow(rev::CANSparkMax::kFollowerDisabled, false);
+    m_rightDriveLead.Follow(rev::CANSparkMax::kFollowerDisabled, false);
 
     m_leftDriveFollowA.Follow(m_leftDriveLead);
     m_leftDriveFollowB.Follow(m_leftDriveLead);
