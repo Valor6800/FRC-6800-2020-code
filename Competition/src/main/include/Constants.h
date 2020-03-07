@@ -37,6 +37,26 @@ namespace DriveConstants {
     constexpr double kWheelDiameterInches = 6;
     constexpr double kGearRatio = 8.8;
 
+    constexpr double kP = -0.01f;
+    constexpr double kI = 0;
+    constexpr double kD = 0;
+    constexpr double kIz = 0;
+    constexpr double kFF = .00017543859;
+    constexpr double MaxRPM = 5700;
+    constexpr double kMaxOutput = 1.0;
+    constexpr double kMinOutput = -1.0;
+    constexpr double kMaxVel = 1000;
+    constexpr double kMinVel = 0;
+    constexpr double kMaxAccel = 1500;
+    constexpr double kAllError = 0;
+    constexpr double kDeadband = 0.05;
+    // changed x and y deadband to .05 for testing
+    constexpr double kDeadbandY = 0.05;
+    constexpr double kDeadbandX = 0.05;
+    constexpr double kDriveMultiplierX = 0.5;
+    constexpr double kDriveMultiplierY = 1;
+    constexpr double kDriveOffset = 1;
+
 }
 
 namespace RamseteConstants {

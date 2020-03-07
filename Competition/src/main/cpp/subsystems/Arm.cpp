@@ -14,6 +14,9 @@ void Arm::InitArm() {
     armMtrLeft.ConfigFactoryDefault();
     armMtrRight.ConfigFactoryDefault();
 
+    armMtrLeft.SetNeutralMode(NeutralMode::Brake);
+    armMtrRight.SetNeutralMode(NeutralMode::Brake);
+
     armMtrLeft.SetInverted(false);
     armMtrRight.SetInverted(false);
 }
