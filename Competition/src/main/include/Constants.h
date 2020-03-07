@@ -37,25 +37,19 @@ namespace DriveConstants {
     constexpr double kWheelDiameterInches = 6;
     constexpr double kGearRatio = 8.8;
 
-    constexpr double kP = -0.01f;
-    constexpr double kI = 0;
-    constexpr double kD = 0;
-    constexpr double kIz = 0;
-    constexpr double kFF = .00017543859;
-    constexpr double MaxRPM = 5700;
-    constexpr double kMaxOutput = 1.0;
-    constexpr double kMinOutput = -1.0;
-    constexpr double kMaxVel = 1000;
-    constexpr double kMinVel = 0;
-    constexpr double kMaxAccel = 1500;
-    constexpr double kAllError = 0;
-    constexpr double kDeadband = 0.05;
-    // changed x and y deadband to .05 for testing
-    constexpr double kDeadbandY = 0.05;
-    constexpr double kDeadbandX = 0.05;
-    constexpr double kDriveMultiplierX = 0.5;
-    constexpr double kDriveMultiplierY = 1;
-    constexpr double kDriveOffset = 1;
+    constexpr static double kP = -0.01;
+    constexpr static double kI = 0;
+    constexpr static double kD = 0;
+    constexpr static double kFF = 0.00017543859;
+    constexpr static double kIz = 0;
+    constexpr static double MAX_RPM = 5700;
+    constexpr static double kMinOutput = -1.0;
+    constexpr static double kMaxOutput = 1.0;
+    constexpr static double kMinVel = 0;
+    constexpr static double kMaxVel = 1000;
+    constexpr static double kMaxAccel = 1500;
+    constexpr static double kAllError = 0;
+    constexpr static double kDeadband = 0.05;
 
 }
 
@@ -99,6 +93,11 @@ namespace ShooterConstants {
     constexpr static int CAN_ID_SHOOTER_FOLLOW = 8;
     constexpr static int VICTOR_ID_THROAT = 0;
     constexpr static int PWM_ID_HOOD = 0;
+
+    constexpr static double MIN_OUTPUT = 0.0;
+    constexpr static double MAX_OUTPUT = 1.0;
+
+    constexpr static double MAX_RPM = 5700;
 
 }
 

@@ -162,14 +162,13 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
       straightValue = 0;
     }
     directionY = (straightValue >= 0) ? 1 : -1;
-    straightTarget = DriveConstants::MaxRPM * -std::pow(straightValue, 2) * directionY * DriveConstants::kDriveMultiplierY * boostMultiplier;
-
+    straightTarget = DriveConstants::MAX_RPM * -std::pow(straightValue, 2) * directionY * kDriveMultiplierY * boostMultiplier;
+   
     turnValue = turnInput;
 
     directionX = (turnValue >= 0) ? 1 : -1;
-
-    turnValue = std::pow(turnValue * DriveConstants::kDriveMultiplierX, 2) * directionX;
-    turnTarget = DriveConstants::MaxRPM * -turnValue;
+    turnValue = std::pow(turnValue * kDriveMultiplierX, 2) * directionX;
+    turnTarget = DriveConstants::MAX_RPM * -turnValue;
     // if (directionY == 1) {   //for inverting x and y in revese direction
     //   turnTarget = -turnTarget;
     // }
@@ -201,7 +200,7 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
 
         // Limelight has target, track and move robot
         if (tv == 1)
-            turnTarget = DriveConstants::kP * tx * DriveConstants::MaxRPM;
+            turnTarget = DriveConstants::kP * tx * DriveConstants::MAX_RPM;
     } else {
 
         // Check state of limelight
