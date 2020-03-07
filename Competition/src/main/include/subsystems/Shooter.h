@@ -50,7 +50,6 @@ class Shooter : public frc2::SubsystemBase {
     rev::CANEncoder encoderRight = shootMtrRight.GetEncoder();
 
     rev::CANPIDController m_shootMtrLeftPID = shootMtrLeft.GetPIDController();
-    rev::CANPIDController m_shootMtrRightPID = shootMtrRight.GetPIDController();
     
     frc::Servo hoodServoLeft;
     frc::Servo hoodServoRight;
@@ -73,12 +72,6 @@ class Shooter : public frc2::SubsystemBase {
     double deadzone;
 
     double shooterPow;
-
-    double kP;
-    double kI;
-    double kD;
-    double kFF;
-    double kIzone;
 
 };
 
