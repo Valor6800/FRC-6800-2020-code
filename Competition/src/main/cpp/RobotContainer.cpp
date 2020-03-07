@@ -27,7 +27,6 @@ RobotContainer::RobotContainer() {
 }
 
 void RobotContainer::ConfigureButtonBindings() {
-
     frc2::JoystickButton driver_rightBumper{&m_GamepadDriver, 6};
     frc2::JoystickButton driver_leftBumper{&m_GamepadDriver, 5};
 
