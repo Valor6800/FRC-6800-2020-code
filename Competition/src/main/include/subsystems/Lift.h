@@ -4,6 +4,7 @@
 #include <frc/PWMVictorSPX.h>
 #include <frc/SpeedControllerGroup.h>
 #include "Constants.h"
+#include <frc/Servo.h>
 
 #ifndef LIFT_H
 #define LIFT_H
@@ -18,10 +19,18 @@ class Lift : public frc2::SubsystemBase {
     void SetLiftPower(double power);
     void Periodic() override;
 
+    void LiftDrive(double stickInput);
+
+    void UnlockRatchet();
+    void LockRatchet();
+
  private:
 
-    frc::PWMVictorSPX liftMtrA;
-    //frc::PWMVictorSPX liftMtrB;
+    frc::PWMVictorSPX liftMtrLeft;
+    frc::PWMVictorSPX liftMtrRight;
+
+    frc::Servo ratchetServoLeft;
+    frc::Servo ratchetServoRight;
 
     //frc::SpeedControllerGroup liftMtrs{liftMtrA, liftMtrB};
 
