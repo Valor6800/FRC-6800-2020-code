@@ -76,8 +76,15 @@ void Shooter::InitShooter(rev::CANSparkMax::IdleMode idleMode) {
 }
 
 void Shooter::SetShooterPower(double power) {
-    m_shootMtrLeftPID.SetReference(power * ShooterConstants::MAX_RPM, rev::ControlType::kVelocity);
-    // shootMtrLeft.Set(power);
+    
+    if (std::abs(power) > 0){
+
+        m_shootMtrLeftPID.SetReference(power * ShooterConstants::MAX_RPM, rev::ControlType::kVelocity);
+
+    }else{
+        
+        shootMtrLeft.Set(power);
+    }
     // shootMtrRight.Set(power);
 }
 
