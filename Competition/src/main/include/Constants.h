@@ -117,13 +117,13 @@ namespace HopperConstants {
 namespace LiftConstants {
 
     constexpr static int VICTOR_ID_LIFT_A = 5;
-    constexpr static int VICTOR_ID_LIFT_B = 8;
+    constexpr static int VICTOR_ID_LIFT_B = 3;
     constexpr static int PWM_ID_SERVO_RATCHET_LEFT = 7;
     constexpr static int PWM_ID_SERVO_RATCHET_RIGHT = 8;
     constexpr static double RATCHET_LOCK_LEFT_POS = 0.65;
     constexpr static double RATCHET_LOCK_RIGHT_POS = 0.1;
     constexpr static double RATCHET_UNLOCK_LEFT_POS = 0.3;
-    constexpr static double RATCHET_UNLOCK_RIGHT_POS = 0.1;
+    constexpr static double RATCHET_UNLOCK_RIGHT_POS = 0.45;
 
     constexpr static double kDeadbandY = 0.02;
 
