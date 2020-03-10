@@ -81,8 +81,9 @@ namespace RamseteConstants {
     constexpr double kPDriveVel = 5.62;
 
     constexpr units::length::meter_t  kStartPos = 4.9_m;
-    //constexpr units::deg_t kStartAngularOffset = 15_deg;
-    constexpr units::length::meter_t  kCenterline = 0.94_m;
+    constexpr units::angle::degree_t kStartAngularOffset = 0_deg;
+    constexpr units::length::meter_t kStartPosSixBall = 1.3_m;
+    constexpr units::length::meter_t  kCenterline = 0.705_m;
 
 }
 
@@ -120,9 +121,9 @@ namespace LiftConstants {
     constexpr static int VICTOR_ID_LIFT_B = 3;
     constexpr static int PWM_ID_SERVO_RATCHET_LEFT = 7;
     constexpr static int PWM_ID_SERVO_RATCHET_RIGHT = 8;
-    constexpr static double RATCHET_LOCK_LEFT_POS = 0.65;
+    constexpr static double RATCHET_LOCK_LEFT_POS = 0.8;
     constexpr static double RATCHET_LOCK_RIGHT_POS = 0.1;
-    constexpr static double RATCHET_UNLOCK_LEFT_POS = 0.3;
+    constexpr static double RATCHET_UNLOCK_LEFT_POS = 0.35;
     constexpr static double RATCHET_UNLOCK_RIGHT_POS = 0.45;
 
     constexpr static double kDeadbandY = 0.02;

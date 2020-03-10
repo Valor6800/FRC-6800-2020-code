@@ -37,4 +37,5 @@ private:
 
     frc::Trajectory trajectory1;
     frc::Trajectory trajectory2;
+    frc::Trajectory trajectory3;
 };
