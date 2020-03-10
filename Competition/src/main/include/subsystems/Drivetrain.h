@@ -61,6 +61,7 @@ class Drivetrain : public frc2::SubsystemBase{
 
     void SetMultiplier(double multiplier);
     void Stop();
+    void TurnOffLimelight();
 
     double boostMultiplier;
 
