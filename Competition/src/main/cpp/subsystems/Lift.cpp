@@ -4,7 +4,7 @@ Lift::Lift() : liftMtrLeft{LiftConstants::VICTOR_ID_LIFT_A},
                liftMtrRight{LiftConstants::VICTOR_ID_LIFT_B},
                ratchetServoLeft{LiftConstants::PWM_ID_SERVO_RATCHET_LEFT},
                ratchetServoRight{LiftConstants::PWM_ID_SERVO_RATCHET_RIGHT} {
-    
+    LockRatchet();
 }
 
 Lift& Lift::GetInstance() {

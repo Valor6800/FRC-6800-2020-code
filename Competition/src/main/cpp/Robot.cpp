@@ -31,6 +31,7 @@ void Robot::DisabledInit() {
   Drivetrain::GetInstance().ResetOdometry(frc::Pose2d(0_m, 0_m, frc::Rotation2d(0_deg)));
   Drivetrain::GetInstance().ResetEncoders();
   Drivetrain::GetInstance().ResetIMU();
+  Drivetrain::GetInstance().TurnOffLimelight();
 
   
 }

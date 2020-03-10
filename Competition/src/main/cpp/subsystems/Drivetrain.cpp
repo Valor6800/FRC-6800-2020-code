@@ -236,3 +236,9 @@ void Drivetrain::Stop() {
     m_rightDriveFollowA.StopMotor();
     m_rightDriveFollowB.StopMotor();
 }
+
+void Drivetrain::TurnOffLimelight() {
+    table->PutNumber("ledMode", LimelightConstants::LED_MODE_OFF);
+    table->PutNumber("camMode", LimelightConstants::TRACK_MODE_OFF);
+    limelight_state = 0;
+}
