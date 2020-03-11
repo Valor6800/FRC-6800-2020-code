@@ -52,7 +52,7 @@ SixBallAuto::SixBallAuto() {
             frc2::RunCommand( [&] {m_shooter.SetShooterPower(0.7); } ).WithTimeout(2_s),
             frc2::InstantCommand( [&] {m_shooter.SetShooterPower(0.7); m_hopper.SetHopperPower(0.8); m_intake.SetIntakePower(1); } ),
             frc2::WaitCommand(3_s),
-            frc2::InstantCommand( [&] {m_shooter.SetShooterPower(0); m_hopper.SetHopperPower(0); m_intake.SetIntakePower(0); } )//,
+            frc2::InstantCommand( [&] {m_shooter.SetShooterPower(0); m_hopper.SetHopperPower(0); m_intake.SetIntakePower(0); } )
         )
     );
 }
