@@ -238,6 +238,7 @@ void Drivetrain::Stop() {
 }
 
 void Drivetrain::TurnOffLimelight() {
+    std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
     table->PutNumber("ledMode", LimelightConstants::LED_MODE_OFF);
     table->PutNumber("camMode", LimelightConstants::TRACK_MODE_OFF);
     limelight_state = 0;
