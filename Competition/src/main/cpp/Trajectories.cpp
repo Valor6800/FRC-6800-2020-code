@@ -1,22 +1,22 @@
 #include "Trajectories.h"
 
 Trajectories::Trajectories() {
-    SBpath1.action = ValorTrajectory::Path;
-    SBpath2.action = ValorTrajectory::Path;
+    // SBpath1.action = ValorTrajectory::Path;
+    // SBpath2.action = ValorTrajectory::Path;
 
-    SBpath1.trajectory = frc::TrajectoryGenerator::GenerateTrajectory(frc::Pose2d(0_m, 0_m, frc::Rotation2d(0_deg)),
-                                                                      {},
-                                                                      frc::Pose2d(5_m, 0.2_m, frc::Rotation2d(-15_deg)),
-                                                                      Drivetrain::GetInstance().kTrajectoryConfigCenterLineF);
+    // SBpath1.trajectory = frc::TrajectoryGenerator::GenerateTrajectory(frc::Pose2d(0_m, 0_m, frc::Rotation2d(0_deg)),
+    //                                                                   {},
+    //                                                                   frc::Pose2d(5_m, 0.2_m, frc::Rotation2d(-15_deg)),
+    //                                                                   Drivetrain::GetInstance().kTrajectoryConfigCenterLineF);
 
-    SBpath2.trajectory = frc::TrajectoryGenerator::GenerateTrajectory(frc::Pose2d(5_m, 0.2_m, frc::Rotation2d(-15_deg)),
-                                                                      {},
-                                                                      frc::Pose2d(0_m, 0_m, frc::Rotation2d(0_deg)),
-                                                                      Drivetrain::GetInstance().kTrajectoryConfigR);
-    sixBallPath.push_back(SBpath1);
-    sixBallPath.push_back(SBpath2);
+    // SBpath2.trajectory = frc::TrajectoryGenerator::GenerateTrajectory(frc::Pose2d(5_m, 0.2_m, frc::Rotation2d(-15_deg)),
+    //                                                                   {},
+    //                                                                   frc::Pose2d(0_m, 0_m, frc::Rotation2d(0_deg)),
+    //                                                                   Drivetrain::GetInstance().kTrajectoryConfigR);
+    // sixBallPath.push_back(SBpath1);
+    // sixBallPath.push_back(SBpath2);
 
-    autos.insert({"SixBallAuto", sixBallPath});
+    // autos.insert({"SixBallAuto", sixBallPath});
 
 
 
