@@ -35,6 +35,7 @@ class Arm/* : public frc2::ProfiledPIDSubsystem<units::degrees>*/ : public frc2:
 
      void Periodic() override;
      void SetArmPower(double power);
+     void SetArmPowerAuto(double power);
 
  private:
 

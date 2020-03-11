@@ -39,6 +39,11 @@ SixBallAuto::SixBallAuto() {
 
     AddCommands(
         frc2::SequentialCommandGroup(
+            frc2::InstantCommand( [&] { m_arm.SetArmPowerAuto(-0.5); } ),
+            frc2::WaitCommand(0.5_s),
+            frc2::InstantCommand( [&] { m_arm.SetArmPowerAuto(0.042); } ),
+            frc2::WaitCommand(2_s),
+            frc2::InstantCommand( [&] { m_arm.SetArmPowerAuto(0); } ),
             frc2::InstantCommand( [&] { m_shooter.SetHoodTarget(0.715); } ), 
             std::move(ramseteCommand1),
             frc2::RunCommand( [&] {m_shooter.SetShooterPower(0.7); } ).WithTimeout(2_s),

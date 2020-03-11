@@ -7,16 +7,16 @@ Trajectories::Trajectories() {
 
     SBpath1.trajectory = frc::TrajectoryGenerator::GenerateTrajectory(frc::Pose2d(0_m, 0_m,frc::Rotation2d(0_m)),
                                                                       {},
-                                                                      frc::Pose2d(0_m, 0_m,frc::Rotation2d(RamseteConstants::kStartAngularOffset)),
+                                                                      frc::Pose2d(0_m, 0_m,frc::Rotation2d(/*RamseteConstants::kStartAngularOffset*/ 0_deg)),
                                                                       Drivetrain::GetInstance().kTrajectoryConfigF);
 
-    SBpath2.trajectory = frc::TrajectoryGenerator::GenerateTrajectory(frc::Pose2d(0_m,0_m,frc::Rotation2d(RamseteConstants::kStartAngularOffset)),
+    SBpath2.trajectory = frc::TrajectoryGenerator::GenerateTrajectory(frc::Pose2d(0_m,0_m,frc::Rotation2d(/*RamseteConstants::kStartAngularOffset*/ 0_deg)),
                                                                       {frc::Translation2d(2.2_m,(-RamseteConstants::kCenterline + RamseteConstants::kStartPosSixBall))},
                                                                       frc::Pose2d(5_m,(-RamseteConstants::kCenterline + RamseteConstants::kStartPosSixBall),frc::Rotation2d(0_deg)),
                                                                       Drivetrain::GetInstance().kTrajectoryConfigCenterLineF);
     SBpath3.trajectory = frc::TrajectoryGenerator::GenerateTrajectory(frc::Pose2d(5_m,(-RamseteConstants::kCenterline + RamseteConstants::kStartPosSixBall),frc::Rotation2d(0_deg)),
                                                                       {},
-                                                                      frc::Pose2d(4_m,(-RamseteConstants::kCenterline + RamseteConstants::kStartPosSixBall -0.2_m),frc::Rotation2d(RamseteConstants::kStartAngularOffset)),
+                                                                      frc::Pose2d(4_m,(-RamseteConstants::kCenterline + RamseteConstants::kStartPosSixBall -0.2_m),frc::Rotation2d(/*RamseteConstants::kStartAngularOffset*/ 0_deg)),
                                                                       Drivetrain::GetInstance().kTrajectoryConfigR);
     sixBallPath.push_back(SBpath1);
     sixBallPath.push_back(SBpath2);
