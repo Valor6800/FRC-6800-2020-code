@@ -33,6 +33,14 @@ void Robot::DisabledInit() {
   Drivetrain::GetInstance().ResetIMU();
   Drivetrain::GetInstance().TurnOffLimelight();
 
+  Shooter::GetInstance().SetShooterPower(0);
+  Hopper::GetInstance().SetHopperPower(0);
+  Drivetrain::GetInstance().TankDriveVolts(0_V, 0_V);
+  Arm::GetInstance().SetArmPower(0);
+  Intake::GetInstance().SetIntakePower(0);
+  Lift::GetInstance().SetLiftPower(0);
+  Muncher::GetInstance().SetMunchPower(0);
+
   
 }
 
