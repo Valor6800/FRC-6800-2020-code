@@ -158,7 +158,7 @@ void Drivetrain::ArcadeDrive(double leftInput, double rightInput) {
 
 void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, double turnInput, bool limelightInput) {
     straightValue = reverseInput - straightInput;
-    if (std::abs(straightValue) < kDeadbandY) {
+    if (std::abs(straightValue) < DriveConstants::kDeadbandY) {
       straightValue = 0;
     }
     directionY = (straightValue >= 0) ? 1 : -1;
@@ -173,12 +173,12 @@ void Drivetrain::RocketLeagueDrive(double straightInput, double reverseInput, do
     //   turnTarget = -turnTarget;
     // }
  
-    if (std::abs(turnValue) < kDeadbandX) {
-      if (std::abs(straightValue) < kDeadbandY) {
+    if (std::abs(turnValue) < DriveConstants::kDeadbandX) {
+      if (std::abs(straightValue) < DriveConstants::kDeadbandY) {
         turnTarget = 0; //if turning, don't use drive straightening
       }
       else {
-        turnTarget = (m_leftEncoder.GetVelocity() - m_rightEncoder.GetVelocity()) * kDriveOffset;
+        turnTarget = (m_leftEncoder.GetVelocity() - m_rightEncoder.GetVelocity()) * DriveConstants::kDriveOffset;
         // Robot tends to curve to the left at 50RPM slower
       }
     }
