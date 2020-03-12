@@ -41,3 +41,7 @@ void Arm::SetArmPower(double power) {
     }
     appliedPow = power;
 }
+void Arm::SetArmPowerAuto(double power) {
+    armMtrLeft.Set(ControlMode::PercentOutput, power);
+    armMtrRight.Set(ControlMode::PercentOutput, power);
+}

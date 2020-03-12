@@ -18,6 +18,7 @@
 #include "subsystems/Intake.h"
 #include "subsystems/Shooter.h"
 #include "subsystems/Hopper.h"
+#include "subsystems/Arm.h"
 
 #include "commands/ShootStart.h"
 
@@ -32,9 +33,11 @@ private:
     Intake& m_intake = Intake::GetInstance();
     Shooter& m_shooter = Shooter::GetInstance();
     Hopper& m_hopper = Hopper::GetInstance();
+    Arm& m_arm = Arm::GetInstance();
 
     Trajectories m_trajectories;
 
-    frc::Trajectory trajectory1;
+    //frc::Trajectory trajectory1;
     frc::Trajectory trajectory2;
+    frc::Trajectory trajectory3;
 };
