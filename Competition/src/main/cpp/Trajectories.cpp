@@ -10,10 +10,15 @@ Trajectories::Trajectories() {
     //                                                                   frc::Pose2d(0_m, 0_m, frc::Rotation2d(15_deg)),
     //                                                                   Drivetrain::GetInstance().kTrajectoryConfigR);
 
+    // SBpath2.trajectory = frc::TrajectoryGenerator::GenerateTrajectory(frc::Pose2d(0_m, 0_m, frc::Rotation2d(0_deg)),
+    //                                                                   {},
+    //                                                                   frc::Pose2d(5_m, 0.2_m, frc::Rotation2d(0_deg)),
+    //                                                                   Drivetrain::GetInstance().kTrajectoryConfigCenterLineF);
+
     SBpath2.trajectory = frc::TrajectoryGenerator::GenerateTrajectory(frc::Pose2d(0_m, 0_m, frc::Rotation2d(0_deg)),
                                                                       {},
-                                                                      frc::Pose2d(5_m, 0.2_m, frc::Rotation2d(0_deg)),
-                                                                      Drivetrain::GetInstance().kTrajectoryConfigCenterLineF);
+                                                                      frc::Pose2d(1_m, 0_m, frc::Rotation2d(0_deg)),
+                                                                      Drivetrain::GetInstance().kTrajectoryConfigF);
 
     SBpath3.trajectory = frc::TrajectoryGenerator::GenerateTrajectory(frc::Pose2d(5_m, 0.2_m, frc::Rotation2d(0_deg)),
                                                                       {},
